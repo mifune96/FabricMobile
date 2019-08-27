@@ -11,56 +11,54 @@ public class SessionSharedPreferences {
 //    Context context;
 //    int private_mode = 0;
 
-    String ID = "ID";
-    String USER_NAME = "USERNAME";
-    String AccessToken = "ACCESSTOKEN";
-    public static String PREF_NAME = "LOGIN_USER";
-    public static String IS_LOGIN = "IS_LOGIN";
+    public static final String ID = "ID";
+    public static final String USER_NAME = "USERNAME";
+    public static final String AccessToken = "ACCESSTOKEN";
+    public static final String PREF_NAME = "LOGIN_USER";
+    public static final String IS_LOGIN = "IS_LOGIN";
 
     public SessionSharedPreferences(Context ctx){
         preferences = ctx.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-    }
-
-    public String getAccessToken() {
-        return preferences.getString(AccessToken, null);
-    }
-
-    public void setAccessToken(String accssToken) {
         editor = preferences.edit();
-        editor.putString(AccessToken, accssToken).apply();
     }
+    public void saveSPString(String keySP, String value) {
+        editor.putString(keySP, value);
+        editor.commit();
+    }
+    public void saveSPInt(String keySP, int value) {
+        editor.putInt(keySP, value);
+        editor.commit();
+    }
+    public void saveSPBoolean(String keySP, boolean value) {
+        editor.putBoolean(keySP, value);
+        editor.commit();
+    }
+    public String getAccessToken() {
+        return preferences.getString(AccessToken,"");
+    }
+
 
     public String getID(){
-        return preferences.getString(ID, null);
+        return preferences.getString(ID, "");
     }
 
-    public void setID(String usrID) {
-        editor = preferences.edit();
-        editor.putString(ID, usrID).apply();
-    }
 
     public String getUSER_NAME(){
         return preferences.getString(USER_NAME, null);
     }
 
-    public void setUSER_NAME(String usrName){
-        editor = preferences.edit();
-        editor.putString(USER_NAME, usrName).apply();
-    }
-
-    public boolean isLogin(){
-        return preferences.getBoolean(IS_LOGIN, false);
-    }
-
-    public void setLogin(boolean isLogin){
-        editor = preferences.edit();
-        editor.putBoolean(IS_LOGIN, isLogin).apply();
+    public boolean getIS_LOGIN(){
+        return preferences.getBoolean(IS_LOGIN,false);
     }
 
     public void logout(){
-        editor = preferences.edit();
-        editor.clear().apply();
+        editor.clear();
+        editor.commit();
     }
+
+
+
+
 
 //    public SessionSharedPreferences(Context context) {
 //        this.context = context;

@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.fabric.apps.mobile.R;
+import com.fabric.apps.mobile.activity.Login_Signup_Activity;
 import com.fabric.apps.mobile.activity.MainActivity;
 import com.fabric.apps.mobile.connection.ConfigRetrofit;
 import com.fabric.apps.mobile.model.siginModel.ResponseLogin;
@@ -30,7 +31,7 @@ import com.fabric.apps.mobile.utils.SessionSharedPreferences;
  */
 public class LoginFragment extends Fragment implements View.OnClickListener {
 
-    SessionSharedPreferences sm;
+    SessionSharedPreferences sessionSharedPreferences;
 
     @BindView(R.id.input_nama_pengguna)
     EditText tvnamapengguna;
@@ -45,6 +46,28 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
     public LoginFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_login, container, false);
+        ButterKnife.bind(this, view);
+        sessionSharedPreferences = new SessionSharedPreferences(this.getActivity());
+        if (sessionSharedPreferences.getIS_LOGIN()){
+            startActivity(new Intent(getActivity(),MainActivity.class)
+                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+            getActivity().finish();
+        }
+
+
+        btLogin.setOnClickListener(this);
+
+
+
+
+        return view;
     }
 
     private void userlogin(){
@@ -69,16 +92,18 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             public void onResponse(Call<ResponseLogin> call, Response<ResponseLogin> response) {
 
                 if (response != null && response.isSuccessful()) {
-//                    String a = response.body().getCustomerSigin().getId();
-                    String message = response.body().getMessage();
-                    sm.setLogin(true);
-                    sm.setAccessToken(response.body().getAccessToken());
-                    sm.setID(response.body().getCustomerSigin().getId());
-                    sm.setUSER_NAME(response.body().getCustomerSigin().getName());
-
-                    Intent intent = new Intent(getActivity(), MainActivity.class);
-                    startActivity(intent);
-                    startActivity(new Intent(getContext(),MainActivity.class));
+                    Log.d("TAG", "Tes: " +response.body().getAccessToken());
+                    String token = response.body().getAccessToken();
+                    String id = response.body().getCustomerSigin().getId();
+                    sessionSharedPreferences.saveSPString(SessionSharedPreferences.AccessToken, token);
+                    sessionSharedPreferences.saveSPString(SessionSharedPreferences.ID, id);
+                    sessionSharedPreferences.saveSPBoolean(SessionSharedPreferences.IS_LOGIN,true);
+//                    Intent intent = new Intent(getActivity(), MainActivity.class);
+//                    startActivity(intent);
+//                    startActivity(new Intent(getContext(),MainActivity.class));
+                    startActivity(new Intent(getContext(),MainActivity.class)
+                                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                    getActivity().finish();
                 } else {
                     Toast.makeText(getActivity(),"Gagal Login Gagal cek email atau passsword" , Toast.LENGTH_SHORT).show();
                 }
@@ -91,23 +116,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             }
         });
 
-    }
-
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_login, container, false);
-        ButterKnife.bind(this, view);
-        sm = new SessionSharedPreferences(getActivity());
-
-        btLogin.setOnClickListener(this);
-
-
-
-
-        return view;
     }
 
 

@@ -1,5 +1,6 @@
 package com.fabric.apps.mobile.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,14 +8,22 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.fabric.apps.mobile.R;
+import com.fabric.apps.mobile.activity.MainActivity;
 import com.fabric.apps.mobile.adapter.CatalogueListAdapter;
+import com.fabric.apps.mobile.connection.ConfigRetrofit;
 import com.fabric.apps.mobile.model.productModel.ResponseProduc;
+import com.fabric.apps.mobile.model.siginModel.ResponseLogin;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +37,7 @@ public class CatalogueFragment extends Fragment {
     private List<ResponseProduc> productList = new ArrayList<>();
 
     public CatalogueFragment() {
-        // Required empty public constructor
+//         Required empty public constructor
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,42 +48,48 @@ public class CatalogueFragment extends Fragment {
 
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2, RecyclerView.VERTICAL, false);
         rvcatalogueList.setLayoutManager(layoutManager);
-//        LoadJson();
+        LoadJson();
         return view;
     }
 
-//    private void LoadJson() {
-//
-//        //ini ngambil smua sy ruh ga kliatan tulisananya bisa gedein ga Bang h
-//        ApiInterface apiInterface = ConfigRetrofit.getClient().create(ApiInterface.class);
-//
-//        Call<Product_catalog_parent> call;
-//        call = apiInterface.getProductparent();
-//
-//        call.enqueue(new Callback<Product_catalog_parent>() {
+    private void LoadJson() {
+        Log.d("TAG", "coba: ");
+
+//        ConfigRetrofit.provideApiService().getProduc().enqueue(new Callback<ResponseProduc>() {
 //            @Override
-//            public void onResponse(Call<Product_catalog_parent> call, ResponseSignup<Product_catalog_parent> response) {
-//                if (response.isSuccessful() && response.body().getProduct_catalog() != null){
-//                    if (!productList.isEmpty()){
-//                        productList.clear();
-//                    }
+//            public void onResponse(Call<ResponseProduc> call, Response<ResponseProduc> response) {
+//                Log.d("TAG","product"+response.body());
 //
-//                    productList = response.body().getProduct_catalog();
-//                    catalogueListAdapter = new CatalogueListAdapter(getContext(), productList);
-//                    rvcatalogueList.setAdapter(catalogueListAdapter);
+//                if (response != null && response.isSuccessful()) {
+//                    Log.d("TAG","product"+response.body());
 //
-//                    catalogueListAdapter.notifyDataSetChanged();
+////                    productList = response.body().getProducts();
+////                    catalogueListAdapter = new CatalogueListAdapter(getContext(), productList);
+////                    rvcatalogueList.setAdapter(catalogueListAdapter);
+////
+////                    catalogueListAdapter.notifyDataSetChanged();
+////                    String a = response.body().getCus1tomerSigin().getId();
+////                    String message = response.body().getMessage();
+////                    sm.setLogin(true);
+////                    sm.setAccessToken(response.body().getAccessToken());
+////                    sm.setID(response.body().getCustomerSigin().getId());
+////                    sm.setUSER_NAME(response.body().getCustomerSigin().getName());
+////
+////                    Intent intent = new Intent(getActivity(), MainActivity.class);
+////                    startActivity(intent);
+////                    startActivity(new Intent(getContext(),MainActivity.class));
 //                } else {
-//                    Toast.makeText(getActivity(), "Gak Ada Hasil Bro", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getActivity(),"Gagal Login Gagal cek email atau passsword" , Toast.LENGTH_SHORT).show();
 //                }
 //            }
 //
-//            @Override
-//            public void onFailure(Call<Product_catalog_parent> call, Throwable t) {
 //
+//            @Override
+//            public void onFailure(Call<ResponseProduc> call, Throwable t) {
+//                Log.d("TAG", "Failed Connetion To" + t.toString());
 //            }
 //        });
-//    }
+    }
 
 
 }

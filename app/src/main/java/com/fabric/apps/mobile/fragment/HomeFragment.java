@@ -10,8 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,8 +25,10 @@ import com.fabric.apps.mobile.R;
 import com.fabric.apps.mobile.activity.HomeExtendsActivity;
 import com.fabric.apps.mobile.adapter.ProductHomeAdapter;
 import com.fabric.apps.mobile.adapter.SlidingBannerAdapter;
+import com.fabric.apps.mobile.connection.ConfigRetrofit;
 import com.fabric.apps.mobile.model.Banner;
 import com.fabric.apps.mobile.model.productModel.ResponseProduc;
+import com.fabric.apps.mobile.utils.SessionSharedPreferences;
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
 
 import java.util.ArrayList;
@@ -62,6 +68,7 @@ private String color = "";
 
     private int NUM_PAGES = 0;
     private int currentPage = 0;
+    SessionSharedPreferences sessionSharedPreferences;
 
     private ProductHomeAdapter homeAdapter;
     private List<ResponseProduc> product_catalogs = new ArrayList<>();
@@ -77,13 +84,14 @@ private String color = "";
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, view);
+        sessionSharedPreferences = new SessionSharedPreferences(this.getActivity());
 
         forYouList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         bestSellerList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         newArrivalList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         
         initViewPager();
-//        LoadJson();
+        LoadJson();
 
         btViewForYou.setOnClickListener(this);
         btViewBestSell.setOnClickListener(this);
@@ -92,7 +100,23 @@ private String color = "";
         return view;
     }
 
-//    private void LoadJson() {
+    private void LoadJson() {
+       String token = sessionSharedPreferences.getAccessToken();
+        Log.d("TAG", "isitoken: " +token);
+        String key = "oa00000000app";
+//        String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkpvaG4gRG9lIiwidXNlcm5hbWUiOiJhbGkiLCJwaG9uZU51bWJlciI6IjA4MjM3Nzk1NDAwOCIsInBhc3N3b3JkIjoiZTAxYzg1OGZiY2Q5MWEzZmE3ODVkMDZjNDY5YTMzYjEyOGU4MGY1ZiIsInNhbHQiOiIwNmQ0OTM5M2ZmOWYzNGFjNjA2YTkwZDdhY2M2ZWMwNGY0Y2MyODVkIiwiaW1hZ2UiOiIiLCJjcmVhdGVkQXQiOm51bGwsInVwZGF0ZWRBdCI6bnVsbCwiaWF0IjoxNTY2ODc1NjM1fQ.Nyqv36mgzwwPncCA2Eb4faYnj6SGF0YawlLduJYjnUY";
+
+        ConfigRetrofit.provideApiService().getProduc(key,token).enqueue(new Callback<ResponseProduc>() {
+            @Override
+            public void onResponse(Call<ResponseProduc> call, Response<ResponseProduc> response) {
+                Log.d("TAG", "Isi Body Cuy"+ response.body());
+            }
+
+            @Override
+            public void onFailure(Call<ResponseProduc> call, Throwable t) {
+
+            }
+        });
 //        String color;
 //        ApiInterface apiInterface = ConfigRetrofit.getClient().create(ApiInterface.class);
 //
@@ -126,7 +150,7 @@ private String color = "";
 //
 //            }
 //        });
-//    }
+    }
 
 
     private void initViewPager() {

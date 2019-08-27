@@ -13,17 +13,14 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ApiInterface {
 
 
 
-    @GET("product?apiKey=oa00000000app&accessToken=")
-    Call<ResponseProduc> getProduc();
-
-    @GET("carts/{id}/customer")
-    Call<Cart_parent> getCartparent(@Path("id")int id);
-
+//    @GET("product?apiKey=oa00000000app&accessToken={accessToken}")
+//    Call<ResponseProduc> getProduc(@Path("accessToken")String accessToken);
     @FormUrlEncoded
     @POST("carts")
     Call<Cart_data> postCart(
@@ -31,6 +28,13 @@ public interface ApiInterface {
             @Field("customerId") int costumerid,
             @Field("note") String note,
             @Field("length_per_meter") int lengthpermeter);
+
+    @GET("product")
+    Call<ResponseProduc> getProduc(@Query("apiKey") String apiKey,
+                                   @Query("accessToken") String accessToken);
+
+    @GET("carts/{id}/customer")
+    Call<Cart_parent> getCartparent(@Path("id")int id);
 
 
     @DELETE("carts/{id}")
