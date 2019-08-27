@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="10dp"
+    android:paddingStart="10dp"
+    android:paddingEnd="10dp"
+    android:background="@android:color/white">
+
+    <ImageView
+        android:id="@+id/notification_image"
+        android:layout_width="50dp"
+        android:layout_height="60dp"
+        android:src="@drawable/default_image_placeholder"
+        android:scaleType="fitXY"/>
+
+    <TextView
+        android:id="@+id/notification_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_toEndOf="@id/notification_image"
+        android:layout_alignTop="@id/notification_image"
+        android:layout_toStartOf="@id/notification_logo"
+        android:layout_marginEnd="10dp"
+        android:text="@string/notification_name"
+        android:layout_marginStart="10dp"/>
+
+    <TextView
+        android:id="@+id/notification_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/notification_message"
+        android:layout_alignStart="@id/notification_name"
+        android:layout_below="@id/notification_name"
+        android:layout_toStartOf="@id/notification_logo"
+        android:layout_marginEnd="10dp"/>
+
+    <TextView
+        android:id="@+id/notification_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/notification_logo"
+        android:background="@drawable/button_gradient_bg"
+        android:textColor="@android:color/white"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_toEndOf="@id/notification_image"
+        android:layout_marginStart="10dp"
+        android:background="@color/colorGray"
+        android:alpha=".5"
+        android:layout_below="@id/notification_image"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"/>
+
+</RelativeLayout>

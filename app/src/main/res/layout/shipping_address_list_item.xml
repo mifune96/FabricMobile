@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/wrapper"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:paddingTop="10dp"
+    android:elevation="1dp"
+    android:paddingStart="10dp"
+    android:paddingEnd="10dp">
+
+    <TextView
+        android:id="@+id/address_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/user_name"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        android:layout_toStartOf="@id/default_address"
+        android:layout_marginEnd="10dp"/>
+
+    <TextView
+        android:id="@+id/default_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/default_address"
+        android:textColor="@color/colorAccent"
+        android:textSize="12sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"/>
+
+    <TextView
+        android:id="@+id/phone_number_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/phone_number_address"
+        android:layout_below="@id/address_name"
+        android:layout_marginTop="10dp"
+        android:textSize="12sp"/>
+
+    <TextView
+        android:id="@+id/detail_shipping_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/detail_shipping_address"
+        android:layout_below="@id/phone_number_address"
+        android:textSize="12sp"/>
+
+    <TextView
+        android:id="@+id/address_city_distrik"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/address_city_and_district"
+        android:layout_below="@id/detail_shipping_address"
+        android:textSize="12sp"
+        android:textAllCaps="true"/>
+
+    <TextView
+        android:id="@+id/address_province"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/address_province"
+        android:layout_below="@id/address_city_distrik"
+        android:textSize="12sp"
+        android:textAllCaps="true"/>
+
+    <TextView
+        android:id="@+id/address_po_box"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@id/place"
+        android:text="@string/address_po_box"
+        android:textAllCaps="true"
+        android:layout_below="@id/address_province"
+        android:textSize="12sp"/>
+
+    <ImageView
+        android:id="@+id/place"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_place"
+        android:alpha=".4"
+        android:layout_alignParentEnd="true"
+        android:layout_alignBottom="@id/address_po_box"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorGray"
+        android:alpha=".5"
+        android:layout_below="@id/address_po_box"
+        android:layout_marginTop="10dp"/>
+
+</RelativeLayout>

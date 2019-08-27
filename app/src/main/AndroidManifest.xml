@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.fabric.apps.mobile">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name="com.fabric.apps.mobile.activity.ChangeAddressActivity"></activity>
+        <activity android:name="com.fabric.apps.mobile.activity.ShippingAddressDetailActivity" />
+        <activity android:name="com.fabric.apps.mobile.activity.Login_Signup_Activity">
+
+        </activity>
+        <activity android:name="com.fabric.apps.mobile.activity.ProfileSettingDetailActivity" />
+        <activity android:name="com.fabric.apps.mobile.activity.EditProfileActivity" />
+        <activity android:name="com.fabric.apps.mobile.activity.TransactionActivity" />
+        <activity android:name="com.fabric.apps.mobile.activity.NotificationActivity" />
+        <activity android:name="com.fabric.apps.mobile.activity.SearchActivity" />
+        <activity android:name="com.fabric.apps.mobile.activity.AccountSettingActivity" />
+        <activity android:name="com.fabric.apps.mobile.activity.HelpActivity" />
+        <activity android:name="com.fabric.apps.mobile.activity.InformationActivity" />
+        <activity android:name="com.fabric.apps.mobile.activity.FavoritedActivity" />
+        <activity android:name="com.fabric.apps.mobile.activity.CheckoutActivity" />
+        <activity android:name="com.fabric.apps.mobile.activity.CartActivity" />
+        <activity android:name="com.fabric.apps.mobile.activity.ProductDetailActivity" />
+        <activity android:name="com.fabric.apps.mobile.activity.HomeExtendsActivity" />
+        <activity android:name="com.fabric.apps.mobile.SplashScreenActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.fabric.apps.mobile.activity.MainActivity" />
+    </application>
+
+</manifest>

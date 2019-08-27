@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="10dp"
+    android:paddingEnd="10dp"
+    android:paddingTop="10dp"
+    android:background="@android:color/white">
+    
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/reviewer_image"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_default_user_placeholder"/>
+    
+    <TextView
+        android:id="@+id/reviewer_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="@string/reviewer_name"
+        android:layout_toEndOf="@id/reviewer_image"
+        android:layout_alignTop="@id/reviewer_image"
+        android:layout_marginStart="10dp"
+        android:layout_toStartOf="@id/rating_bar"
+        android:textColor="@android:color/black"/>
+
+    <TextView
+        android:id="@+id/review_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/review_date"
+        android:layout_below="@id/reviewer_name"
+        android:layout_alignStart="@id/reviewer_name"/>
+
+    <androidx.appcompat.widget.AppCompatRatingBar
+        android:id="@+id/rating_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        style="@style/Widget.AppCompat.RatingBar.Small"
+        android:theme="@style/RatingBarCustom"
+        android:rating="0"
+        android:stepSize=".5"
+        android:numStars="5"/>
+
+    <TextView
+        android:id="@+id/review"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/reviewer_image"
+        android:text="@string/review"
+        android:layout_alignStart="@id/reviewer_name"
+        android:layout_marginTop="5dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorGray"
+        android:alpha=".5"
+        android:layout_alignStart="@id/reviewer_name"
+        android:layout_below="@id/review"
+        android:layout_marginTop="10dp"/>
+
+
+</RelativeLayout>

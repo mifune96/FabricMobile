@@ -1,0 +1,149 @@
+<resources>
+    <string name="app_name">Fabric Mobile</string>
+    <string name="gama_textile">Fabric Store</string>
+
+    <string name="nav_home">Beranda</string>
+    <string name="nav_catalogue">Katalog</string>
+    <string name="nav_cart">Keranjang</string>
+    <string name="nav_profile">Profile</string>
+
+    <string name="nav_home_toolbar_title">Beranda</string>
+    <string name="nav_catalogue_toolbar_title">Katalog</string>
+    <string name="nav_cart_toolbar_title">Keranjang Belanja</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="chat">Pesan</string>
+    <string name="notification">Notifikasi</string>
+    <string name="search">Cari</string>
+    <string name="new_arrivals">Produk Baru</string>
+    <string name="view_all">Lihat Semua</string>
+    <string name="best_seller">Produk Terlaris</string>
+    <string name="just_for_you">Rekomendasi</string>
+    <string name="product_name">Product Name</string>
+    <string name="extend_activity">Extend Activity</string>
+    <string name="product_price">Product Price</string>
+    <string name="buy_now">Beli Sekarang</string>
+    <string name="total">Total</string>
+    <string name="total_payment">Total Payment</string>
+    <string name="checkout">Bayar</string>
+    <string name="_1">1</string>
+    <string name="user_name">Nama Pengguna</string>
+    <string name="nama">Nama</string>
+    <string name="edit_profile">Ubah profile</string>
+    <string name="setting_name">Setting Name</string>
+    <string name="favorited">Favorit</string>
+    <string name="account_setting">Pengaturan Akun</string>
+    <string name="help">Bantuan</string>
+    <string name="information">Informasi</string>
+    <string name="transaction">Transaksi</string>
+    <string name="product_description">Deskripsi Produk</string>
+    <string name="product_review">Review Produk</string>
+    <string name="shopping_cart">Keranjang Belanja</string>
+    <string name="reviewer_name">Reviewer Name</string>
+    <string name="review_date">Review Date</string>
+    <string name="review">Review</string>
+
+    <string name="product_desc">
+        Brokat Abstrak 3 109
+        \nRp. 62.500
+        \nkode barang : 109
+        \nHarga Rp.125.000-permeter
+        \nlebar 1.30
+
+        \n\nHarga DIUPLOAD PER SETENGAH METER!!! untuk memudahkan sista yg membutuhkan bahan kelipatan setengah meter
+
+        \n\nmembeli berarti membaca dan memahami keterangan produk!!!
+
+        \n\nBrokat yg satu ini TerrrrLimited Edition yah kak
+        \nGk nyesel deh punya koleksi brokat cantik dengan harga yg ramah rekening
+
+        \n\nHarap chat sebelum chekout!!!
+
+        \n\nHati2 kehabisan brokat cantiiik ini yah kak</string>
+    <string name="success_add_to_cart">Berhasil Masuk Keranjang</string>
+    <string name="sub_total">Sub Total</string>
+    <string name="belum_termasuk_biaya_kirim">Belum termasuk biaya kirim</string>
+    <string name="proced_to_checkout">Lanjut ke Pembayaran</string>
+    <string name="add_more_goods">Tambah Barang Lagi</string>
+    <string name="shipping_address">Alamat Pengiriman</string>
+    <string name="change">Ubah</string>
+    <string name="user_address">User Address</string>
+    <string name="user_phone_number">Phone Number</string>
+    <string name="payment_method">Metode Pembayaran</string>
+    <string name="bank_transfer">Transfer Bank</string>
+    <string name="info">Info</string>
+    <string name="purchase_information">Informasi Pembelian</string>
+    <string name="service_provider">Jasa Pengiriman</string>
+    <string name="total_pembayaran">Total Pembayaran</string>
+    <string name="place_order">Bayar Sekarang</string>
+    <string name="total_product_price">Total Harga Barang</string>
+    <string name="service_price">Ongkos Kirim</string>
+    <string name="account_setting_name">Account Setting Name</string>
+    <string name="email_address">Alamat Email</string>
+    <string name="password">Password</string>
+    <string name="logout">Keluar</string>
+    <string name="keyword_history">Riwayat Kata Kunci</string>
+    <string name="product_history">Riwayat Barang</string>
+    <string name="filter">Filter</string>
+    <string name="sort">Sort</string>
+    <string name="keyword">Keyword</string>
+    <string name="notification_name">Notification Name</string>
+    <string name="notification_message">Notification Message</string>
+    <string name="notification_logo">New</string>
+    <string name="profile_information">Informasi Profil</string>
+    <string name="name">Nama</string>
+    <string name="birth_date">Tanggal Lahir</string>
+    <string name="user_birth_date">User Birth Date</string>
+    <string name="user_gender">Jenis Kelamin</string>
+    <string name="user_phone">Nomor Telepon</string>
+    <string name="nomer_telpon">Masukkan Nomer Telpon</string>
+    <string name="forgot_password">Lupa Password?</string>
+    <string name="login">Masuk</string>
+    <string name="_or">atau</string>
+    <string name="continue_with_facebook">Lanjutkan dengan Facebook</string>
+    <string name="sign_in_with_google">Masuk dengan Google</string>
+    <string name="register">Daftar Baru</string>
+    <string name="input_your_name">Masukkan Nama Anda</string>
+    <string name="input_password">Masukkan Password</string>
+    <string name="input_password_again">Masukkan Password Lagi</string>
+    <string name="sign_up">Daftar</string>
+    <string name="your_email">Email Anda</string>
+    <string name="change_email_address">Ubah Alamat Email</string>
+    <string name="masukkan_email_baru">Masukkan Email Baru</string>
+    <string name="your_phone_number">Nomor Telepon Anda</string>
+    <string name="input_your_new_phone_number">Masukkan Nomor Baru Anda</string>
+    <string name="change_phone_number">Ubah Nomor Telepon</string>
+    <string name="change_password">Ubah Password</string>
+    <string name="input_old_password">Masukkan Password Lama</string>
+    <string name="input_new_password">Masukkan Password Baru</string>
+    <string name="input_again_new_password">Masukkan Ulang Password Baru</string>
+    <string name="add_shipping_address">Tambah Alamat</string>
+    <string name="save">Simpan</string>
+    <string name="add_new_addresss">Tambah Alamat Baru</string>
+    <string name="default_address">[Alamat Utama]</string>
+    <string name="detail_shipping_address">Detail Shipping Address</string>
+    <string name="address_city_and_district">Address City and District</string>
+    <string name="address_province">Address Province</string>
+    <string name="address_po_box">Address PO.BOX</string>
+    <string name="phone_number_address">Phone Number Address</string>
+    <string name="input_name">Masukkan Nama</string>
+    <string name="input_phone_number">Masukkan Nomor Telepon</string>
+    <string name="province">Provinsi</string>
+    <string name="input_province">Masukkan Provinsi</string>
+    <string name="city">Kota</string>
+    <string name="input_city">Masukkan Kota</string>
+    <string name="input_district">Masukkan Kecamatan</string>
+    <string name="district">Kecamatan</string>
+    <string name="postal_code">Kode Pos</string>
+    <string name="input_postal_code">Masukkan Kode Pos</string>
+    <string name="detailed_address">Alamat Lengkap</string>
+    <string name="detailed_address_desc">Nomor Unit, Nomor Rumah, Gedung, Nama Jalan</string>
+    <string name="set_as_default_address">Jadikan Alamat Utama</string>
+    <string name="delete_address">Hapus Alamat</string>
+    <string name="nav_favorite">Favorit</string>
+    <string name="nav_favorite_toolbar_title">Favorit</string>
+    <string name="product_stock">Product Stock</string>
+    <string name="first_name">Nama Awal</string>
+    <string name="last_name">Nama Akhir</string>
+</resources>
