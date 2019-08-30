@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.fabric.apps.mobile.R;
 import com.fabric.apps.mobile.activity.ProductDetailActivity;
+import com.fabric.apps.mobile.model.productModel.ProductsItem;
 import com.fabric.apps.mobile.model.productModel.ResponseProduc;
 
 import java.util.List;
@@ -24,9 +25,9 @@ import butterknife.ButterKnife;
 public class ProductHomeAdapter extends RecyclerView.Adapter<ProductHomeAdapter.ViewHolder> {
 
     private Context context;
-    private List<ResponseProduc> productList;
+    private List<ProductsItem> productList;
 
-    public ProductHomeAdapter(Context context, List<ResponseProduc> productList) {
+    public ProductHomeAdapter(Context context, List<ProductsItem> productList) {
         this.context = context;
         this.productList = productList;
     }
@@ -41,19 +42,20 @@ public class ProductHomeAdapter extends RecyclerView.Adapter<ProductHomeAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-//        holder.productName.setText(productList.get(position).getProduct().getNameProduct());
-//
-//        Glide.with(context)
-//                .load(productList.get(position)
-//                        .getProduct().getImageUrl()).into(holder.productImage);
+        holder.productName.setText(productList.get(position).getName());
+
+        Glide.with(context)
+                .load(productList.get(position)
+                       .getImage()).into(holder.productImage);
 
         holder.wrapper.setOnClickListener(v -> {
             Intent intent = new Intent(context, ProductDetailActivity.class);
-//            intent.putExtra("id", productList.get(position).getId());
-//            intent.putExtra("product_name", productList.get(position).getProduct().getNameProduct());
-//            intent.putExtra("product_price", productList.get(position).getPrice());
-//            intent.putExtra("product_image", productList.get(position).getProduct().getImageUrl());
-//            intent.putExtra("product_description", productList.get(position).getDescription());
+            intent.putExtra("id", productList.get(position).getId());
+            intent.putExtra("product_name", productList.get(position).getName());
+            intent.putExtra("product_price", productList.get(position).getHarga());
+            intent.putExtra("product_image", productList.get(position).getImage());
+            intent.putExtra("product_stok",productList.get(position).getStok());
+            intent.putExtra("product_description", productList.get(position).getDeskripsi());
             context.startActivity(intent);
         });
     }

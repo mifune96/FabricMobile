@@ -11,6 +11,7 @@ import butterknife.ButterKnife;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -45,6 +46,9 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
     @BindView(R.id.product_price)
     TextView productPrice;
 
+    @BindView(R.id.product_stock)
+    TextView productStok;
+
     @BindView(R.id.product_description)
     TextView productDescription;
 
@@ -61,7 +65,7 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
     Button buttonBuyNow;
 
     private String mImg,mProductname,mDescription;
-    private int mProductprice;
+    private int mProductprice,mProductstock;
     private int mProductid;
 
     @Override
@@ -81,6 +85,7 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
         mProductname = intent.getStringExtra("product_name");
         mProductid = intent.getIntExtra("id",0);
         mProductprice = intent.getIntExtra("product_price",0);
+        mProductstock = intent.getIntExtra("product_stok",0);
         mDescription = intent.getStringExtra("product_description");
         mImg = intent.getStringExtra("product_image");
 
@@ -91,7 +96,10 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
 
         productName.setText(mProductname);
         productPrice.setText("Rp. "+mProductprice);
+        productStok.setText("Stok :"+mProductstock);
         productDescription.setText(mDescription);
+
+        Log.d("TAG", "ISINYA" +mProductid);
 
         buttonAddToCart.setOnClickListener(this);
         buttonBuyNow.setOnClickListener(this);

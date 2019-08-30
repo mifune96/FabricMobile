@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.fabric.apps.mobile.R;
 import com.fabric.apps.mobile.activity.ProductDetailActivity;
+import com.fabric.apps.mobile.model.productModel.ProductsItem;
 import com.fabric.apps.mobile.model.productModel.ResponseProduc;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -25,9 +26,9 @@ import butterknife.ButterKnife;
 public class CatalogueListAdapter extends RecyclerView.Adapter<CatalogueListAdapter.ViewHolder> {
 
     private Context context;
-    private List<ResponseProduc> productList;
+    private List<ProductsItem> productList;
 
-    public CatalogueListAdapter(Context context, List<ResponseProduc> productList) {
+    public CatalogueListAdapter(Context context, List<ProductsItem> productList) {
         this.context = context;
         this.productList = productList;
     }
@@ -44,12 +45,12 @@ public class CatalogueListAdapter extends RecyclerView.Adapter<CatalogueListAdap
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         //bisa diginiin
-//        holder.productName.setText(productList.get(position).getProduct().getNameProduct());
-//        holder.productPrice.setText("Rp. "+ productList.get(position).getPrice());
-//
-//        int id = productList.get(position).getId();
-//
-//        Glide.with(context).load(productList.get(position).getProduct().getImageUrl()).into(holder.productImage);
+        holder.productName.setText(productList.get(position).getName());
+        holder.productPrice.setText("Rp. "+ productList.get(position).getHarga());
+
+        int id = productList.get(position).getId();
+
+        Glide.with(context).load(productList.get(position).getImage()).into(holder.productImage);
 
         holder.favorite.setOnClickListener(v -> {
             holder.favorite.setImageResource(R.drawable.ic_favorite_fill);
@@ -57,11 +58,12 @@ public class CatalogueListAdapter extends RecyclerView.Adapter<CatalogueListAdap
 
         holder.wrapper.setOnClickListener(v -> {
             Intent intent = new Intent(context, ProductDetailActivity.class);
-//            intent.putExtra("id", productList.get(position).getId());
-//            intent.putExtra("product_name", productList.get(position).getProduct().getNameProduct());
-//            intent.putExtra("product_price", productList.get(position).getPrice());
-//            intent.putExtra("product_image", productList.get(position).getProduct().getImageUrl());
-//            intent.putExtra("product_description", productList.get(position).getDescription());
+            intent.putExtra("id", productList.get(position).getId());
+            intent.putExtra("product_name", productList.get(position).getName());
+            intent.putExtra("product_price", productList.get(position).getHarga());
+            intent.putExtra("product_image", productList.get(position).getImage());
+            intent.putExtra("product_stok",productList.get(position).getStok());
+            intent.putExtra("product_description", productList.get(position).getDeskripsi());
             context.startActivity(intent);
         });
 

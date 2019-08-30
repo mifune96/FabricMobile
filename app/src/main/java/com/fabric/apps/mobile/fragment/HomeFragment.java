@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,13 +21,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.load.model.ModelLoader;
 import com.fabric.apps.mobile.R;
 import com.fabric.apps.mobile.activity.HomeExtendsActivity;
 import com.fabric.apps.mobile.adapter.ProductHomeAdapter;
 import com.fabric.apps.mobile.adapter.SlidingBannerAdapter;
 import com.fabric.apps.mobile.connection.ConfigRetrofit;
 import com.fabric.apps.mobile.model.Banner;
+import com.fabric.apps.mobile.model.productModel.ProductsItem;
 import com.fabric.apps.mobile.model.productModel.ResponseProduc;
 import com.fabric.apps.mobile.utils.SessionSharedPreferences;
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
@@ -39,11 +43,17 @@ import java.util.TimerTask;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends Fragment implements View.OnClickListener {
+public class HomeFragment extends Fragment implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
 
-private String color = "";
+    private String color = "";
+    SessionSharedPreferences sessionSharedPreferences;
+    private SwipeRefreshLayout swipeRefreshLayout;
+
     @BindView(R.id.banner_view_pager)
     ViewPager bannerViewPager;
+
+    @BindView(R.id.swipe_refres_layout)
+    SwipeRefreshLayout swRefreslayout;
 
     @BindView(R.id.view_pager_indicator)
     DotsIndicator viewPagerIndicator;
@@ -68,10 +78,10 @@ private String color = "";
 
     private int NUM_PAGES = 0;
     private int currentPage = 0;
-    SessionSharedPreferences sessionSharedPreferences;
+
 
     private ProductHomeAdapter homeAdapter;
-    private List<ResponseProduc> product_catalogs = new ArrayList<>();
+    private List<ProductsItem> product_catalogs = new ArrayList<>();
 
     public HomeFragment() {
         // Required empty public constructor
@@ -85,13 +95,14 @@ private String color = "";
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, view);
         sessionSharedPreferences = new SessionSharedPreferences(this.getActivity());
+        swipeRefreshLayout.setOnRefreshListener(this);
 
         forYouList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         bestSellerList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         newArrivalList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         
         initViewPager();
-        LoadJson();
+//        LoadJson();
 
         btViewForYou.setOnClickListener(this);
         btViewBestSell.setOnClickListener(this);
@@ -101,6 +112,8 @@ private String color = "";
     }
 
     private void LoadJson() {
+
+        swipeRefreshLayout.setRefreshing(true);
        String token = sessionSharedPreferences.getAccessToken();
         Log.d("TAG", "isitoken: " +token);
         String key = "oa00000000app";
@@ -109,11 +122,29 @@ private String color = "";
         ConfigRetrofit.provideApiService().getProduc(key,token).enqueue(new Callback<ResponseProduc>() {
             @Override
             public void onResponse(Call<ResponseProduc> call, Response<ResponseProduc> response) {
+                if(response != null && response.body().getProducts() != null){
+                    if (!product_catalogs.isEmpty()){
+                        product_catalogs.clear();
+                    }
+                    product_catalogs = response.body().getProducts();
+                    homeAdapter = new ProductHomeAdapter(getContext(),product_catalogs);
+                    forYouList.setAdapter(homeAdapter);
+                    bestSellerList.setAdapter(homeAdapter);
+                    newArrivalList.setAdapter(homeAdapter);
+                    homeAdapter.notifyDataSetChanged();
+                    swipeRefreshLayout.setRefreshing(false);
+
+                }else {
+                    swipeRefreshLayout.setRefreshing(false);
+                    Toast.makeText(getActivity(), "Isi nya Kosong  bor",Toast.LENGTH_SHORT).show();
+                }
+
                 Log.d("TAG", "Isi Body Cuy"+ response.body());
             }
 
             @Override
             public void onFailure(Call<ResponseProduc> call, Throwable t) {
+                swipeRefreshLayout.setRefreshing(false);
 
             }
         });
@@ -234,4 +265,21 @@ private String color = "";
                 break;
         }
     }
+
+    @Override
+    public void onRefresh() {
+
+        LoadJson();
+    }
+
+//    private void onLoadSwiperRefresh(final String data){
+//        swipeRefreshLayout.post(
+//                new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        LoadJson(data);
+//                    }
+//                }
+//        );
+//    }
 }

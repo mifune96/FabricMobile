@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.fabric.apps.mobile.R;
 import com.fabric.apps.mobile.fragment.CartFragment;
+import com.fabric.apps.mobile.fragment.CatalogueFragment;
 import com.fabric.apps.mobile.fragment.FavoriteFragment;
 import com.fabric.apps.mobile.fragment.HomeFragment;
 import com.fabric.apps.mobile.fragment.ProfileFragment;
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private static String TAG;
     private Fragment homeFragment = new HomeFragment();
-    private Fragment favoriteFragment = new FavoriteFragment();
+    private Fragment catalogFragment = new CatalogueFragment();
     private Fragment cartFragment = new CartFragment();
     private Fragment profileFragment = new ProfileFragment();
     private Fragment activeFragment = homeFragment;
@@ -82,8 +83,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         fragmentManager.beginTransaction().add(R.id.main_container, homeFragment, "Home").commit();
         fragmentManager.beginTransaction().add(R.id.main_container, cartFragment,"Cart")
                 .hide(cartFragment).commit();
-        fragmentManager.beginTransaction().add(R.id.main_container, favoriteFragment,"Favorite")
-                .hide(favoriteFragment).commit();
+        fragmentManager.beginTransaction().add(R.id.main_container, catalogFragment,"Catalog")
+                .hide(catalogFragment).commit();
         fragmentManager.beginTransaction().add(R.id.main_container, profileFragment,"Profile")
                 .hide(profileFragment).commit();
     }
@@ -94,8 +95,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 TAG = "Home";
                 setBottomNavBar(TAG);
                 return true;
-            case R.id.nav_favorite:
-                TAG = "Favorite";
+            case R.id.nav_catalog:
+                TAG = "Catalog";
                 setBottomNavBar(TAG);
                 return true;
             case R.id.nav_cart:
@@ -122,11 +123,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                searchButton.setVisibility(View.VISIBLE);
                 toolbar.setVisibility(View.VISIBLE);
                 break;
-            case "Favorite":
-                fragmentManager.beginTransaction().hide(activeFragment).show(favoriteFragment).commit();
-                activeFragment = favoriteFragment;
+            case "Catalog":
+                fragmentManager.beginTransaction().hide(activeFragment).show(catalogFragment).commit();
+                activeFragment = catalogFragment;
                 Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(true);
-                getSupportActionBar().setTitle(getString(R.string.nav_favorite_toolbar_title));
+                getSupportActionBar().setTitle(getString(R.string.nav_catalogue_toolbar_title));
 //                searchButton.setVisibility(View.VISIBLE);
                 toolbar.setVisibility(View.VISIBLE);
                 break;
