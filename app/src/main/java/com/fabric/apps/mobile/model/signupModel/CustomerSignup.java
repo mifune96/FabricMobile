@@ -1,13 +1,16 @@
 package com.fabric.apps.mobile.model.signupModel;
 
-//import javax.annotation.Generated;
+
 import com.google.gson.annotations.SerializedName;
 
-//@Generated("com.robohorse.robopojogenerator")
+
 public class CustomerSignup {
 
 	@SerializedName("createdAt")
 	private String createdAt;
+
+	@SerializedName("image")
+	private Object image;
 
 	@SerializedName("password")
 	private String password;
@@ -36,6 +39,14 @@ public class CustomerSignup {
 
 	public String getCreatedAt(){
 		return createdAt;
+	}
+
+	public void setImage(Object image){
+		this.image = image;
+	}
+
+	public Object getImage(){
+		return image;
 	}
 
 	public void setPassword(String password){
@@ -70,12 +81,12 @@ public class CustomerSignup {
 		return name;
 	}
 
-	public String getId() {
-		return id;
+	public void setId(String id){
+		this.id = id;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public String getId(){
+		return id;
 	}
 
 	public void setUsername(String username){
@@ -99,6 +110,7 @@ public class CustomerSignup {
 		return 
 			"CustomerSignup{" +
 			"createdAt = '" + createdAt + '\'' + 
+			",image = '" + image + '\'' + 
 			",password = '" + password + '\'' + 
 			",phoneNumber = '" + phoneNumber + '\'' + 
 			",salt = '" + salt + '\'' + 

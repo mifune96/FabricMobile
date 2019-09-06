@@ -23,11 +23,14 @@ import com.fabric.apps.mobile.R;
 import com.fabric.apps.mobile.activity.MainActivity;
 import com.fabric.apps.mobile.connection.ConfigRetrofit;
 import com.fabric.apps.mobile.model.signupModel.ResponseSignup;
+import com.fabric.apps.mobile.utils.SessionSharedPreferences;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class SignUpFragment extends Fragment implements View.OnClickListener {
+
+    SessionSharedPreferences sessionSharedPreferences;
 
     @BindView(R.id.input_nama_pengguna)
     EditText tvusername;
@@ -104,9 +107,17 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
                     public void onResponse(Call<ResponseSignup> call, Response<ResponseSignup> response) {
                         if (response != null && response.isSuccessful()){
                             Log.d("TAG", "Sukses Daftar ");
-                            Intent intent = new Intent(getActivity(), MainActivity.class);
-                            startActivity(intent);
-                            startActivity(new Intent(getContext(),MainActivity.class));
+                            String token = response.body().getAccessToken();
+                            String id = response.body().getCustomerSignup().getId();
+                            sessionSharedPreferences.saveSPString(SessionSharedPreferences.AccessToken, token);
+                            sessionSharedPreferences.saveSPString(SessionSharedPreferences.ID, id);
+                            sessionSharedPreferences.saveSPBoolean(SessionSharedPreferences.IS_LOGIN,true);
+                            startActivity(new Intent(getContext(),MainActivity.class)
+                                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                            getActivity().finish();
+//                            Intent intent = new Intent(getActivity(), MainActivity.class);
+//                            startActivity(intent);
+//                            startActivity(new Intent(getContext(),MainActivity.class));
                         } else {
                             Toast.makeText(getActivity(),"Gagal MendaftarCek data diri" , Toast.LENGTH_SHORT).show();
                         }
@@ -154,6 +165,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_sign_up, container, false);
         ButterKnife.bind(this, view);
+        sessionSharedPreferences = new SessionSharedPreferences(this.getActivity());
 
         BtnSignup.setOnClickListener(this);
 

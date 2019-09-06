@@ -47,7 +47,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Swip
 
     private String color = "";
     SessionSharedPreferences sessionSharedPreferences;
-    private SwipeRefreshLayout swipeRefreshLayout;
+//    private SwipeRefreshLayout swipeRefreshLayout;
 
     @BindView(R.id.banner_view_pager)
     ViewPager bannerViewPager;
@@ -95,14 +95,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Swip
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, view);
         sessionSharedPreferences = new SessionSharedPreferences(this.getActivity());
-        swipeRefreshLayout.setOnRefreshListener(this);
+        swRefreslayout.setOnRefreshListener(this);
 
         forYouList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         bestSellerList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         newArrivalList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         
         initViewPager();
-//        LoadJson();
+        LoadJson();
 
         btViewForYou.setOnClickListener(this);
         btViewBestSell.setOnClickListener(this);
@@ -113,7 +113,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Swip
 
     private void LoadJson() {
 
-        swipeRefreshLayout.setRefreshing(true);
+        swRefreslayout.setRefreshing(true);
        String token = sessionSharedPreferences.getAccessToken();
         Log.d("TAG", "isitoken: " +token);
         String key = "oa00000000app";
@@ -132,10 +132,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Swip
                     bestSellerList.setAdapter(homeAdapter);
                     newArrivalList.setAdapter(homeAdapter);
                     homeAdapter.notifyDataSetChanged();
-                    swipeRefreshLayout.setRefreshing(false);
+                    swRefreslayout.setRefreshing(false);
 
                 }else {
-                    swipeRefreshLayout.setRefreshing(false);
+                    swRefreslayout.setRefreshing(false);
                     Toast.makeText(getActivity(), "Isi nya Kosong  bor",Toast.LENGTH_SHORT).show();
                 }
 
@@ -144,7 +144,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Swip
 
             @Override
             public void onFailure(Call<ResponseProduc> call, Throwable t) {
-                swipeRefreshLayout.setRefreshing(false);
+                swRefreslayout.setRefreshing(false);
 
             }
         });

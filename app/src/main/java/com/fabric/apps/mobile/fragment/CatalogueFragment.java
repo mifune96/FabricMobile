@@ -89,7 +89,7 @@ public class CatalogueFragment extends Fragment {
 
 //        ConfigRetrofit.provideApiService().getProduc().enqueue(new Callback<ResponseProduc>() {
 //            @Override
-//            public void onResponse(Call<ResponseProduc> call, Response<ResponseProduc> response) {
+//            public void onResponse(Call<ResponseProduc> call, ResponseSignup<ResponseProduc> response) {
 //                Log.d("TAG","product"+response.body());
 //
 //                if (response != null && response.isSuccessful()) {
