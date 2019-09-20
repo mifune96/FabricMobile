@@ -1,16 +1,19 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-    android:id="@+id/swipe_refres_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/swipeContainer"
     tools:context=".fragment.HomeFragment">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/wrapper"
+        android:id="@+id/successGroup"
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -132,8 +135,7 @@
                 android:paddingEnd="0dp"
                 android:layout_marginTop="10dp"
                 android:background="@android:color/white"
-                android:paddingBottom="10dp"
-                android:visibility="gone">
+                android:paddingBottom="10dp">
 
                 <TextView
                     android:id="@+id/best_seller"
@@ -169,6 +171,20 @@
         </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.core.widget.NestedScrollView>
+        <include
+            android:id="@+id/errorGroup"
+            layout="@layout/empty_list"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:visibility="gone" />
+
+        <include
+            android:id="@+id/errorState"
+            layout="@layout/somthing_wrong"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:visibility="gone" />
+    </RelativeLayout>
 
 
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

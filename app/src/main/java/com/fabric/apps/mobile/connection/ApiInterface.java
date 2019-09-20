@@ -1,44 +1,31 @@
 package com.fabric.apps.mobile.connection;
 
-import com.fabric.apps.mobile.model.cartModel.Cart_data;
-import com.fabric.apps.mobile.model.cartModel.Cart_parent;
+import com.fabric.apps.mobile.model.cartModel.CartItem;
+import com.fabric.apps.mobile.model.cartModel.ResponseCart;
 import com.fabric.apps.mobile.model.productModel.ResponseProduc;
 import com.fabric.apps.mobile.model.siginModel.ResponseLogin;
 import com.fabric.apps.mobile.model.signupModel.ResponseSignup;
 
 import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ApiInterface {
 
-
-
-//    @GET("product?apiKey=oa00000000app&accessToken={accessToken}")
-//    Call<ResponseProduc> getProduc(@Path("accessToken")String accessToken);
-    @FormUrlEncoded
-    @POST("carts")
-    Call<Cart_data> postCart(
-            @Field("productInboundId") int productinboundid,
-            @Field("customerId") int costumerid,
-            @Field("note") String note,
-            @Field("length_per_meter") int lengthpermeter);
-
+    /**
+    ** for get all produc for catalog and home
+     **/
     @GET("product")
     Call<ResponseProduc> getProduc(@Query("apiKey") String apiKey,
                                    @Query("accessToken") String accessToken);
-
-    @GET("carts/{id}/customer")
-    Call<Cart_parent> getCartparent(@Path("id")int id);
-
-
-    @DELETE("carts/{id}")
-    Call<Cart_data> deleteCart(@Path("id") int id);
 
     @FormUrlEncoded
     @POST("customer/signin")
@@ -47,6 +34,9 @@ public interface ApiInterface {
             @Field("password") String password);
 
 
+    /**
+    ** for Post if Costumer Registration
+     **/
     @FormUrlEncoded
     @POST("customer/register")
     Call<ResponseSignup> Signup(
@@ -56,11 +46,43 @@ public interface ApiInterface {
             @Field("password") String password,
             @Field("retypePassword") String rtpassword);
 
+    /**
+     *
+     *============================================================================
+     * ============= Fungsi untuk Cart Get/update/delet===========================
+     * ===========================================================================
+    /*
+    For Get all data cart by id costumer
+     */
+    @GET("cart/{id}")
+    Call<ResponseCart> getCart(
+                                 @Path("id")String id,
+                                 @Query("apiKey") String apiKey,
+                                 @Query("accessToken") String accessToken);
 
-
-
-
-
-
-
+    /*
+    Post Cart Data
+     */
+    @FormUrlEncoded
+    @POST("cart")
+    Call<CartItem> postCart(@Query("apiKey") String apiKey,
+                            @Query("accessToken") String accessToken,
+                            @Field("CustomerId") String costumerid,
+                            @Field("ProductId") int produkid,
+                            @Field("permeter") double permeter);
+    /*
+    For Update Cart
+     */
+    @PUT("cart")
+    Call<ResponseCart> updateCart(@Query("CustomerId") String id,
+                                  @Query("ProductId") String produkid,
+                                  @Path("permeter") String permeter,
+                                  @Body ResponseCart cart);
+    /*
+    Delete Cart
+     */
+    @DELETE("cart")
+    Call<ResponseCart> deletCart  (@Path("id") String id,
+                                   @Query("apiKey") String apiKey,
+                                   @Query("accessToken") String accessToken);
 }

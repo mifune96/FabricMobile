@@ -38,10 +38,10 @@ public class ProductHistoryAdapter extends RecyclerView.Adapter<ProductHistoryAd
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-//        holder.productName.setText(product_catalogs.get(position).getProduct().getNameProduct());
+//        holder.productName.setText(product_catalogs.get(position).getProductCart().getNameProduct());
 //        holder.productPrice.setText(product_catalogs.get(position).getPrice());
 
-//        Glide.with(context).load(product_catalogs.get(position).getProduct().getImageUrl()).into(holder.productImage);
+//        Glide.with(context).load(product_catalogs.get(position).getProductCart().getImageUrl()).into(holder.productImage);
     }
 
     @Override

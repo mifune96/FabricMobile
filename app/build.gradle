@@ -14,10 +14,12 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "SERVER_URL", '\"https://fabric-store.herokuapp.com/api/v1/\"'
+//            buildConfigField "String", "SERVER_URL", '\"https://fabric-store.herokuapp.com/api/v1/\"'
+            buildConfigField "String", "SERVER_URL", '\"http://192.168.100.55:3000/api/v1/\"'
         }
         debug {
-            buildConfigField "String", "SERVER_URL", '"https://fabric-store.herokuapp.com/api/v1/"'
+            buildConfigField "String", "SERVER_URL", '"http://192.168.100.55:3000/api/v1/"'
+//            buildConfigField "String", "SERVER_URL", '"https://fabric-store.herokuapp.com/api/v1/"'
             //buildConfigField "String", "IMAGES", '"http://iconscript.com/chat19/userfiles/images/"'
         }
     }
@@ -50,6 +52,7 @@ dependencies {
     implementation 'com.amitshekhar.android:android-networking:1.0.2'
     implementation 'com.jakewharton:butterknife:10.1.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
+    implementation 'com.github.ybq:Android-SpinKit:1.2.0'
 
     //Network
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
@@ -60,5 +63,8 @@ dependencies {
 
     //Times Formater
     implementation 'org.ocpsoft.prettytime:prettytime:4.0.1.Final'
+
+    // Currency Formatter
+    implementation 'com.wajahatkarim3.EasyMoney-Widgets:EasyMoney-Widgets:1.0.0'
 
 }

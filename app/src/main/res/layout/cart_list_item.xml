@@ -29,8 +29,8 @@
             android:layout_toStartOf="@id/button_remove"
             android:layout_toEndOf="@id/product_image"
             android:layout_marginStart="10dp"/>
-        
-        <TextView
+
+        <com.wajahatkarim3.easymoneywidgets.EasyMoneyTextView
             android:id="@+id/product_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

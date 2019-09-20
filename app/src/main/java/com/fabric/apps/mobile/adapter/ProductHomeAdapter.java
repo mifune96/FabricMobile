@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.fabric.apps.mobile.R;
 import com.fabric.apps.mobile.activity.ProductDetailActivity;
+import com.fabric.apps.mobile.contoller.CartController;
 import com.fabric.apps.mobile.model.productModel.ProductsItem;
 import com.fabric.apps.mobile.model.productModel.ResponseProduc;
 

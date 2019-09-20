@@ -44,12 +44,12 @@ public class ExtendListAdapter extends RecyclerView.Adapter<ExtendListAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-//        holder.productName.setText(productList.get(position).getProduct().getNameProduct());
+//        holder.productName.setText(productList.get(position).getProductCart().getNameProduct());
 //        holder.productPrice.setText(productList.get(position).getPrice());
 
 //        Glide.with(context)
 //                .load(productList.get(position)
-////                        .getProduct().getImageUrl()).into(holder.productImage);
+////                        .getProductCart().getImageUrl()).into(holder.productImage);
 
         boolean isFavorited = true;
 
@@ -64,9 +64,9 @@ public class ExtendListAdapter extends RecyclerView.Adapter<ExtendListAdapter.Vi
         holder.wrapper.setOnClickListener(v -> {
             Intent intent = new Intent(context, ProductDetailActivity.class);
 //            intent.putExtra("id",productList.get(position).getId());
-//            intent.putExtra("product_name", productList.get(position).getProduct().getNameProduct());
+//            intent.putExtra("product_name", productList.get(position).getProductCart().getNameProduct());
 //            intent.putExtra("product_price", productList.get(position).getPrice());
-//            intent.putExtra("product_image", productList.get(position).getProduct().getImageUrl());
+//            intent.putExtra("product_image", productList.get(position).getProductCart().getImageUrl());
 //            intent.putExtra("product_description", productList.get(position).getDescription());
             context.startActivity(intent);
         });

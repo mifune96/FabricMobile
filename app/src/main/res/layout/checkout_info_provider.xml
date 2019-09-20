@@ -22,7 +22,13 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/product_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
+    <include
+        android:id="@+id/cart_item"
+        layout="@layout/cart_list_item"
+        android:visibility="gone"/>
 
     <View
         android:layout_width="match_parent"

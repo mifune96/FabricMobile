@@ -1,16 +1,15 @@
-package com.fabric.apps.mobile.model.signupModel;
+package com.fabric.apps.mobile.model.cartModel;
 
 
 import com.google.gson.annotations.SerializedName;
 
+public class CustomerCart {
 
-public class CustomerSignup {
+	@SerializedName("image")
+	private String image;
 
 	@SerializedName("createdAt")
 	private String createdAt;
-
-	@SerializedName("image")
-	private Object image;
 
 	@SerializedName("password")
 	private String password;
@@ -25,7 +24,7 @@ public class CustomerSignup {
 	private String name;
 
 	@SerializedName("id")
-	private int id;
+	private String id;
 
 	@SerializedName("username")
 	private String username;
@@ -33,20 +32,20 @@ public class CustomerSignup {
 	@SerializedName("updatedAt")
 	private String updatedAt;
 
+	public void setImage(String image){
+		this.image = image;
+	}
+
+	public String getImage(){
+		return image;
+	}
+
 	public void setCreatedAt(String createdAt){
 		this.createdAt = createdAt;
 	}
 
 	public String getCreatedAt(){
 		return createdAt;
-	}
-
-	public void setImage(Object image){
-		this.image = image;
-	}
-
-	public Object getImage(){
-		return image;
 	}
 
 	public void setPassword(String password){
@@ -81,11 +80,11 @@ public class CustomerSignup {
 		return name;
 	}
 
-	public void setId(int id){
+	public void setId(String id){
 		this.id = id;
 	}
 
-	public int getId(){
+	public String getId(){
 		return id;
 	}
 
@@ -108,9 +107,9 @@ public class CustomerSignup {
 	@Override
  	public String toString(){
 		return 
-			"CustomerSignup{" +
-			"createdAt = '" + createdAt + '\'' + 
-			",image = '" + image + '\'' + 
+			"CustomerCart{" +
+			"image = '" + image + '\'' + 
+			",createdAt = '" + createdAt + '\'' + 
 			",password = '" + password + '\'' + 
 			",phoneNumber = '" + phoneNumber + '\'' + 
 			",salt = '" + salt + '\'' + 

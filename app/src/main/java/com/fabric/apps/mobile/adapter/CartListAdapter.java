@@ -11,9 +11,12 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.fabric.apps.mobile.R;
-import com.fabric.apps.mobile.model.cartModel.Cart_data;
+import com.fabric.apps.mobile.contoller.CartController;
+import com.fabric.apps.mobile.model.cartModel.CartItem;
 import com.fabric.apps.mobile.utils.SessionSharedPreferences;
+import com.wajahatkarim3.easymoneywidgets.EasyMoneyTextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -24,139 +27,72 @@ import butterknife.ButterKnife;
 public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHolder> {
 
     private Context context;
-    private List<Cart_data> cart_data;
+    private List<CartItem> cartItems;
     private TextView total;
-    private Double qty, totalPayment;
-    SessionSharedPreferences session;
+    private int qty, totalPayment;
+    private CartController cartController = new CartController();
 
-    //session = new SessionSharedPreferences(context); bukannya ini di taeo di fragmen ya kak ? ga tau sy harusnya di on create ahaha wkwkwkw
-    public CartListAdapter(Context context, List<Cart_data> cart_data, TextView total) {
+    public CartListAdapter(Context context, List<CartItem> cart_data) {
         this.context = context;
-        this.cart_data = cart_data;
-        this.total = total;
+        this.cartItems = cart_data;
     }
 
-    public CartListAdapter() {
-    }
+
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.cart_list_item, parent, false);
 
-//        int totalharga=0;
-//        for (int i =0; i<cart_data.size();i++){
-//            totalharga+=cart_data.get(i).getProduct_catalog().getPrice();
-//        }
-        session = new SessionSharedPreferences(context);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        totalPayment = getTotalPayment();
 
-//        holder.productName.setText(cart_data.get(position).getProduct_catalog().getProduct().getNameProduct());
-//        holder.productPrice.setText("Rp. "+ cart_data.get(position).getProduct_catalog().getPrice().intValue());
+        holder.productName.setText(cartItems.get(position).getProductCart().getName());
+        holder.productPrice.setText(Integer.toString(cartItems.get(position).getProductCart().getHarga()));
+        holder.productPrice.setCurrency("Rp");
+        holder.productPrice.showCommas();
+        holder.productPrice.showCurrencySymbol();
         holder.quantity.setText("1.0");
 
-
-//        Glide.with(context).load(cart_data.get(position).getProduct_catalog().getProduct().getImageUrl()).into(holder.productImage);
+        if (!cartItems.get(position).getProductCart().getImage().isEmpty()){
+            Glide.with(context).load(cartItems.get(position).getProductCart()
+                    .getImage()).into(holder.productImage);
+            holder.productImage.setScaleType(ImageView.ScaleType.FIT_XY);
+        } else {
+            holder.productImage.setImageResource(R.drawable.default_image_placeholder);
+        }
 
         holder.remove.setOnClickListener(v -> {
-//            delete(cart_data.get(position).getId(),context);
-            cart_data.remove(position);
+//            cartController.deleteCart(cartItems.get(position).getId(), context);
+            cartItems.remove(position);
             notifyDataSetChanged();
         });
 
-        //ini ketika nekan button +
         holder.increase.setOnClickListener(v -> {
-            Double price = 0.0, qt = 0.0;
-            qty = Double.parseDouble(holder.quantity.getText().toString());//1
-
-            Toast.makeText(context, "qty : "+ qty, Toast.LENGTH_SHORT).show();
-//            Double barder=cart_data.get(position).getProduct_catalog().getPrice().doubleValue();//1000
-//            Toast.makeText(context, "barder : "+ barder, Toast.LENGTH_SHORT).show();
-            qty += 0.5f;//1.5
-            qt = 0.5;
-//            qt *= barder;
+            qty++;
             holder.quantity.setText("" + qty);
-//            qty *= barder;//1.5*1000
-
-
-            holder.productPrice.setText("Rp. "+qty.intValue());
-
-            totalPayment += qt;
-
-            total.setText("Rp. " + totalPayment.intValue());
-//            session.setJumlah(totalPayment.floatValue());
-            //mau simmpen nilai qty sama barder di shared preferences, cuma kan ini recyclerview jadi dia datanya lebih, sy coba pakai array di shared preferences tapi ga tau gmn panggilnya
-            //session.setQty(qty.floatValue()[0],"array");
         });
 
-        //ini ketika nekan button -
         holder.decrease.setOnClickListener(v -> {
-            qty = Double.parseDouble(holder.quantity.getText().toString());
-            Double qt = 0.5;
+            qty = Integer.parseInt(holder.quantity.getText().toString());
 
             if (qty > 1){
-//                Double barder=cart_data.get(position).getProduct_catalog().getPrice().doubleValue();
-                qty -= 0.5f;
-                holder.quantity.setText(qty.toString().trim());
-//                qty *= barder;
-//                qt *= barder;
-                holder.productPrice.setText("Rp. "+qty.intValue());
-                totalPayment -= qt;
-                total.setText("Rp. " + totalPayment.intValue());
-//                session.setJumlah(totalPayment.floatValue());
-
+                qty--;
+                holder.quantity.setText("" + qty);
             } else {
-                qty = 1.0;
+                qty = 1;
                 holder.quantity.setText("" + qty);
             }
         });
 
-        holder.wrapper.setOnClickListener(v -> {
-            //Panggil ID
-        });
     }
-
-    public Double getTotalPayment(){
-        Double price = 0.0;
-
-        for (int i = 0; i < cart_data.size(); i++){
-//            price += cart_data.get(i).getProduct_catalog().getPrice().doubleValue();
-        }
-
-        return price;
-    }
-
-//    private void delete(int id, Context context){
-//        ApiInterface apiInterface = ConfigRetrofit.getClient().create(ApiInterface.class);
-//
-//        Call<Cart_data> call;
-//        call = apiInterface.deleteCart(id);
-//        call.enqueue(new Callback<Cart_data>() {
-//            @Override
-//            public void onResponse(Call<Cart_data> call, ResponseSignup<Cart_data> response) {
-//                if (response.isSuccessful()){
-//                    Toast.makeText(context,"Berhasil", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Cart_data> call, Throwable t) {
-//                Toast.makeText(context,"Gagal", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//
-//    }
-
-
     @Override
     public int getItemCount() {
-        return cart_data.size();
+        return cartItems.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -168,7 +104,7 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
         TextView productName;
 
         @BindView(R.id.product_price)
-        TextView productPrice;
+        EasyMoneyTextView productPrice;
 
         @BindView(R.id.button_remove)
         ImageView remove;
@@ -182,8 +118,6 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
         @BindView(R.id.product_quantity)
         TextView quantity;
 
-        @BindView(R.id.product_wrapper)
-        ViewGroup wrapper;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);

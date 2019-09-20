@@ -108,10 +108,11 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
                         if (response != null && response.isSuccessful()){
                             Log.d("TAG", "Sukses Daftar ");
                             String token = response.body().getAccessToken();
-                            String id = response.body().getCustomerSignup().getId();
+                            int id = response.body().getCustomerSignup().getId();
                             sessionSharedPreferences.saveSPString(SessionSharedPreferences.AccessToken, token);
-                            sessionSharedPreferences.saveSPString(SessionSharedPreferences.ID, id);
+                            sessionSharedPreferences.saveSPInt("" + SessionSharedPreferences.ID, id); //dah jdi string
                             sessionSharedPreferences.saveSPBoolean(SessionSharedPreferences.IS_LOGIN,true);
+
                             startActivity(new Intent(getContext(),MainActivity.class)
                                     .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
                             getActivity().finish();
@@ -129,32 +130,6 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
                     }
                 });
 
-
-//        ApiInterface apiInterface = ConfigRetrofit.getClient().create(ApiInterface.class);
-
-//       try {
-//           Call<SignUp> call;
-//           call =  apiInterface.PostSignup(username,fisrt,last,email,pass2);
-//           call.enqueue(new Callback<SignUp>() {
-//               @Override
-//               public void onResponse(Call<SignUp> call, ResponseSignup<SignUp> response) {
-//                   if (response.isSuccessful()){
-//
-//                       Toast.makeText(getActivity(), "Berhasil signup", Toast.LENGTH_SHORT).show();
-//                   } else {
-//                       Toast.makeText(getActivity(), "gagal cek data mu nak", Toast.LENGTH_SHORT).show();
-//                   }
-//               }
-//
-//               @Override
-//               public void onFailure(Call<SignUp> call, Throwable t) {
-//                   Log.e("TAG", "=======onFailure: " + t.toString());
-//                   t.printStackTrace();
-//               }
-//           });
-//       }catch (Exception e){
-//           Log.e("Error", e.getMessage());
-//       }
 
     }
 

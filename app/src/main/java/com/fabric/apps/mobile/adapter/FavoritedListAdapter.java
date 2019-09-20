@@ -42,10 +42,10 @@ public class FavoritedListAdapter extends RecyclerView.Adapter<FavoritedListAdap
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-//        holder.productName.setText(productArrayList.get(position).getProduct().getNameProduct());
+//        holder.productName.setText(productArrayList.get(position).getProductCart().getNameProduct());
 //        holder.productPrice.setText("Rp. "+productArrayList.get(position).getPrice());
 //
-//        Glide.with(context).load(productArrayList.get(position).getProduct().getImageUrl()).into(holder.productImage);
+//        Glide.with(context).load(productArrayList.get(position).getProductCart().getImageUrl()).into(holder.productImage);
 
         holder.remove.setOnClickListener(v -> {
             productArrayList.remove(position);
@@ -54,9 +54,9 @@ public class FavoritedListAdapter extends RecyclerView.Adapter<FavoritedListAdap
 
         holder.wrapper.setOnClickListener(v -> {
             Intent intent = new Intent(context, ProductDetailActivity.class);
-//            intent.putExtra("product_name", productArrayList.get(position).getProduct().getNameProduct());
+//            intent.putExtra("product_name", productArrayList.get(position).getProductCart().getNameProduct());
 //            intent.putExtra("product_price", productArrayList.get(position).getPrice());
-//            intent.putExtra("product_image", productArrayList.get(position).getProduct().getImageUrl());
+//            intent.putExtra("product_image", productArrayList.get(position).getProductCart().getImageUrl());
 //            intent.putExtra("product_description", productArrayList.get(position).getDescription());
             context.startActivity(intent);
         });

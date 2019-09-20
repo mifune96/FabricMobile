@@ -5,9 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.core.view.ViewGroupCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -20,7 +23,10 @@ import android.widget.TextView;
 import com.fabric.apps.mobile.R;
 import com.fabric.apps.mobile.activity.CheckoutActivity;
 import com.fabric.apps.mobile.adapter.CartListAdapter;
-import com.fabric.apps.mobile.model.cartModel.Cart_data;
+import com.fabric.apps.mobile.contoller.CartController;
+import com.fabric.apps.mobile.model.cartModel.CartItem;
+import com.fabric.apps.mobile.utils.SessionSharedPreferences;
+import com.wajahatkarim3.easymoneywidgets.EasyMoneyTextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,10 +40,26 @@ public class CartFragment extends Fragment implements View.OnClickListener {
     Button checkoutButton;
 
     @BindView(R.id.total_payment)
-    TextView totalPayment;
+    EasyMoneyTextView totalPayment;
 
-    private CartListAdapter cartListAdapter;
-    private List<Cart_data> productList = new ArrayList<>();
+    @BindView(R.id.successGroup)
+    ViewGroup onSuccess;
+
+    @BindView(R.id.swipeContainer)
+    SwipeRefreshLayout refreshLayout;
+
+    @BindView(R.id.errorGroup)
+    ViewGroup onError;
+
+    @BindView(R.id.errorState)
+    ViewGroup errorState;
+
+    @BindView(R.id.reload)
+    Button reload;
+
+    SessionSharedPreferences sessionSharedPreferences;
+
+    private CartController cartController = new CartController();
 
     public CartFragment() {
         // Required empty public constructor
@@ -49,64 +71,46 @@ public class CartFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
         ButterKnife.bind(this, view);
-//        LoadJson();
-        cartList.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
+        sessionSharedPreferences = new SessionSharedPreferences(this.getActivity());
+
+        totalPayment.setCurrency("Rp");
+        totalPayment.showCurrencySymbol();
+        totalPayment.showCommas();
         checkoutButton.setOnClickListener(this);
+        reload.setOnClickListener(this);
+
+        cartList.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
+
+        refreshLayout.setOnRefreshListener(onRefreshListener);
+        refreshLayout.post(() -> {
+            refreshLayout.setRefreshing(true);
+
+            onRefreshListener.onRefresh();
+        });
+
         return view;
     }
-
-//    private void LoadJson() {
-//        ApiInterface apiInterface = ConfigRetrofit.getClient().create(ApiInterface.class);
-//
-//        Call<Cart_parent> call;
-//        call = apiInterface.getCartparent(2);
-//
-//        call.enqueue(new Callback<Cart_parent>() {
-//            @Override
-//            public void onResponse(Call<Cart_parent> call, ResponseSignup<Cart_parent> response) {
-//                if (response.isSuccessful() && response.body().getCart_data() != null){
-//                    if (!productList.isEmpty()){
-//                        productList.clear();
-//                    }
-//
-//                    productList = response.body().getCart_data();
-//                    cartListAdapter = new CartListAdapter(getContext(),productList, totalPayment);
-//                    cartList.setAdapter(cartListAdapter);
-//
-//                    cartListAdapter.notifyDataSetChanged();
-//                    totalPayment.setText("Rp. " + cartListAdapter.getTotalPayment().intValue());
-//                } else {
-//                    Toast.makeText(getActivity(), "Gak Ada Hasil Bro", Toast.LENGTH_LONG).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Cart_parent> call, Throwable t) {
-//
-//            }
-//        });
-//
-//    }
-
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.checkout:
+            case R.id.proceed_to_checkout:
                 startActivity(new Intent(getContext(), CheckoutActivity.class));
+                break;
+            case R.id.reload:
+                refreshLayout.post(() -> {
+                    refreshLayout.setRefreshing(true);
+
+                    onRefreshListener.onRefresh();
+                });
                 break;
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-//        LoadJson();
-    }
-
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-//        LoadJson();
-    }
+    private SwipeRefreshLayout.OnRefreshListener onRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
+        @Override
+        public void onRefresh() {
+            cartController.ambilCart(cartList, getContext(), onError, onSuccess,errorState, refreshLayout);
+        }
+    };
 }

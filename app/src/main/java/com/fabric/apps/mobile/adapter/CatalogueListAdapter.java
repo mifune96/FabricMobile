@@ -15,6 +15,7 @@ import com.fabric.apps.mobile.activity.ProductDetailActivity;
 import com.fabric.apps.mobile.model.productModel.ProductsItem;
 import com.fabric.apps.mobile.model.productModel.ResponseProduc;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.wajahatkarim3.easymoneywidgets.EasyMoneyTextView;
 
 import java.util.List;
 
@@ -46,11 +47,19 @@ public class CatalogueListAdapter extends RecyclerView.Adapter<CatalogueListAdap
 
         //bisa diginiin
         holder.productName.setText(productList.get(position).getName());
-        holder.productPrice.setText("Rp. "+ productList.get(position).getHarga());
+        holder.productPrice.setText(Integer.toString(productList.get(position).getHarga()));
+        holder.productPrice.setCurrency("Rp");
+        holder.productPrice.showCurrencySymbol();
+        holder.productPrice.showCommas();
 
         int id = productList.get(position).getId();
 
-        Glide.with(context).load(productList.get(position).getImage()).into(holder.productImage);
+        if (!productList.get(position).getImage().isEmpty()){
+            Glide.with(context).load(productList.get(position).getImage()).into(holder.productImage);
+            holder.productImage.setScaleType(ImageView.ScaleType.FIT_XY);
+        } else {
+            holder.productImage.setImageResource(R.drawable.default_image_placeholder);
+        }
 
         holder.favorite.setOnClickListener(v -> {
             holder.favorite.setImageResource(R.drawable.ic_favorite_fill);
@@ -83,7 +92,7 @@ public class CatalogueListAdapter extends RecyclerView.Adapter<CatalogueListAdap
         TextView productName;
 
         @BindView(R.id.product_price)
-        TextView productPrice;
+        EasyMoneyTextView productPrice;
 
         @BindView(R.id.favorite_button)
         FloatingActionButton favorite;

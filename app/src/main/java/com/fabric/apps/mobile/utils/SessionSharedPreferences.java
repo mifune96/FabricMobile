@@ -39,7 +39,7 @@ public class SessionSharedPreferences {
 
 
     public String getID(){
-        return preferences.getString(ID, "");
+        return preferences.getString(ID, ""); //udah gini doang coba tes dulu
     }
 
 
@@ -57,38 +57,6 @@ public class SessionSharedPreferences {
     }
 
 
-
-
-
-//    public SessionSharedPreferences(Context context) {
-//        this.context = context;
-//        pref = context.getSharedPreferences(PREF_NAME, private_mode);
-//        editor = pref.edit();
-//    }
-//
-//    public void setJumlah(Float jumlah){
-//        editor.putFloat("jumlah", jumlah);
-//        editor.commit();
-//    }
-//
-//    public Float getJumlah(){
-//        return  pref.getFloat("jumlah",0.0f);
-//    }
-//
-//    public void setQty(Float[] array, String arrayName) {
-//        editor.putInt(arrayName +"_size", array.length);
-//        for(int i=0;i<array.length;i++)
-//            editor.putFloat(arrayName + "_" + i, array[i]);
-//        editor.commit();
-//    }
-//
-//    public Float[] getQty(String arrayName) {
-//        int size = pref.getInt(arrayName + "_size", 0);
-//        Float array[] = new Float[size];
-//        for(int i=0;i<size;i++)
-//            array[i] = pref.getFloat(arrayName + "_" + i, 0.0f);
-//        return array;
-//    }
 
 
 }

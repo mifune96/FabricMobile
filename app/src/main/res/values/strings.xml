@@ -146,4 +146,15 @@
     <string name="product_stock">Product Stock</string>
     <string name="first_name">Nama Awal</string>
     <string name="last_name">Nama Akhir</string>
+    <string name="something_wrong_state">Oops, something went wrong.</string>
+    <string name="something_wrong_message">Coba lagi atau tekan tombol dibawah</string>
+    <string name="reload">Reload</string>
+    <string name="under_construction">Oops, this page is under construction.</string>
+    <string name="under_construction_message">Halaman ini masih dalam tahap pengembangan</string>
+    <string name="empty_list_state">Oops, nothing to see here</string>
+    <string name="no_data">Belum ada data yang terekam</string>
+    <string name="empty_cart_state">Oops, your cart is empty.</string>
+    <string name="empty_cart_message">Tambahkan barang untuk melihat daftarnya disini</string>
+    <string name="note">Catatan</string>
+    <string name="note_for_seller">Catatan untuk penjual</string>
 </resources>

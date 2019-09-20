@@ -22,10 +22,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.fabric.apps.mobile.R;
 import com.fabric.apps.mobile.activity.CheckoutActivity;
 import com.fabric.apps.mobile.adapter.CartListAdapter;
-import com.fabric.apps.mobile.model.cartModel.Cart_data;
+import com.wajahatkarim3.easymoneywidgets.EasyMoneyTextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,20 +40,34 @@ public class DialogCartFragment extends DialogFragment implements View.OnClickLi
     @BindView(R.id.button_close)
     ImageView close;
 
-    @BindView(R.id.cart_list)
-    RecyclerView rvcartList;
-
     @BindView(R.id.sub_total)
     TextView subTotal;
 
     @BindView(R.id.proceed_to_checkout)
-    Button procedCheckout;
+    Button proccedCheckout;
 
     @BindView(R.id.add_more)
     Button addMore;
 
-    private CartListAdapter cartListAdapter;
-    private List<Cart_data> product_catalogs2 = new ArrayList<>();
+    @BindView(R.id.product_image)
+    ImageView productImage;
+
+    @BindView(R.id.product_name)
+    TextView productName;
+
+    @BindView(R.id.product_price)
+    EasyMoneyTextView productPrice;
+
+    @BindView(R.id.button_remove)
+    ImageView buttonRemove;
+
+    @BindView(R.id.product_quantity)
+    TextView productQuantity;
+
+    private int id;
+
+//    private CartListAdapter cartListAdapter;
+//    private List<Cart_data> product_catalogs2 = new ArrayList<>();
 
     public DialogCartFragment() {
         // Required empty public constructor
@@ -75,14 +90,31 @@ public class DialogCartFragment extends DialogFragment implements View.OnClickLi
         View view = inflater.inflate(R.layout.fragment_dialog_cart, container, false);
         ButterKnife.bind(this, view);
 
-        rvcartList.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
-//        LoadJson();
+        Bundle bundle = this.getArguments();
+        if (bundle != null){
+            if (!Objects.requireNonNull(bundle.getString("product_image")).isEmpty()){
+                Glide.with(this).load(bundle.getString("product_image")).into(productImage);
+            } else {
+                productImage.setImageResource(R.drawable.default_image_placeholder);
+            }
+
+            productName.setText(bundle.getString("product_name"));
+            productPrice.setText(Integer.toString(bundle.getInt("product_price")));
+            productQuantity.setText(bundle.getString("product_length"));
+            id = bundle.getInt("id");
+        }
 
         close.setOnClickListener(this);
-        procedCheckout.setOnClickListener(this);
+        proccedCheckout.setOnClickListener(this);
         addMore.setOnClickListener(this);
 
         return view;
+    }
+
+    // ngambil data dari bundle tdi
+    private void getDetail(){
+        Bundle bundle = getArguments(); // bisa lu inisialisasi dlu atau lngsung getArguments() kaya intent bisa langsung getintent ok cuk gw solat dulu ty ty
+        subTotal.setText(getArguments().getInt("id")); // misalnya begini cuk
     }
 
 //    private void LoadJson() {
