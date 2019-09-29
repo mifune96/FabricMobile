@@ -89,7 +89,7 @@ public class DialogCartFragment extends DialogFragment implements View.OnClickLi
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_dialog_cart, container, false);
         ButterKnife.bind(this, view);
-
+        buttonRemove.setVisibility(View.GONE);
         Bundle bundle = this.getArguments();
         if (bundle != null){
             if (!Objects.requireNonNull(bundle.getString("product_image")).isEmpty()){
@@ -99,9 +99,10 @@ public class DialogCartFragment extends DialogFragment implements View.OnClickLi
             }
 
             productName.setText(bundle.getString("product_name"));
-            productPrice.setText(Integer.toString(bundle.getInt("product_price")));
+            productPrice.setText("Rp" +bundle.getInt("product_price"));
             productQuantity.setText(bundle.getString("product_length"));
-            id = bundle.getInt("id");
+            id = bundle.getInt("product_id");
+            subTotal.setText("Rp." +CartListAdapter.totalPayment);
         }
 
         close.setOnClickListener(this);
@@ -112,10 +113,7 @@ public class DialogCartFragment extends DialogFragment implements View.OnClickLi
     }
 
     // ngambil data dari bundle tdi
-    private void getDetail(){
-        Bundle bundle = getArguments(); // bisa lu inisialisasi dlu atau lngsung getArguments() kaya intent bisa langsung getintent ok cuk gw solat dulu ty ty
-        subTotal.setText(getArguments().getInt("id")); // misalnya begini cuk
-    }
+
 
 //    private void LoadJson() {
 //        ApiInterface apiInterface = ConfigRetrofit.getClient().create(ApiInterface.class);

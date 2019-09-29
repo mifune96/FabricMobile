@@ -110,7 +110,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
                             String token = response.body().getAccessToken();
                             int id = response.body().getCustomerSignup().getId();
                             sessionSharedPreferences.saveSPString(SessionSharedPreferences.AccessToken, token);
-                            sessionSharedPreferences.saveSPInt("" + SessionSharedPreferences.ID, id); //dah jdi string
+                            sessionSharedPreferences.saveSPInt(SessionSharedPreferences.ID, id); //dah jdi string
                             sessionSharedPreferences.saveSPBoolean(SessionSharedPreferences.IS_LOGIN,true);
 
                             startActivity(new Intent(getContext(),MainActivity.class)

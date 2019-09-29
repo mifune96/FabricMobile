@@ -31,7 +31,7 @@ public class ProductController {
     //mengambil data produk di json
     public void ambilProduk(RecyclerView recyclerView,RecyclerView recyclerView1,RecyclerView recyclerView2, Context context, ViewGroup onNoData, ViewGroup onSuccess, ViewGroup onError, SwipeRefreshLayout refreshLayout){
         sessionSharedPreferences = new SessionSharedPreferences(context);
-        String id = sessionSharedPreferences.getID();
+        int id = sessionSharedPreferences.getID();
         Log.d("TAG", "isi idnya bro: " +id);
         String token = sessionSharedPreferences.getAccessToken();
         Log.d("TAG", "buaha: " +token);

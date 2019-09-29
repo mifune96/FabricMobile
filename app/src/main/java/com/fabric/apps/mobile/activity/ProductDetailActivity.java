@@ -248,7 +248,14 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
                 startActivity(openWA);
                 break;
             case R.id.button_add_to_cart:
+                Bundle bundle = new Bundle();
+                bundle.putInt("product_id", mProductid);
+                bundle.putString("product_name", productName.getText().toString());
+                bundle.putInt("product_price",Integer.parseInt(productPrice.getValueString()));
+                bundle.putString("product_image", mImg);
+
                 DialogFragment dialogFragment = new DialogCartFragment();
+                dialogFragment.setArguments(bundle);// setbundelnya
                 dialogFragment.show(getSupportFragmentManager(),"Cart Dialog");
                 addCart();
                 break;

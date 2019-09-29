@@ -28,6 +28,7 @@ public class CatalogueListAdapter extends RecyclerView.Adapter<CatalogueListAdap
 
     private Context context;
     private List<ProductsItem> productList;
+    public static int IDcart;
 
     public CatalogueListAdapter(Context context, List<ProductsItem> productList) {
         this.context = context;
@@ -53,6 +54,7 @@ public class CatalogueListAdapter extends RecyclerView.Adapter<CatalogueListAdap
         holder.productPrice.showCommas();
 
         int id = productList.get(position).getId();
+        IDcart = id;
 
         if (!productList.get(position).getImage().isEmpty()){
             Glide.with(context).load(productList.get(position).getImage()).into(holder.productImage);
@@ -74,6 +76,8 @@ public class CatalogueListAdapter extends RecyclerView.Adapter<CatalogueListAdap
             intent.putExtra("product_stok",productList.get(position).getStok());
             intent.putExtra("product_description", productList.get(position).getDeskripsi());
             context.startActivity(intent);
+
+
         });
 
     }

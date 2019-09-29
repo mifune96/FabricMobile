@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class CustomerCart {
 
+
 	@SerializedName("image")
 	private String image;
 
@@ -24,10 +25,13 @@ public class CustomerCart {
 	private String name;
 
 	@SerializedName("id")
-	private String id;
+	private int id;
 
 	@SerializedName("username")
 	private String username;
+
+	@SerializedName("status")
+	private String status;
 
 	@SerializedName("updatedAt")
 	private String updatedAt;
@@ -80,11 +84,11 @@ public class CustomerCart {
 		return name;
 	}
 
-	public void setId(String id){
+	public void setId(int id){
 		this.id = id;
 	}
 
-	public String getId(){
+	public int getId(){
 		return id;
 	}
 
@@ -94,6 +98,14 @@ public class CustomerCart {
 
 	public String getUsername(){
 		return username;
+	}
+
+	public void setStatus(String status){
+		this.status = status;
+	}
+
+	public String getStatus(){
+		return status;
 	}
 
 	public void setUpdatedAt(String updatedAt){

@@ -94,9 +94,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 if (response != null && response.isSuccessful()) {
                     Log.d("TAG", "Tes: " +response.body().getAccessToken());
                     String token = response.body().getAccessToken();
-                    String id = response.body().getCustomerSigin().getId();
+                    int id = response.body().getCustomerSigin().getId();
                     sessionSharedPreferences.saveSPString(SessionSharedPreferences.AccessToken, token);
-                    sessionSharedPreferences.saveSPString(SessionSharedPreferences.ID, id);
+                    sessionSharedPreferences.saveSPInt(SessionSharedPreferences.ID, id);
                     Log.d("TAG", "isi dari id login: " +id);
                     sessionSharedPreferences.saveSPBoolean(SessionSharedPreferences.IS_LOGIN,true);
                     startActivity(new Intent(getContext(),MainActivity.class)

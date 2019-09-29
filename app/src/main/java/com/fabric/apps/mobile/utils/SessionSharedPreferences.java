@@ -2,6 +2,7 @@ package com.fabric.apps.mobile.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.renderscript.Sampler;
 
 public class SessionSharedPreferences {
 
@@ -11,7 +12,8 @@ public class SessionSharedPreferences {
 //    Context context;
 //    int private_mode = 0;
 
-    public static final String ID = "ID";
+    public static final int ID = 0;
+//    public static final String ID = "ID";
     public static final String USER_NAME = "USERNAME";
     public static final String AccessToken = "ACCESSTOKEN";
     public static final String PREF_NAME = "LOGIN_USER";
@@ -25,10 +27,16 @@ public class SessionSharedPreferences {
         editor.putString(keySP, value);
         editor.commit();
     }
-    public void saveSPInt(String keySP, int value) {
-        editor.putInt(keySP, value);
+    public void saveSPInt(int keySP, int value) {
+        editor.putInt(String.valueOf(keySP), value);
         editor.commit();
     }
+
+//    public void saveSPInt(String keySP, int value) {
+//        editor.putInt(keySP, value);
+//        editor.commit();
+//    }
+
     public void saveSPBoolean(String keySP, boolean value) {
         editor.putBoolean(keySP, value);
         editor.commit();
@@ -38,9 +46,13 @@ public class SessionSharedPreferences {
     }
 
 
-    public String getID(){
-        return preferences.getString(ID, ""); //udah gini doang coba tes dulu
+//    public Integer getID(){
+//        return preferences.getInt(String.valueOf(ID), 0); //udah gini doang coba tes dulu
+//    }
+    public int getID(){
+        return preferences.getInt(String.valueOf(ID), 0);
     }
+
 
 
     public String getUSER_NAME(){

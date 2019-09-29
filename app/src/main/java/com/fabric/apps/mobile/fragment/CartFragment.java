@@ -110,7 +110,7 @@ public class CartFragment extends Fragment implements View.OnClickListener {
     private SwipeRefreshLayout.OnRefreshListener onRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
         @Override
         public void onRefresh() {
-            cartController.ambilCart(cartList, getContext(), onError, onSuccess,errorState, refreshLayout);
+            cartController.ambilCart(cartList,getContext(),onError,onSuccess,errorState,refreshLayout);
         }
     };
 }

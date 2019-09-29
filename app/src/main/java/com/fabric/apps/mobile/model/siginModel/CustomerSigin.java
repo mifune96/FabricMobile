@@ -25,7 +25,7 @@ public class CustomerSigin {
 	private String name;
 
 	@SerializedName("id")
-	private String id;
+	private int id;
 
 	@SerializedName("username")
 	private String username;
@@ -81,11 +81,11 @@ public class CustomerSigin {
 		return name;
 	}
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

@@ -157,4 +157,5 @@
     <string name="empty_cart_message">Tambahkan barang untuk melihat daftarnya disini</string>
     <string name="note">Catatan</string>
     <string name="note_for_seller">Catatan untuk penjual</string>
+    <string name="price_format">Rp.%1$d</string>
 </resources>

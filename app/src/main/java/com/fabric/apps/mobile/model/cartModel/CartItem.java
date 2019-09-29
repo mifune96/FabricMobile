@@ -14,16 +14,16 @@ public class CartItem{
 	private ProductCart productCart;
 
 	@SerializedName("ProductId")
-	private String productId;
+	private int productId;
 
 	@SerializedName("id")
-	private String id;
+	private int id;
 
 	@SerializedName("CustomerId")
-	private String customerId;
+	private int customerId;
 
 	@SerializedName("permeter")
-	private String permeter;
+	private double permeter;
 
 	@SerializedName("updatedAt")
 	private String updatedAt;
@@ -52,35 +52,35 @@ public class CartItem{
 		return productCart;
 	}
 
-	public void setProductId(String productId){
+	public void setProductId(int productId){
 		this.productId = productId;
 	}
 
-	public String getProductId(){
+	public int getProductId(){
 		return productId;
 	}
 
-	public void setId(String id){
+	public void setId(int id){
 		this.id = id;
 	}
 
-	public String getId(){
+	public int getId(){
 		return id;
 	}
 
-	public void setCustomerId(String customerId){
+	public void setCustomerId(int customerId){
 		this.customerId = customerId;
 	}
 
-	public String getCustomerId(){
+	public int getCustomerId(){
 		return customerId;
 	}
 
-	public void setPermeter(String permeter){
+	public void setPermeter(double permeter){
 		this.permeter = permeter;
 	}
 
-	public String getPermeter(){
+	public double getPermeter(){
 		return permeter;
 	}
 
@@ -93,17 +93,17 @@ public class CartItem{
 	}
 
 	@Override
- 	public String toString(){
-		return 
-			"CartItem{" + 
-			"createdAt = '" + createdAt + '\'' + 
-			",customerCart = '" + customerCart + '\'' +
-			",productCart = '" + productCart + '\'' +
-			",productId = '" + productId + '\'' + 
-			",id = '" + id + '\'' + 
-			",customerId = '" + customerId + '\'' + 
-			",permeter = '" + permeter + '\'' + 
-			",updatedAt = '" + updatedAt + '\'' + 
-			"}";
-		}
+	public String toString(){
+		return
+				"CartItem{" +
+						"createdAt = '" + createdAt + '\'' +
+						",customerCart = '" + customerCart + '\'' +
+						",productCart = '" + productCart + '\'' +
+						",productId = '" + productId + '\'' +
+						",id = '" + id + '\'' +
+						",customerId = '" + customerId + '\'' +
+						",permeter = '" + permeter + '\'' +
+						",updatedAt = '" + updatedAt + '\'' +
+						"}";
+	}
 }
