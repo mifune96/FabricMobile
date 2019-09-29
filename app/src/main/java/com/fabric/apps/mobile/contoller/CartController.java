@@ -34,7 +34,7 @@ public class CartController {
     private List<CartItem> cartItems = new ArrayList<>();
 
     public void ambilCart (RecyclerView recyclerView, Context context, ViewGroup onError
-            , ViewGroup onSuccess, ViewGroup errorState, SwipeRefreshLayout refreshLayout){
+            , ViewGroup onSuccess, ViewGroup errorState, SwipeRefreshLayout refreshLayout, TextView Totalbayar){
         sessionSharedPreferences = new SessionSharedPreferences(context);
         int id = sessionSharedPreferences.getID();
         String token = sessionSharedPreferences.getAccessToken();
@@ -43,15 +43,12 @@ public class CartController {
         ConfigRetrofit.provideApiService().getCart(id,key,token).enqueue(new Callback<ResponseCart>() {
             @Override
             public void onResponse(Call<ResponseCart> call, Response<ResponseCart> response) {
-
-                if (response != null && response.body().getCart() != null) {
-                    if (cartItems.isEmpty()) {
-                        cartItems.clear();
-                    }
-                    cartItems = response.body().getCart();
-                    CartListAdapter adapter = new CartListAdapter(context, cartItems);
-                    recyclerView.setAdapter(adapter);
-                    onSuccess.setVisibility(View.VISIBLE);
+                cartItems = response.body().getCart();
+                CartListAdapter adapter = new CartListAdapter(context, cartItems, Totalbayar);
+                recyclerView.setAdapter(adapter);
+                if (cartItems.isEmpty()) {
+                    cartItems.clear();
+                    onSuccess.setVisibility(View.GONE);
                     onError.setVisibility(View.GONE);
                     errorState.setVisibility(View.GONE);
                     refreshLayout.setRefreshing(false);
@@ -60,7 +57,7 @@ public class CartController {
                     onError.setVisibility(View.GONE);
                     errorState.setVisibility(View.GONE);
                     refreshLayout.setRefreshing(false);
-                    Log.i(TAG, response.errorBody().toString());
+//                    Log.i(TAG, response.errorBody().toString());
                     }
             }
 
@@ -139,6 +136,7 @@ public class CartController {
         Integer idcustumer = CartListAdapter.idcustomer;
         Integer idproduk= CartListAdapter.idproduk;
         Double permeter= CartListAdapter.permeter;
+        Log.d(TAG, "PERMETER :" +permeter);
         ConfigRetrofit.provideApiService().updateCart(idcart,key,token,idcustumer,idproduk,permeter).enqueue(new Callback<ResponseCart>() {
             @Override
             public void onResponse(Call<ResponseCart> call, Response<ResponseCart> response) {

@@ -72,14 +72,12 @@ public class CartFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
         ButterKnife.bind(this, view);
         sessionSharedPreferences = new SessionSharedPreferences(this.getActivity());
-
+        cartList.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
         totalPayment.setCurrency("Rp");
         totalPayment.showCurrencySymbol();
         totalPayment.showCommas();
         checkoutButton.setOnClickListener(this);
         reload.setOnClickListener(this);
-
-        cartList.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
 
         refreshLayout.setOnRefreshListener(onRefreshListener);
         refreshLayout.post(() -> {
@@ -110,7 +108,7 @@ public class CartFragment extends Fragment implements View.OnClickListener {
     private SwipeRefreshLayout.OnRefreshListener onRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
         @Override
         public void onRefresh() {
-            cartController.ambilCart(cartList,getContext(),onError,onSuccess,errorState,refreshLayout);
+            cartController.ambilCart(cartList,getContext(),onError,onSuccess,errorState,refreshLayout,totalPayment);
         }
     };
 }
