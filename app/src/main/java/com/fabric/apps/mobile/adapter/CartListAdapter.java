@@ -31,8 +31,6 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
     private Double qty;
     public static Double totalPayment;
     private CartController cartController = new CartController();
-    public static Integer idcart, idcustomer, idproduk;
-    public static Double permeter=0.0;
     SessionSharedPreferences sessionSharedPreferences;
 
     public CartListAdapter(Context context, List<CartItem> cart_data,TextView total) {
@@ -54,22 +52,18 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-//        totalPayment = getTotakPayment();
-
+        setTotalBayar();
         holder.productName.setText(cartItems.get(position).getProductCart().getName());
         holder.productPrice.setText(Integer.toString(cartItems.get(position).getProductCart().getHarga()));
         holder.productPrice.setCurrency("Rp");
         holder.productPrice.showCommas();
+
         holder.productPrice.showCurrencySymbol();
+//        totalPayment = setTotalBayar();
         holder.quantity.setText(Double.toString(cartItems.get(position).getPermeter()));
-        int s = cartItems.get(position).getProductCart().getStok();
-        idcart = cartItems.get(position).getId();
-        idcustomer = cartItems.get(position).getCustomerId();
-
-        setTotalBayar();
-//        permeter = cartItems.get(position).getPermeter();
 
 
+        Log.d("TAG", "heheheh: " +total);
         if (!cartItems.get(position).getProductCart().getImage().isEmpty()){
             Glide.with(context).load(cartItems.get(position).getProductCart()
                     .getImage()).into(holder.productImage);
@@ -87,83 +81,46 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
         menekan button +
          */
         holder.increase.setOnClickListener(v -> {
-            idproduk = cartItems.get(position).getProductId();
-            permeter = Double.parseDouble(holder.quantity.getText().toString());
-            if (cartItems.get(position).getPermeter() < cartItems.get(position).getProductCart().getStok()) {
-                permeter += 0.5;
-                cartController.updateCart(context);
-                holder.quantity.setText("" + permeter);
-            }
+            cartItems.get(position).setPermeter(
+                    (cartItems.get(position
+                    ).getPermeter() + 0.5));
+            holder.quantity.setText(Double.toString(cartItems.get(position).getPermeter()));
+            setTotalBayar();
+//            total.setText("Rp. "+totalPayment.intValue());
+            cartController.updateCart(cartItems.get(position).getId(),cartItems.get(position).getCustomerId(),
+                    cartItems.get(position).getProductId(),cartItems.get(position).getPermeter(),context);
 //
-//
-//
-//
-//
-////            Integer price = 0;
-////            double  qt = 0.5;
-////            qty = Double.parseDouble(holder.quantity.getText().toString());//1
-////            price=cartItems.get(position).getProductCart().getHarga();//1000
-////            qty += 0.5f;//1.5
-////            qt = 0.5;
-////            qt *= price;
-////            holder.quantity.setText("" + qty);
-////            qty *= price;//1.5*1000
-////            holder.productPrice.setText("Rp." +qty);
-////
-////            totalPayment += qt;
-////
-////            total.setText("Rp. " + totalPayment);
         });
 
         /*
         ketika menekan button -
          */
         holder.decrease.setOnClickListener(v -> {
-            permeter = Double.parseDouble(holder.quantity.getText().toString());
-            idproduk = cartItems.get(position).getProductId();
             if (cartItems.get(position).getPermeter() > 0.5) {
-                permeter -= 0.5;
-                cartController.updateCart(context);
-                holder.quantity.setText(""+permeter);
-
+                cartItems.get(position).setPermeter(
+                        (cartItems.get(position
+                        ).getPermeter() - 0.5));
+                holder.quantity.setText(Double.toString(cartItems.get(position).getPermeter()));
+                setTotalBayar();
+                cartController.updateCart(cartItems.get(position).getId(),cartItems.get(position).getCustomerId(),
+                        cartItems.get(position).getProductId(),cartItems.get(position).getPermeter(),context);
             }
-//
-////            qty = Double.parseDouble(holder.quantity.getText().toString());
-////            Double qt = 0.5;
-////            if (qty > 1){
-////                int barder=cartItems.get(position).getProductCart().getHarga();
-////                qty -= 0.5f;
-////                holder.quantity.setText(""+qty);
-////                qty *= barder;
-////                qt *= barder;
-////                holder.productPrice.setText("Rp. "+qty);
-////                totalPayment -= qt;
-////                total.setText("Rp. " + totalPayment);
-////            } else {
-////                qty = 1.0;
-////                holder.quantity.setText("" + qty);
-////            }
         });
 
     }
 
-    private void setTotalBayar(){
+
+    public void setTotalBayar(){
         Double price = 0.0;
         for (CartItem c : cartItems){
-            price = price + (c.getPermeter() * c.getProductCart().getHarga());
+               price += (c.getPermeter() * c.getProductCart().getHarga());
         }
-        totalPayment = price;
+        Log.d("TAG", "setTotalBayar: " +price);
+//        totalPayment = price;
+        total.setText("Rp. " +price.intValue());
+
     }
 
-
-    //    public Integer getTotakPayment(){
-//        int price = 0;
-//
-//        for (int i = 0; i < cartItems.size(); i++){
-//            price += cartItems.get(i).getProductCart().getHarga();
-//        }
-//        return price;
-//    }
     @Override
     public int getItemCount() {
         return cartItems.size();

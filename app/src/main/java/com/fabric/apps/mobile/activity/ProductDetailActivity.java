@@ -137,7 +137,6 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
             productImage.setImageResource(R.drawable.default_image_placeholder);
         }
 
-//        mProductid = intent.getIntExtra("id", 0);
         productName.setText(mProductname);
         productPrice.setText(Integer.toString(mProductprice));
         productPrice.setCurrency("Rp");
@@ -149,61 +148,9 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
         buttonAddToCart.setOnClickListener(this);
         buttonBuyNow.setOnClickListener(this);
         buttonChat.setOnClickListener(this);
-//        productDescription.setOnLongClickListener(this);
     }
 
 
-
-//    private void getProductDetail(){
-//        mProductname = getIntent().getStringExtra("product_name");
-//        mProductid = getIntent().getIntExtra("id",0); // kalo int pake defaultValue
-//        mProductprice = getIntent().getIntExtra("product_price",0);
-//        mProductstock = getIntent().getIntExtra("product_stok",0);
-//        mDescription = getIntent().getStringExtra("product_description");
-//        mImg = getIntent().getStringExtra("product_image");
-//
-//        Glide.with(this)
-//                .load(mImg)
-//                .into(productImage);
-//
-//
-//        productName.setText(mProductname);
-//        productPrice.setText("Rp. "+mProductprice);
-//        productStok.setText("Stok :"+mProductstock);
-//        productDescription.setText(mDescription);
-//
-//    }
-
-
-
-
-//    private void initRecyclerView() {
-//        ArrayList<Review> reviews = populateReview();
-//
-//        reviewList.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
-//        reviewList.setAdapter(new ReviewListAdapter(this, reviews));
-//    }
-
-//    private ArrayList<Review> populateReview() {
-//        ArrayList<Review> reviewArrayList = new ArrayList<>();
-//
-//        Date date = Calendar.getInstance().getTime();
-//        @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MMM/yyyy");
-//        String formatDate = dateFormat.format(date);
-//
-//        for (int i = 0; i < 3; i++){
-//            Review review = new Review();
-//            review.setReviewerName("John");
-//            review.setReviewDate(formatDate);
-//            review.setReviewerImage(R.drawable.user_profile);
-//            review.setReview("Barangnya bagus,mantap");
-//            review.setRating(4.5f);
-//
-//            reviewArrayList.add(review);
-//        }
-//
-//        return reviewArrayList;
-//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

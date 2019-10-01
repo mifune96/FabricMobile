@@ -14,6 +14,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +41,7 @@ public class CartFragment extends Fragment implements View.OnClickListener {
     Button checkoutButton;
 
     @BindView(R.id.total_payment)
-    EasyMoneyTextView totalPayment;
+    TextView totalPayment;
 
     @BindView(R.id.successGroup)
     ViewGroup onSuccess;
@@ -58,6 +59,7 @@ public class CartFragment extends Fragment implements View.OnClickListener {
     Button reload;
 
     SessionSharedPreferences sessionSharedPreferences;
+    private CartListAdapter cartListAdapter;
 
     private CartController cartController = new CartController();
 
@@ -73,11 +75,10 @@ public class CartFragment extends Fragment implements View.OnClickListener {
         ButterKnife.bind(this, view);
         sessionSharedPreferences = new SessionSharedPreferences(this.getActivity());
         cartList.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
-        totalPayment.setCurrency("Rp");
-        totalPayment.showCurrencySymbol();
-        totalPayment.showCommas();
+//        cartListAdapter.setTotalBayar();
         checkoutButton.setOnClickListener(this);
         reload.setOnClickListener(this);
+
 
         refreshLayout.setOnRefreshListener(onRefreshListener);
         refreshLayout.post(() -> {
@@ -88,6 +89,7 @@ public class CartFragment extends Fragment implements View.OnClickListener {
 
         return view;
     }
+
 
     @Override
     public void onClick(View v) {

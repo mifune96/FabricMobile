@@ -34,7 +34,7 @@ public class CartController {
     private List<CartItem> cartItems = new ArrayList<>();
 
     public void ambilCart (RecyclerView recyclerView, Context context, ViewGroup onError
-            , ViewGroup onSuccess, ViewGroup errorState, SwipeRefreshLayout refreshLayout, TextView Totalbayar){
+            , ViewGroup onSuccess, ViewGroup errorState, SwipeRefreshLayout refreshLayout, TextView total){
         sessionSharedPreferences = new SessionSharedPreferences(context);
         int id = sessionSharedPreferences.getID();
         String token = sessionSharedPreferences.getAccessToken();
@@ -44,8 +44,9 @@ public class CartController {
             @Override
             public void onResponse(Call<ResponseCart> call, Response<ResponseCart> response) {
                 cartItems = response.body().getCart();
-                CartListAdapter adapter = new CartListAdapter(context, cartItems, Totalbayar);
+                CartListAdapter adapter = new CartListAdapter(context, cartItems, total);
                 recyclerView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
                 if (cartItems.isEmpty()) {
                     cartItems.clear();
                     onSuccess.setVisibility(View.GONE);
@@ -108,8 +109,8 @@ public class CartController {
         sessionSharedPreferences = new SessionSharedPreferences(context);
         String token = sessionSharedPreferences.getAccessToken();
         String key = "oa00000000app";
-        Integer idm = CartListAdapter.idcart;
-        ConfigRetrofit.provideApiService().deletCart(idm,key,token).enqueue(new Callback<ResponseCart>() {
+//        Integer idm = CartListAdapter.idcart;
+        ConfigRetrofit.provideApiService().deletCart(cartId,key,token).enqueue(new Callback<ResponseCart>() {
             @Override
             public void onResponse(Call<ResponseCart> call, Response<ResponseCart> response) {
                 if (response.isSuccessful()){
@@ -128,14 +129,10 @@ public class CartController {
         });
     }
 
-    public void updateCart (Context context){
+    public void updateCart (int idcart,int idcustumer,int idproduk,double permeter,Context context){
         sessionSharedPreferences = new SessionSharedPreferences(context);
         String token = sessionSharedPreferences.getAccessToken();
         String key = "oa00000000app";
-        Integer idcart= CartListAdapter.idcart;
-        Integer idcustumer = CartListAdapter.idcustomer;
-        Integer idproduk= CartListAdapter.idproduk;
-        Double permeter= CartListAdapter.permeter;
         Log.d(TAG, "PERMETER :" +permeter);
         ConfigRetrofit.provideApiService().updateCart(idcart,key,token,idcustumer,idproduk,permeter).enqueue(new Callback<ResponseCart>() {
             @Override
@@ -150,7 +147,7 @@ public class CartController {
 
             @Override
             public void onFailure(Call<ResponseCart> call, Throwable t) {
-                Toast.makeText(context, "Oops, something when wrong!", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, "Oops, something when wrong!", Toast.LENGTH_SHORT).show();
                 Log.e(TAG, "onFailure: " + t.getMessage());
             }
         });

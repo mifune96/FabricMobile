@@ -39,12 +39,13 @@
                         android:text="@string/total"
                         android:textSize="14sp" />
 
-                    <com.wajahatkarim3.easymoneywidgets.EasyMoneyTextView
+                    <TextView
                         android:id="@+id/total_payment"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:text="@string/total_payment"
                         android:textSize="16sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
