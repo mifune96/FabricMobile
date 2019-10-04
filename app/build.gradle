@@ -15,11 +15,13 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 //            buildConfigField "String", "SERVER_URL", '\"https://fabric-store.herokuapp.com/api/v1/\"'
-            buildConfigField "String", "SERVER_URL", '\"http://http://192.168.1.5:3000/api/v1/\"'
+            buildConfigField "String", "SERVER_URL", '\"http://http://192.168.1.2:3000/api/v1/\"'
+//            buildConfigField "String", "SERVER_URL", '\"http://http://172.20.10.6:3000/api/v1/\"'
         }
         debug {
-            buildConfigField "String", "SERVER_URL", '"http://192.168.1.5:3000/api/v1/"'
-//            buildConfigField "String", "SERVER_URL", '"https://fabric-store.herokuapp.com/api/v1/"'
+            buildConfigField "String", "SERVER_URL", '"http://192.168.1.2:3000/api/v1/"'
+//            buildConfigField "String", "SERVER_URL", '"http://172.20.10.6:3000/api/v1/"'
+//            buildConfigField "String", "SERVER_URL", '"https://fabric-store.herokuapp.pocom/api/v1/"'
             //buildConfigField "String", "IMAGES", '"http://iconscript.com/chat19/userfiles/images/"'
         }
     }

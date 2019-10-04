@@ -204,7 +204,7 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
                 DialogFragment dialogFragment = new DialogCartFragment();
                 dialogFragment.setArguments(bundle);// setbundelnya
                 dialogFragment.show(getSupportFragmentManager(),"Cart Dialog");
-                addCart();
+//                addCart();
                 break;
             case R.id.button_buy_now:
                 Intent intent = new Intent(this, CheckoutActivity.class);

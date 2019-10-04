@@ -64,8 +64,6 @@ ViewPager bannerViewPager;
     @BindView(R.id.best_seller_list)
     RecyclerView bestSellerList;
 
-//    @BindView(R.id.catalogue_list)
-//    RecyclerView catalogueList;  // Ini ga ada di layoutnya makanya error coba cara gw
 
     @BindView(R.id.swipeContainer)
     SwipeRefreshLayout refreshLayout;
@@ -103,7 +101,7 @@ ViewPager bannerViewPager;
         forYouList.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
         bestSellerList.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
         newArrivalList.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
-//        catalogueList.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
+
         refreshLayout.setOnRefreshListener(onRefreshListener);
         refreshLayout.post(() -> {
             refreshLayout.setRefreshing(true);
@@ -128,12 +126,6 @@ ViewPager bannerViewPager;
         @Override
         public void onRefresh() {
             productController.ambilProduk(forYouList,bestSellerList,newArrivalList, getContext(), onError, onSuccess, errorState, refreshLayout);
-
-
-            // ini yang direfresh si forYouList, bestSeller, sama new Arrival
-            // buat catalgout ditab catalogue
-            // disni ga ada recyclerview catalogue
-            //gtu mksd gw wkwkwk
 
         }
     };

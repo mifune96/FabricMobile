@@ -58,6 +58,8 @@ public class CartFragment extends Fragment implements View.OnClickListener {
     @BindView(R.id.reload)
     Button reload;
 
+
+
     SessionSharedPreferences sessionSharedPreferences;
     private CartListAdapter cartListAdapter;
 
@@ -75,7 +77,6 @@ public class CartFragment extends Fragment implements View.OnClickListener {
         ButterKnife.bind(this, view);
         sessionSharedPreferences = new SessionSharedPreferences(this.getActivity());
         cartList.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
-//        cartListAdapter.setTotalBayar();
         checkoutButton.setOnClickListener(this);
         reload.setOnClickListener(this);
 

@@ -2,6 +2,7 @@ package com.fabric.apps.mobile.contoller;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,6 +72,28 @@ public class CartController {
             }
         });
     }
+
+    public void addDialogcart(int produkid, double qty){
+        int idcostumer = sessionSharedPreferences.getID();
+        String token = sessionSharedPreferences.getAccessToken();
+        String key = "oa00000000app";
+        ConfigRetrofit.provideApiService().postCart(key,token,idcostumer,produkid,qty).enqueue(new Callback<CartItem>() {
+            @Override
+            public void onResponse(Call<CartItem> call, Response<CartItem> response) {
+                if (response.isSuccessful()){
+
+                    Log.d(TAG, "Berhasil");
+                } else {
+                    Log.d(TAG, "Gagal");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CartItem> call, Throwable t) {
+                Log.d(TAG, "Gagal");
+            }
+        });
+    }
     public void addcart(CartItem cart, SpinKitView progressBar, Activity activity, Context context, List<CartItem> cartResponse){
         sessionSharedPreferences = new SessionSharedPreferences(context);
         int idcostumer = sessionSharedPreferences.getID();
@@ -104,6 +127,7 @@ public class CartController {
             }
         });
     }
+
 
     public void deletCart(int cartId, Context context){
         sessionSharedPreferences = new SessionSharedPreferences(context);

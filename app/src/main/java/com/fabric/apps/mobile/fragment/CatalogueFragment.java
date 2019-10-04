@@ -64,7 +64,6 @@ public class CatalogueFragment extends Fragment {
         String token = sessionSharedPreferences.getAccessToken();
         Log.d("TAG", "isitoken: " +token);
         String key = "oa00000000app";
-//        String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkpvaG4gRG9lIiwidXNlcm5hbWUiOiJhbGkiLCJwaG9uZU51bWJlciI6IjA4MjM3Nzk1NDAwOCIsInBhc3N3b3JkIjoiZTAxYzg1OGZiY2Q5MWEzZmE3ODVkMDZjNDY5YTMzYjEyOGU4MGY1ZiIsInNhbHQiOiIwNmQ0OTM5M2ZmOWYzNGFjNjA2YTkwZDdhY2M2ZWMwNGY0Y2MyODVkIiwiaW1hZ2UiOiIiLCJjcmVhdGVkQXQiOm51bGwsInVwZGF0ZWRBdCI6bnVsbCwiaWF0IjoxNTY2ODc1NjM1fQ.Nyqv36mgzwwPncCA2Eb4faYnj6SGF0YawlLduJYjnUY";
 
         ConfigRetrofit.provideApiService().getProduc(key,token).enqueue(new Callback<ResponseProduc>() {
             @Override
@@ -87,40 +86,6 @@ public class CatalogueFragment extends Fragment {
             }
         });
 
-//        ConfigRetrofit.provideApiService().getProduc().enqueue(new Callback<ResponseProduc>() {
-//            @Override
-//            public void onResponse(Call<ResponseProduc> call, ResponseSignup<ResponseProduc> response) {
-//                Log.d("TAG","product"+response.body());
-//
-//                if (response != null && response.isSuccessful()) {
-//                    Log.d("TAG","product"+response.body());
-//
-////                    productList = response.body().getProducts();
-////                    catalogueListAdapter = new CatalogueListAdapter(getContext(), productList);
-////                    rvcatalogueList.setAdapter(catalogueListAdapter);
-////
-////                    catalogueListAdapter.notifyDataSetChanged();
-////                    String a = response.body().getCus1tomerSigin().getId();
-////                    String message = response.body().getMessage();
-////                    sm.setLogin(true);
-////                    sm.setAccessToken(response.body().getAccessToken());
-////                    sm.setID(response.body().getCustomerSigin().getId());
-////                    sm.setUSER_NAME(response.body().getCustomerSigin().getName());
-////
-////                    Intent intent = new Intent(getActivity(), MainActivity.class);
-////                    startActivity(intent);
-////                    startActivity(new Intent(getContext(),MainActivity.class));
-//                } else {
-//                    Toast.makeText(getActivity(),"Gagal Login Gagal cek email atau passsword" , Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//
-//
-//            @Override
-//            public void onFailure(Call<ResponseProduc> call, Throwable t) {
-//                Log.d("TAG", "Failed Connetion To" + t.toString());
-//            }
-//        });
     }
 
 

@@ -1,7 +1,9 @@
 package com.fabric.apps.mobile.fragment;
 
 
+import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -13,19 +15,32 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.fabric.apps.mobile.R;
 import com.fabric.apps.mobile.activity.CheckoutActivity;
+import com.fabric.apps.mobile.activity.ProductDetailActivity;
 import com.fabric.apps.mobile.adapter.CartListAdapter;
+import com.fabric.apps.mobile.connection.ConfigRetrofit;
+import com.fabric.apps.mobile.contoller.CartController;
+import com.fabric.apps.mobile.model.cartModel.CartItem;
+import com.fabric.apps.mobile.utils.SessionSharedPreferences;
+import com.github.ybq.android.spinkit.SpinKitView;
 import com.wajahatkarim3.easymoneywidgets.EasyMoneyTextView;
 
 import java.util.ArrayList;
@@ -61,13 +76,20 @@ public class DialogCartFragment extends DialogFragment implements View.OnClickLi
     @BindView(R.id.button_remove)
     ImageView buttonRemove;
 
+    @BindView(R.id.increase_product)
+    ImageButton increase;
+
+    @BindView(R.id.decrease_product)
+    ImageButton decrease;
+
     @BindView(R.id.product_quantity)
     TextView productQuantity;
 
     private int id;
 
-//    private CartListAdapter cartListAdapter;
-//    private List<Cart_data> product_catalogs2 = new ArrayList<>();
+    private CartController cartController = new CartController();
+    SessionSharedPreferences sessionSharedPreferences;
+
 
     public DialogCartFragment() {
         // Required empty public constructor
@@ -89,6 +111,7 @@ public class DialogCartFragment extends DialogFragment implements View.OnClickLi
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_dialog_cart, container, false);
         ButterKnife.bind(this, view);
+        sessionSharedPreferences = new SessionSharedPreferences(this.getActivity());
         buttonRemove.setVisibility(View.GONE);
         Bundle bundle = this.getArguments();
         if (bundle != null){
@@ -100,50 +123,51 @@ public class DialogCartFragment extends DialogFragment implements View.OnClickLi
 
             productName.setText(bundle.getString("product_name"));
             productPrice.setText("Rp" +bundle.getInt("product_price"));
-            productQuantity.setText(bundle.getString("product_length"));
+            subTotal.setText("Rp. "+bundle.getInt("product_price"));
+
             id = bundle.getInt("product_id");
-            subTotal.setText("Rp." +CartListAdapter.totalPayment);
+
         }
 
         close.setOnClickListener(this);
         proccedCheckout.setOnClickListener(this);
         addMore.setOnClickListener(this);
+        decrease.setOnClickListener(this);
+        increase.setOnClickListener(this);
 
         return view;
     }
 
-    // ngambil data dari bundle tdi
+    public void Adddialogcart(){
+        Bundle bundle = this.getArguments();
+        int idcostumer = sessionSharedPreferences.getID();
+        String token = sessionSharedPreferences.getAccessToken();
+        String key = "oa00000000app";
+        double qty = bundle.getDouble("product_length");
+        Log.d("TAG", "isi QTY :" +qty);
+
+//        int idpro = ProductDetailActivity.ID;
 
 
-//    private void LoadJson() {
-//        ApiInterface apiInterface = ConfigRetrofit.getClient().create(ApiInterface.class);
-//
-//        Call<Cart_parent> call;
-//        call = apiInterface.getCartparent(getId());
-//        call.enqueue(new Callback<Cart_parent>() {
-//            @Override
-//            public void onResponse(Call<Cart_parent> call, ResponseSignup<Cart_parent> response) {
-//                if (response.isSuccessful() && response.body().getCart_data() != null){
-//                    if (!product_catalogs2.isEmpty()){
-//                        product_catalogs2.clear();
-//                    }
-//
-//                    product_catalogs2 = response.body().getCart_data();
-//                    cartListAdapter = new CartListAdapter(getContext(),product_catalogs2, subTotal);
-//                    rvcartList.setAdapter(cartListAdapter);
-//
-//                    cartListAdapter.notifyDataSetChanged();
-//                } else {
-//                    Toast.makeText(getActivity(), "Gak Ada Hasil Bro", Toast.LENGTH_LONG).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Cart_parent> call, Throwable t) {
-//
-//            }
-//        });
-//    }
+//        Log.d("TAG", "id barangnya" +idpro);
+        ConfigRetrofit.provideApiService().postCart(key,token,idcostumer,id,qty).enqueue(new Callback<CartItem>() {
+            @Override
+            public void onResponse(Call<CartItem> call, Response<CartItem> response) {
+                if (response.isSuccessful()){
+
+                    Toast.makeText(getActivity(), "Berhasil Memasukkan Produk", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getActivity(), "Gagal Memasukkan Produk", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CartItem> call, Throwable t) {
+                Toast.makeText(getActivity(), "Oops, something went wrong.", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 
     @Override
     public void onClick(View v) {
@@ -152,10 +176,39 @@ public class DialogCartFragment extends DialogFragment implements View.OnClickLi
                 dismiss();
                 break;
             case R.id.add_more:
+                Adddialogcart();
                 dismiss();
                 break;
             case R.id.proceed_to_checkout:
                 startActivity(new Intent(getContext(), CheckoutActivity.class));
+                break;
+            case R.id.increase_product:
+                Bundle bundle = this.getArguments();
+                Double permeter = 0.0;
+                int harga = 0;
+                harga = bundle.getInt("product_price");
+                permeter = Double.parseDouble(productQuantity.getText().toString());
+                permeter += 0.5;
+                productQuantity.setText(Double.toString(permeter));
+                harga *= permeter;
+                subTotal.setText("Rp." +harga);
+
+                break;
+
+            case R.id.decrease_product:
+                Bundle bundle2 = this.getArguments();
+                permeter = Double.parseDouble(productQuantity.getText().toString());
+                if (permeter > 1) {
+                    int harga2 = 0;
+                    harga2 = bundle2.getInt("product_price");
+                    permeter -= 0.5;
+                    productQuantity.setText(Double.toString(permeter));
+                    harga2 *= permeter;
+                    subTotal.setText("Rp." + harga2);
+                }else {
+                    permeter = 1.0;
+                    productQuantity.setText(Double.toString(permeter));
+                }
                 break;
         }
     }

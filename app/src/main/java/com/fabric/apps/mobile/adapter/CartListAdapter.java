@@ -86,7 +86,6 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
                     ).getPermeter() + 0.5));
             holder.quantity.setText(Double.toString(cartItems.get(position).getPermeter()));
             setTotalBayar();
-//            total.setText("Rp. "+totalPayment.intValue());
             cartController.updateCart(cartItems.get(position).getId(),cartItems.get(position).getCustomerId(),
                     cartItems.get(position).getProductId(),cartItems.get(position).getPermeter(),context);
 //
@@ -96,7 +95,7 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
         ketika menekan button -
          */
         holder.decrease.setOnClickListener(v -> {
-            if (cartItems.get(position).getPermeter() > 0.5) {
+            if (cartItems.get(position).getPermeter() > 1) {
                 cartItems.get(position).setPermeter(
                         (cartItems.get(position
                         ).getPermeter() - 0.5));
