@@ -86,6 +86,7 @@ public class DialogCartFragment extends DialogFragment implements View.OnClickLi
     TextView productQuantity;
 
     private int id;
+    public double permeter;
 
     private CartController cartController = new CartController();
     SessionSharedPreferences sessionSharedPreferences;
@@ -139,31 +140,23 @@ public class DialogCartFragment extends DialogFragment implements View.OnClickLi
     }
 
     public void Adddialogcart(){
-        Bundle bundle = this.getArguments();
         int idcostumer = sessionSharedPreferences.getID();
         String token = sessionSharedPreferences.getAccessToken();
         String key = "oa00000000app";
-        double qty = bundle.getDouble("product_length");
-        Log.d("TAG", "isi QTY :" +qty);
+        Log.d("TAG", "qtynya : " +permeter);
 
-//        int idpro = ProductDetailActivity.ID;
-
-
-//        Log.d("TAG", "id barangnya" +idpro);
-        ConfigRetrofit.provideApiService().postCart(key,token,idcostumer,id,qty).enqueue(new Callback<CartItem>() {
+        ConfigRetrofit.provideApiService().postCart(key,token,idcostumer,id,permeter).enqueue(new Callback<CartItem>() {
             @Override
             public void onResponse(Call<CartItem> call, Response<CartItem> response) {
                 if (response.isSuccessful()){
-
-                    Toast.makeText(getActivity(), "Berhasil Memasukkan Produk", Toast.LENGTH_SHORT).show();
+                    Log.d("TAG", "Berhasil memasukkan cardialog");
                 } else {
-                    Toast.makeText(getActivity(), "Gagal Memasukkan Produk", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<CartItem> call, Throwable t) {
-                Toast.makeText(getActivity(), "Oops, something went wrong.", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "Oops, something went wrong.", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -184,13 +177,13 @@ public class DialogCartFragment extends DialogFragment implements View.OnClickLi
                 break;
             case R.id.increase_product:
                 Bundle bundle = this.getArguments();
-                Double permeter = 0.0;
                 int harga = 0;
                 harga = bundle.getInt("product_price");
                 permeter = Double.parseDouble(productQuantity.getText().toString());
                 permeter += 0.5;
                 productQuantity.setText(Double.toString(permeter));
                 harga *= permeter;
+                Log.d("TAG", "isi permeter dalam onklik" +permeter);
                 subTotal.setText("Rp." +harga);
 
                 break;
