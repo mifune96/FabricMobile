@@ -59,7 +59,7 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
     TextView productName;
 
     @BindView(R.id.product_price)
-    EasyMoneyTextView productPrice;
+    TextView productPrice;
 
     @BindView(R.id.product_description)
     TextView productDescription;
@@ -138,10 +138,7 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
         }
 
         productName.setText(mProductname);
-        productPrice.setText(Integer.toString(mProductprice));
-        productPrice.setCurrency("Rp");
-        productPrice.showCommas();
-        productPrice.showCurrencySymbol();
+        productPrice.setText("Rp. "+mProductprice);
         productDescription.setText(mDescription);
         ID = mProductid;
 
@@ -198,7 +195,7 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
                 Bundle bundle = new Bundle();
                 bundle.putInt("product_id", mProductid);
                 bundle.putString("product_name", productName.getText().toString());
-                bundle.putInt("product_price",Integer.parseInt(productPrice.getValueString()));
+                bundle.putInt("product_price", mProductprice);
                 bundle.putString("product_image", mImg);
 
                 DialogFragment dialogFragment = new DialogCartFragment();
@@ -211,7 +208,7 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
                 intent.putExtra("TAG", "Product");
                 intent.putExtra("product_id", mProductid);
                 intent.putExtra("product_name", productName.getText().toString());
-                intent.putExtra("product_price", productPrice.getValueString());
+                intent.putExtra("product_price", productPrice.getText());
                 intent.putExtra("product_image", mImg);
                 startActivity(intent);
                 break;
@@ -219,29 +216,7 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
                 break;
         }
     }
-//    private void tambahcard(){
-//        String idcostumer = preferences.getID();
-//        String token = preferences.getAccessToken();
-//        String key = "oa00000000app";
-//        double qty = 1.0;
-//
-//        int idpro = 1;
-//        ConfigRetrofit.provideApiService().postCart(key,token,idcostumer,idpro,qty).enqueue(new Callback<ResponseCart>() {
-//            @Override
-//            public void onResponse(Call<ResponseCart> call, Response<ResponseCart> response) {
-//                if (response.isSuccessful())
-//                {
-//
-//                    Toast.makeText(ProductDetailActivity.this,"Berhasil", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ResponseCart> call, Throwable t) {
-//                Toast.makeText(ProductDetailActivity.this,"Gagal Post", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//    }
+
 
     private void addCart() {
         progressBar.setVisibility(View.VISIBLE);

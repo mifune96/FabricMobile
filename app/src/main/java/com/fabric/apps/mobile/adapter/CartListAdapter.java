@@ -54,11 +54,7 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
 
         setTotalBayar();
         holder.productName.setText(cartItems.get(position).getProductCart().getName());
-        holder.productPrice.setText(Integer.toString(cartItems.get(position).getProductCart().getHarga()));
-        holder.productPrice.setCurrency("Rp");
-        holder.productPrice.showCommas();
-
-        holder.productPrice.showCurrencySymbol();
+        holder.productPrice.setText("Rp. "+cartItems.get(position).getProductCart().getHarga());
 //        totalPayment = setTotalBayar();
         holder.quantity.setText(Double.toString(cartItems.get(position).getPermeter()));
 
@@ -134,7 +130,7 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
         TextView productName;
 
         @BindView(R.id.product_price)
-        EasyMoneyTextView productPrice;
+        TextView productPrice;
 
         @BindView(R.id.button_remove)
         ImageView remove;

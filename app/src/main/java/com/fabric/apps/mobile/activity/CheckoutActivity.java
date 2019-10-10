@@ -7,9 +7,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -17,12 +22,16 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.fabric.apps.mobile.R;
 import com.fabric.apps.mobile.adapter.CartListAdapter;
+import com.fabric.apps.mobile.connection.ConfigRetrofit;
 import com.fabric.apps.mobile.contoller.AddressController;
 import com.fabric.apps.mobile.contoller.CartController;
+import com.fabric.apps.mobile.model.cartModel.CartItem;
+import com.fabric.apps.mobile.model.cartModel.ResponseCart;
 import com.fabric.apps.mobile.utils.SessionSharedPreferences;
 import com.github.ybq.android.spinkit.SpinKitView;
 import com.wajahatkarim3.easymoneywidgets.EasyMoneyTextView;
@@ -82,7 +91,7 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
     TextView productName;
 
     @BindView(R.id.product_price)
-    EasyMoneyTextView productPrice;
+    TextView productPrice;
 
     @BindView(R.id.product_quantity)
     TextView productQuantity;
@@ -96,14 +105,14 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
     @BindView(R.id.button_remove)
     ImageView removeButton;
 
-    @BindView(R.id.cart_item)
-    ViewGroup productDetail;
-
     @BindView(R.id.progress_bar)
     SpinKitView progressBar;
 
     private CartController cartController = new CartController();
     private Intent intent;
+    private CartListAdapter cartListAdapter;
+    SessionSharedPreferences preferences;
+    private List<CartItem> cartItems;
     private final int REQUEST_ADDRESS_CODE = 100;
 
     @Override
@@ -114,6 +123,7 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
 
         intent = getIntent();
         String TAG = intent.getStringExtra("TAG");
+        preferences = new SessionSharedPreferences(this);
 
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(true);
@@ -154,20 +164,40 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void initCheckoutFromProduct() {
-        productName.setText(intent.getStringExtra("product_name"));
-        productPrice.setText(intent.getStringExtra("product_price"));
-        productPrice.setCurrency("Rp");
-        productPrice.showCommas();
-        productPrice.showCurrencySymbol();
+        int id = preferences.getID();
+        String token = preferences.getAccessToken();
+        String key = "oa00000000app";
+        ConfigRetrofit.provideApiService().getCart(id,key,token).enqueue(new Callback<ResponseCart>() {
+            @Override
+            public void onResponse(Call<ResponseCart> call, Response<ResponseCart> response) {
+                if (response.isSuccessful()) {
+                    cartItems = response.body().getCart();
+                    cartListAdapter = new CartListAdapter(CheckoutActivity.this, cartItems, totalPrice);
+                    productList.setAdapter(cartListAdapter);
+                    cartListAdapter.notifyDataSetChanged();
+                } else {
+                    Toast.makeText(CheckoutActivity.this, "Gak Ada Hasil Bro", Toast.LENGTH_LONG).show();
+                }
+            }
 
-        if (!intent.getStringExtra("product_image").isEmpty()){
-            Glide.with(this).load(intent.getStringExtra("product_image")).into(productImage);
-        } else {
-            productImage.setImageResource(R.drawable.default_image_placeholder);
-        }
+            @Override
+            public void onFailure(Call<ResponseCart> call, Throwable t) {
+                Toast.makeText(CheckoutActivity.this, "Gagal bro", Toast.LENGTH_LONG).show();
+            }
+        });
+//        productName.setText(intent.getStringExtra("product_name"));
+//        productPrice.setText(intent.getStringExtra("product_price"));
+//
+//
+//        if (!intent.getStringExtra("product_image").isEmpty()){
+//            Glide.with(this).load(intent.getStringExtra("product_image")).into(productImage);
+//        } else {
+//            productImage.setImageResource(R.drawable.default_image_placeholder);
+//        }
+
 
         removeButton.setVisibility(View.GONE);
-        productDetail.setVisibility(View.VISIBLE);
+//        productDetail.setVisibility(View.VISIBLE);
     }
 
 

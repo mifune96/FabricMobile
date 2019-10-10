@@ -48,10 +48,7 @@ public class CatalogueListAdapter extends RecyclerView.Adapter<CatalogueListAdap
 
         //bisa diginiin
         holder.productName.setText(productList.get(position).getName());
-        holder.productPrice.setText(Integer.toString(productList.get(position).getHarga()));
-        holder.productPrice.setCurrency("Rp");
-        holder.productPrice.showCurrencySymbol();
-        holder.productPrice.showCommas();
+        holder.productPrice.setText("Rp. "+productList.get(position).getHarga());
 
         int id = productList.get(position).getId();
         IDcart = id;
@@ -96,7 +93,7 @@ public class CatalogueListAdapter extends RecyclerView.Adapter<CatalogueListAdap
         TextView productName;
 
         @BindView(R.id.product_price)
-        EasyMoneyTextView productPrice;
+        TextView productPrice;
 
         @BindView(R.id.favorite_button)
         FloatingActionButton favorite;

@@ -71,7 +71,7 @@ public class DialogCartFragment extends DialogFragment implements View.OnClickLi
     TextView productName;
 
     @BindView(R.id.product_price)
-    EasyMoneyTextView productPrice;
+    TextView productPrice;
 
     @BindView(R.id.button_remove)
     ImageView buttonRemove;

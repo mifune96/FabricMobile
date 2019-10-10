@@ -5,6 +5,7 @@ import com.fabric.apps.mobile.model.cartModel.ResponseCart;
 import com.fabric.apps.mobile.model.productModel.ResponseProduc;
 import com.fabric.apps.mobile.model.siginModel.ResponseLogin;
 import com.fabric.apps.mobile.model.signupModel.ResponseSignup;
+import com.fabric.apps.mobile.utils.SessionSharedPreferences;
 
 import retrofit2.Call;
 import retrofit2.http.DELETE;
@@ -18,9 +19,11 @@ import retrofit2.http.Query;
 
 public interface ApiInterface {
 
+
     /**
     ** for get all produc for catalog and home
      **/
+
     @GET("product")
     Call<ResponseProduc> getProduc(@Query("apiKey") String apiKey,
                                    @Query("accessToken") String accessToken);
