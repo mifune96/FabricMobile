@@ -70,7 +70,7 @@ public class TransactionActivity extends AppCompatActivity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        menu.findItem(R.id.menu_notif).setVisible(false);
+//        menu.findItem(R.id.menu_notif).setVisible(false);
         return super.onPrepareOptionsMenu(menu);
     }
 

@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#C73A79</color>
     <color name="colorAccent">#534B88</color>
     <color name="colorGray">#9e9e9e</color>
+    <color name="colorWhite">#FFFF</color>
     <color name="search_button_color">#eeeeee</color>
 
     <color name="orange_gradient_dark">#EB3349</color>

@@ -9,10 +9,10 @@
         android:icon="@drawable/ic_chat"
         app:showAsAction="ifRoom"/>
 
-    <item
-        android:id="@+id/menu_notif"
-        android:title="@string/notification"
-        android:icon="@drawable/ic_bell"
-        app:showAsAction="ifRoom" />
+    <!--<item-->
+        <!--android:id="@+id/menu_notif"-->
+        <!--android:title="@string/notification"-->
+        <!--android:icon="@drawable/ic_bell"-->
+        <!--app:showAsAction="ifRoom" />-->
 
 </menu>

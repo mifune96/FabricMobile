@@ -67,10 +67,12 @@
         android:id="@+id/button_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/colorWhite"
         android:text="@string/login"
         android:layout_marginTop="20dp"
         android:elevation="3dp"
-        android:background="@drawable/gray_with_corner_bg"
+        android:textStyle="bold"
+        android:background="@drawable/pink_with_corner_bg"
         android:textAllCaps="false"
         android:layout_gravity="end"
         android:textSize="16sp"
@@ -82,62 +84,9 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <View
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="1dp"
-            android:background="@color/colorGray"
-            android:alpha=".5"
-            android:layout_gravity="center"/>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/_or"/>
-
-        <View
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="1dp"
-            android:background="@color/colorGray"
-            android:alpha=".5"
-            android:layout_gravity="center"/>
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/login_google"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/sign_in_with_google"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/google_sign_in_background"
-        android:textAllCaps="false"
-        android:elevation="3dp"
-        android:drawableStart="@drawable/ic_google"
-        android:paddingStart="15dp"
-        android:paddingEnd="15dp"
-        android:layout_gravity="end"
-        android:textSize="16sp"
-        android:alpha=".7"/>
 
-    <Button
-        android:id="@+id/login_facebook"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/continue_with_facebook"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/facebook_sign_in_bg"
-        android:textColor="@android:color/white"
-        android:drawableStart="@drawable/ic_facebook"
-        android:paddingStart="15dp"
-        android:paddingEnd="15dp"
-        android:textAllCaps="false"
-        android:elevation="3dp"
-        android:layout_gravity="end"
-        android:textSize="16sp"
-        android:alpha=".7"/>
 
 </LinearLayout>

@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.colorGray));
+        getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         sm = new SessionSharedPreferences(this);
@@ -171,9 +171,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case R.id.menu_notif:
-                startActivity(new Intent(this, NotificationActivity.class));
-                return true;
+//            case R.id.menu_notif:
+//                startActivity(new Intent(this, NotificationActivity.class));
+//                return true;
             case R.id.menu_chat:
                 Intent openWA = new Intent(Intent.ACTION_VIEW, Uri.parse("https://api.whatsapp.com/send?phone=6281368009882&text=Hi%20there,%20i%20love%20your%20product.%20Contact%20Me."));
                 startActivity(openWA);

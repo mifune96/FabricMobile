@@ -38,8 +38,8 @@ public class Login_Signup_Activity extends AppCompatActivity {
 
     private void setupViewPager() {
         ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        pagerAdapter.addFragment(new LoginFragment(), "Login");
-        pagerAdapter.addFragment(new SignUpFragment(), "Signup");
+        pagerAdapter.addFragment(new LoginFragment(), "Masuk");
+        pagerAdapter.addFragment(new SignUpFragment(), "Daftar");
         viewPager.setAdapter(pagerAdapter);
     }
 
