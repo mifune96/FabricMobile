@@ -34,7 +34,7 @@ public class CartController {
     SessionSharedPreferences sessionSharedPreferences;
     private List<CartItem> cartItems = new ArrayList<>();
 
-    public void ambilCart (RecyclerView recyclerView, Context context, ViewGroup onError
+    public void ambilCart (RecyclerView recyclerView, Context context, ViewGroup errorGroup
             , ViewGroup onSuccess, ViewGroup errorState, SwipeRefreshLayout refreshLayout, TextView total){
         sessionSharedPreferences = new SessionSharedPreferences(context);
         int id = sessionSharedPreferences.getID();
@@ -51,12 +51,12 @@ public class CartController {
                 if (cartItems.isEmpty()) {
                     cartItems.clear();
                     onSuccess.setVisibility(View.GONE);
-                    onError.setVisibility(View.GONE);
+                    errorGroup.setVisibility(View.VISIBLE);
                     errorState.setVisibility(View.GONE);
                     refreshLayout.setRefreshing(false);
                 }else {
                     onSuccess.setVisibility(View.VISIBLE);
-                    onError.setVisibility(View.GONE);
+                    errorGroup.setVisibility(View.GONE);
                     errorState.setVisibility(View.GONE);
                     refreshLayout.setRefreshing(false);
 //                    Log.i(TAG, response.errorBody().toString());
@@ -66,7 +66,7 @@ public class CartController {
             @Override
             public void onFailure(Call<ResponseCart> call, Throwable t) {
                 onSuccess.setVisibility(View.GONE);
-                onError.setVisibility(View.GONE);
+                errorGroup.setVisibility(View.GONE);
                 errorState.setVisibility(View.VISIBLE);
                 refreshLayout.setRefreshing(false);
             }
@@ -175,5 +175,38 @@ public class CartController {
                 Log.e(TAG, "onFailure: " + t.getMessage());
             }
         });
+    }
+
+    public void getCartCount(TextView cardBadge, Context context){
+        sessionSharedPreferences = new SessionSharedPreferences(context);
+        int id = sessionSharedPreferences.getID();
+        String token = sessionSharedPreferences.getAccessToken();
+        String key = "oa00000000app";
+
+        ConfigRetrofit.provideApiService().getCart(id,key,token).enqueue(new Callback<ResponseCart>() {
+            @Override
+            public void onResponse(Call<ResponseCart> call, Response<ResponseCart> response) {
+                if (response.body().getCart().size() > 0){
+                    int size = response.body().getCart().size();
+                    String cartCount = String.valueOf(Math.min(size, 99));
+                    cardBadge.setText(cartCount);
+
+                    Log.d(TAG, "ngentod" + response.body().getCart().size());
+                    if (cardBadge.getVisibility() != View.VISIBLE){
+                        cardBadge.setVisibility(View.VISIBLE);
+                    }
+                } else {
+                    if (cardBadge.getVisibility() != View.GONE){
+                        cardBadge.setVisibility(View.GONE);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseCart> call, Throwable t) {
+                Log.d(TAG, "onFailure: " + t.getMessage());
+            }
+        });
+
     }
 }

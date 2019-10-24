@@ -1,11 +1,15 @@
 package com.fabric.apps.mobile.connection;
 
+import com.fabric.apps.mobile.model.cekkurirModel.ResponseKurirModel;
+import com.fabric.apps.mobile.model.daftarModel.ResponseDaftarModel;
+import com.fabric.apps.mobile.model.kotaModel.ResponseKotaModel;
+import com.fabric.apps.mobile.model.profileModel.ResponseProfilModel;
+import com.fabric.apps.mobile.model.provinsirajaongkirModel.ResponseProvinceModel;
 import com.fabric.apps.mobile.model.cartModel.CartItem;
 import com.fabric.apps.mobile.model.cartModel.ResponseCart;
 import com.fabric.apps.mobile.model.productModel.ResponseProduc;
 import com.fabric.apps.mobile.model.siginModel.ResponseLogin;
-import com.fabric.apps.mobile.model.signupModel.ResponseSignup;
-import com.fabric.apps.mobile.utils.SessionSharedPreferences;
+
 
 import retrofit2.Call;
 import retrofit2.http.DELETE;
@@ -28,6 +32,54 @@ public interface ApiInterface {
     Call<ResponseProduc> getProduc(@Query("apiKey") String apiKey,
                                    @Query("accessToken") String accessToken);
 
+    /**
+     *
+     *============================================================================
+     * ============= Fungsi untuk Api address dan kurir raja ongkir Get/update/delet===========================
+     * ===========================================================================
+     /*
+
+    /*
+    cek provinsi from raja ongkir
+     */
+    @GET("cek-ongkir/provinsi")
+    Call<ResponseProvinceModel> getProvince();
+
+    /*
+      cek kota from raja ongkir
+       */
+    @GET("cek-ongkir/kota/{id}")
+    Call<ResponseKotaModel> getKota(@Path("id") String idprovinsi);
+
+
+    /**
+     *
+     * Cek Ongkir dan kurir
+     */
+    @FormUrlEncoded
+    @POST("cek-ongkir")
+    Call<ResponseKurirModel> getKurir(
+            @Field("CustomerId") int idcustomer,
+            @Field("courier") String kurir);
+
+    /**
+     *
+     *============================================================================
+     * ============= Fungsi untuk registrasi login dan profil Get/update/delet===========================
+     * ===========================================================================
+     /*
+
+    /*
+      get data from api profil
+       */
+    @GET("customer/{id}")
+    Call<ResponseProfilModel> getProfil( @Path("id")int id,
+                                         @Query("apiKey") String apiKey,
+                                         @Query("accessToken") String accessToken);
+
+      /*
+    Registrasi
+     */
     @FormUrlEncoded
     @POST("customer/signin")
     Call<ResponseLogin> sigIn(
@@ -40,12 +92,14 @@ public interface ApiInterface {
      **/
     @FormUrlEncoded
     @POST("customer/register")
-    Call<ResponseSignup> Signup(
+    Call<ResponseDaftarModel> Signup(
             @Field("name") String name,
             @Field("username") String username,
             @Field("phoneNumber") String phonenumber,
             @Field("password") String password,
-            @Field("retypePassword") String rtpassword);
+            @Field("retypePassword") String rtpassword,
+            @Field("ProvinceId") String ProvinceId,
+            @Field("CitiesId") String CitiesId);
 
     /**
      *

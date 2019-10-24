@@ -6,9 +6,11 @@
         android:id="@+id/menu_cart"
         android:title="@string/shopping_cart"
         android:icon="@drawable/ic_cart"
+        app:actionLayout="@layout/badge_cart_action_item"
         app:showAsAction="ifRoom"/>
 
     <item
+        android:visible="false"
         android:id="@+id/menu_favorited"
         android:title="@string/favorited"
         android:icon="@drawable/ic_heart"

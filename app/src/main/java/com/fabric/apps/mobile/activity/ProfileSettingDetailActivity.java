@@ -54,13 +54,13 @@ public class ProfileSettingDetailActivity extends AppCompatActivity {
 
     private void setupContainer() {
         switch (intent.getStringExtra("TAG")){
-            case "Shipping Address":
+            case "Shipping AddressDaftarModel":
                 fragmentManager.beginTransaction().show(shippingAddress).commit();
                 break;
             case "Phone Number":
                 fragmentManager.beginTransaction().show(phoneNumber).commit();
                 break;
-            case "Email Address":
+            case "Email AddressDaftarModel":
                 fragmentManager.beginTransaction().show(emailAddress).commit();
                 break;
             case "Password":

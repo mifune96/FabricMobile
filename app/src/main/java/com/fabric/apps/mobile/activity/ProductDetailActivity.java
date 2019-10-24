@@ -1,5 +1,6 @@
 package com.fabric.apps.mobile.activity;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
@@ -79,10 +80,6 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
     @BindView(R.id.progress_bar)
     SpinKitView progressBar;
 
-//    @BindView(R.id.cart_badge)
-//    TextView cartBadge;
-
-
     private String mImg,mProductname,mDescription;
     private int mProductprice,mProductstock;
     private int mProductid;
@@ -95,23 +92,10 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail);
         ButterKnife.bind(this);
-       preferences = new SessionSharedPreferences(this);
+        preferences = new SessionSharedPreferences(this);
         initView();
 
-        //Intent intent = getIntent();
 
-//        setSupportActionBar(toolbar);
-//        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(true);
-//        getSupportActionBar().setTitle(getIntent().getStringExtra("product_name"));
-//        toolbar.setNavigationIcon(R.drawable.ic_back);
-//        toolbar.setNavigationOnClickListener(v -> finish());
-
-
-
-//       getProductDetail();\
-//        productDescription.setOnLongClickListener(this);
-
-//        initRecyclerView();
     }
     private void initView(){
         Intent intent = getIntent();
@@ -152,22 +136,21 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.detail_menu, menu);
+
         final MenuItem menuItem = menu.findItem(R.id.menu_cart);
 
-//        View actionView = menuItem.getActionView();
-//        cartBadge = actionView.findViewById(R.id.cart_badge);
+        View actionView = menuItem.getActionView();
+        TextView cartBadge = actionView.findViewById(R.id.cart_badge);
+
+        if (cartBadge != null){
+            cartController.getCartCount(cartBadge, this);
+        }
 
 //        setupBadge();
 
-//        actionView.setOnClickListener(v -> onOptionsItemSelected(menuItem));
+        actionView.setOnClickListener(v -> onOptionsItemSelected(menuItem));
         return true;
     }
-
-//    private void setupBadge() {
-//        if (cartBadge != null){
-////            cartController.getCartCount(2, cartBadge);
-//        }
-//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

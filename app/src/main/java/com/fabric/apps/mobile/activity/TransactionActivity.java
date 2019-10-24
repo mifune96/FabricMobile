@@ -55,7 +55,6 @@ public class TransactionActivity extends AppCompatActivity {
         pagerAdapter.addFragment(new TransactionFragment(), "Diterima");
         pagerAdapter.addFragment(new TransactionFragment(), "Selesai");
         pagerAdapter.addFragment(new TransactionFragment(), "Dibatalkan");
-        pagerAdapter.addFragment(new TransactionFragment(), "Dikembalikan");
         transactionPager.setAdapter(pagerAdapter);
     }
 
@@ -65,7 +64,6 @@ public class TransactionActivity extends AppCompatActivity {
         transactionTab.addTab(transactionTab.newTab().setTag("To Receive"));
         transactionTab.addTab(transactionTab.newTab().setTag("Completed"));
         transactionTab.addTab(transactionTab.newTab().setTag("Cancelled"));
-        transactionTab.addTab(transactionTab.newTab().setTag("Return"));
     }
 
     @Override

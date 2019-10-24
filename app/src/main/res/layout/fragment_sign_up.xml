@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:orientation="vertical"
+<androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,6 +7,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.SignUpFragment"
     android:padding="20dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <TextView
         android:layout_width="match_parent"
@@ -114,6 +118,49 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <LinearLayout
+
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_weight="3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pilih Provinsi"/>
+        <Spinner
+            android:padding="15dp"
+            android:layout_weight="1"
+            android:id="@+id/sp_input_provinsi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+        <View
+            android:background="@color/colorGray"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_weight="3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pilih Kota"/>
+            <Spinner
+                android:padding="15dp"
+                android:layout_weight="1"
+                android:id="@+id/sp_input_kota"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <View
+            android:background="@color/colorGray"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
     <Button
         android:id="@+id/button_signup"
         android:layout_width="match_parent"
@@ -130,3 +177,5 @@
         android:alpha=".7"/>
 
     </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>

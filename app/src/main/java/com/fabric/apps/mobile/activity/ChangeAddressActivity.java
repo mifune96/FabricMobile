@@ -36,6 +36,6 @@ public class ChangeAddressActivity extends AppCompatActivity {
         bundle.putString("TAG", "Change");
         shipAddress.setArguments(bundle);
 
-        manager.beginTransaction().add(R.id.main_container, shipAddress, "Shipping Address").show(shipAddress).commit();
+        manager.beginTransaction().add(R.id.main_container, shipAddress, "Shipping AddressDaftarModel").show(shipAddress).commit();
     }
 }

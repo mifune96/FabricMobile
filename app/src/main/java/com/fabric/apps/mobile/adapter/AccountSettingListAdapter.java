@@ -67,7 +67,7 @@ public class AccountSettingListAdapter extends RecyclerView.Adapter<AccountSetti
                     context.startActivity(new Intent(context, EditProfileActivity.class));
                     break;
                 case 1:
-                    intent.putExtra("TAG", "Shipping Address");
+                    intent.putExtra("TAG", "Shipping AddressDaftarModel");
                     intent.putExtra("title", "Alamat Pengiriman");
                     context.startActivity(intent);
                     break;
@@ -77,7 +77,7 @@ public class AccountSettingListAdapter extends RecyclerView.Adapter<AccountSetti
                     context.startActivity(intent);
                     break;
                 case 3:
-                    intent.putExtra("TAG", "Email Address");
+                    intent.putExtra("TAG", "Email AddressDaftarModel");
                     intent.putExtra("title", "Alamat Email");
                     context.startActivity(intent);
                     break;

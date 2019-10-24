@@ -7,7 +7,7 @@ public class CartItem{
 	@SerializedName("createdAt")
 	private String createdAt;
 
-	@SerializedName("Customer")
+	@SerializedName("CustomerProfilModel")
 	private CustomerCart customerCart;
 
 	@SerializedName("Product")

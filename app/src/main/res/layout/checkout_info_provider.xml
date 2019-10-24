@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/purchase_information"
+        android:text="Inforrmasi Barang yang di Beli"
         android:textSize="16sp"/>
 
     <View
@@ -55,31 +55,48 @@
         android:id="@+id/service_provider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_marginBottom="15dp">
 
-        <ImageView
-            android:id="@+id/service_image"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight=".7"
-            android:src="@drawable/default_image_placeholder"/>
-
-        <TextView
-            android:id="@+id/service_name"
-            android:layout_width="0dp"
+        <RadioGroup
+            android:gravity="center"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/service_provider"
-            android:layout_gravity="center"
-            android:gravity="end"/>
+            android:orientation="horizontal">
+            <RadioButton
+                android:layout_margin="15dp"
+                android:id="@+id/rb_jne"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="JNE"/>
 
-        <ImageView
-            android:layout_width="0dp"
+            <RadioButton
+                android:layout_margin="15dp"
+                android:id="@+id/rb_pos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="POS"/>
+
+            <RadioButton
+                android:layout_margin="15dp"
+                android:id="@+id/rb_tiki"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TIKI"/>
+
+        </RadioGroup>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorGray"
+            android:alpha=".5"/>
+
+        <Spinner
+            android:id="@+id/carType"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight=".2"
-            android:src="@drawable/ic_right"
-            android:layout_gravity="center"/>
+            android:padding="25dp"/>
 
     </LinearLayout>
 

@@ -11,7 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +25,9 @@ import android.widget.TextView;
 import com.fabric.apps.mobile.R;
 import com.fabric.apps.mobile.activity.EditProfileActivity;
 import com.fabric.apps.mobile.adapter.SettingListAdapter;
+import com.fabric.apps.mobile.connection.ConfigRetrofit;
+import com.fabric.apps.mobile.model.profileModel.ResponseProfilModel;
+import com.fabric.apps.mobile.utils.SessionSharedPreferences;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,6 +46,8 @@ public class ProfileFragment extends Fragment {
     @BindView(R.id.profile_wrapper)
     RelativeLayout wrapper;
 
+    SessionSharedPreferences sessionSharedPreferences;
+
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -51,6 +60,8 @@ public class ProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         ButterKnife.bind(this, view);
+        sessionSharedPreferences = new SessionSharedPreferences(this.getActivity());
+        LoadProfil();
 
         initRecyclerView();
         wrapper.setOnClickListener(v -> {
@@ -60,8 +71,32 @@ public class ProfileFragment extends Fragment {
         return view;
     }
 
+    private void LoadProfil() {
+        int idcostumer = sessionSharedPreferences.getID();
+        String token = sessionSharedPreferences.getAccessToken();
+        String key = "oa00000000app";
+
+        ConfigRetrofit.provideApiService().getProfil(idcostumer,key,token).enqueue(new Callback<ResponseProfilModel>() {
+            @Override
+            public void onResponse(Call<ResponseProfilModel> call, Response<ResponseProfilModel> response) {
+                if (response.isSuccessful()){
+
+                    Log.d("TAG", "Isi Respon profil " +response.body().getCustomer());
+                    userName.setText(response.body().getCustomer().getName());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseProfilModel> call, Throwable t) {
+
+            }
+        });
+    }
+
     private void initRecyclerView() {
         settingList.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
         settingList.setAdapter(new SettingListAdapter(getContext()));
     }
+
+
 }

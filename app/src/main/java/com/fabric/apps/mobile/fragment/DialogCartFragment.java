@@ -86,7 +86,7 @@ public class DialogCartFragment extends DialogFragment implements View.OnClickLi
     TextView productQuantity;
 
     private int id;
-    public double permeter;
+    public double permeter = 1.0;
 
     private CartController cartController = new CartController();
     SessionSharedPreferences sessionSharedPreferences;
@@ -166,11 +166,11 @@ public class DialogCartFragment extends DialogFragment implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.button_close:
-                dismiss();
+                refresh();
                 break;
             case R.id.add_more:
                 Adddialogcart();
-                dismiss();
+                refresh();
                 break;
             case R.id.proceed_to_checkout:
                 startActivity(new Intent(getContext(), CheckoutActivity.class));
@@ -204,5 +204,15 @@ public class DialogCartFragment extends DialogFragment implements View.OnClickLi
                 }
                 break;
         }
+    }
+
+    public void refresh() {
+        Intent intent = getActivity().getIntent();
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        getActivity().finish();
+        getActivity().overridePendingTransition(0,0);
+        startActivity(intent);
+        dismiss();
+        getActivity().overridePendingTransition(0,0);
     }
 }

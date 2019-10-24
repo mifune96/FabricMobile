@@ -11,32 +11,26 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.fabric.apps.mobile.R;
 import com.fabric.apps.mobile.adapter.CartListAdapter;
 import com.fabric.apps.mobile.connection.ConfigRetrofit;
-import com.fabric.apps.mobile.contoller.AddressController;
 import com.fabric.apps.mobile.contoller.CartController;
 import com.fabric.apps.mobile.model.cartModel.CartItem;
 import com.fabric.apps.mobile.model.cartModel.ResponseCart;
 import com.fabric.apps.mobile.utils.SessionSharedPreferences;
 import com.github.ybq.android.spinkit.SpinKitView;
-import com.wajahatkarim3.easymoneywidgets.EasyMoneyTextView;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -44,21 +38,21 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+//
+//    @BindView(R.id.user_name)
+//    TextView userName;
 
-    @BindView(R.id.user_name)
-    TextView userName;
-
-    @BindView(R.id.user_address)
-    TextView userAddress;
-
-    @BindView(R.id.user_phone_number)
-    TextView userPhoneNumber;
-
-    @BindView(R.id.change_shipping_adress)
-    TextView changeAddress;
-
-    @BindView(R.id.payment_method_info)
-    TextView paymentInfo;
+//    @BindView(R.id.user_address)
+//    TextView userAddress;
+//
+//    @BindView(R.id.user_phone_number)
+//    TextView userPhoneNumber;
+//
+//    @BindView(R.id.change_shipping_adress)
+//    TextView changeAddress;
+//
+//    @BindView(R.id.payment_method_info)
+//    TextView paymentInfo;
 
     @BindView(R.id.service_provider)
     LinearLayout serviceWrapper;
@@ -66,11 +60,14 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
     @BindView(R.id.product_list)
     RecyclerView productList;
 
-    @BindView(R.id.service_image)
-    ImageView serviceImage;
+    @BindView(R.id.rb_jne)
+    RadioButton rbJne;
 
-    @BindView(R.id.service_name)
-    TextView serviceName;
+    @BindView(R.id.rb_pos)
+    RadioButton rbPos;
+
+    @BindView(R.id.rb_tiki)
+    RadioButton rbTiki;
 
     @BindView(R.id.total_product_price)
     TextView totalPrice;
@@ -125,6 +122,10 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
         String TAG = intent.getStringExtra("TAG");
         preferences = new SessionSharedPreferences(this);
 
+        removeButton.setVisibility(View.GONE);
+        increaseProduct.setVisibility(View.GONE);
+        decreaseProduct.setVisibility(View.GONE);
+
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(true);
         getSupportActionBar().setTitle("Atur Pesanan");
@@ -134,7 +135,7 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
 //        cartController.addcart(productList,progressBar,this,i);
         productList.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
 
-        getMainAddress();
+
         initCheckoutFromProduct();
 
 //        changeAddress.setOnClickListener(this);
@@ -153,10 +154,7 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
 //        paymentInfo.setOnClickListener(this);
 
     }
-    private void getMainAddress() {
-        AddressController addressController = new AddressController();
-//        addressController.getMainAddress(1, this, userName, userAddress, userPhoneNumber);
-    }
+
 
     private void initCheckoutFromCart() {
 
@@ -175,6 +173,9 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
                     cartListAdapter = new CartListAdapter(CheckoutActivity.this, cartItems, totalPrice);
                     productList.setAdapter(cartListAdapter);
                     cartListAdapter.notifyDataSetChanged();
+                    removeButton.setVisibility(View.GONE);
+                    increaseProduct.setVisibility(View.GONE);
+                    decreaseProduct.setVisibility(View.GONE);
                 } else {
                     Toast.makeText(CheckoutActivity.this, "Gak Ada Hasil Bro", Toast.LENGTH_LONG).show();
                 }
@@ -196,7 +197,7 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
 //        }
 
 
-        removeButton.setVisibility(View.GONE);
+
 //        productDetail.setVisibility(View.VISIBLE);
     }
 
@@ -204,14 +205,6 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.change_shipping_adress:
-            Intent intent = new Intent(this, ProfileSettingDetailActivity.class);
-            intent.putExtra("TAG", "Shipping Address");
-            intent.putExtra("Func", "GET");
-            startActivityForResult(intent, REQUEST_ADDRESS_CODE);
-            break;
-            case R.id.payment_method_info:
-                break;
             case R.id.service_provider:
                 break;
             default:
@@ -219,13 +212,13 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_ADDRESS_CODE || resultCode == RESULT_OK && data != null){
-            userName.setText(data.getStringExtra("Name"));
-            userAddress.setText(data.getStringExtra("Description"));
-            userPhoneNumber.setText(data.getStringExtra("PhoneNumber"));
-        }
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode == REQUEST_ADDRESS_CODE || resultCode == RESULT_OK && data != null){
+////            userName.setText(data.getStringExtra("Name"));
+////            userAddress.setText(data.getStringExtra("Description"));
+////            userPhoneNumber.setText(data.getStringExtra("PhoneNumber"));
+//        }
+//    }
 }

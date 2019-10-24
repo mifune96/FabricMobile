@@ -13,16 +13,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.fabric.apps.mobile.R;
-import com.fabric.apps.mobile.model.ProvinsirajaongkirModel.ResultsItemProvinceModel;
+import com.fabric.apps.mobile.model.provinsirajaongkirModel.ResultsItemProvinceModel;
 
 import static com.fabric.apps.mobile.R.layout.item_province;
 
 
 import java.util.List;
 
-public class AddressRajaongkirListAdapter extends ArrayAdapter<ResultsItemProvinceModel> {
+public class ProvinceRajaongkirListAdapter extends ArrayAdapter<ResultsItemProvinceModel> {
 
-    public AddressRajaongkirListAdapter(Context context, List<ResultsItemProvinceModel> resultsItems){
+    public ProvinceRajaongkirListAdapter(Context context, List<ResultsItemProvinceModel> resultsItems){
         super(context,0,resultsItems);
     }
 

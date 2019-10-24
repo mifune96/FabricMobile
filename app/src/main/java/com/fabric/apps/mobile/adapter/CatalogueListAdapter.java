@@ -2,6 +2,7 @@ package com.fabric.apps.mobile.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +53,8 @@ public class CatalogueListAdapter extends RecyclerView.Adapter<CatalogueListAdap
 
         int id = productList.get(position).getId();
         IDcart = id;
+//        String folder = "http://192.168.100.55:8080/catalog/";
+
 
         if (!productList.get(position).getImage().isEmpty()){
             Glide.with(context).load(productList.get(position).getImage()).into(holder.productImage);

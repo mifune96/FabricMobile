@@ -32,13 +32,13 @@
             android:orientation="vertical">
 
             <include
-                layout="@layout/checkout_shipping_payment"
+                layout="@layout/checkout_info_provider"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp" />
 
             <include
-                layout="@layout/checkout_info_provider"
+                layout="@layout/checkout_shipping_payment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp" />

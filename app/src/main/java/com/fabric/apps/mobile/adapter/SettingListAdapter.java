@@ -36,10 +36,10 @@ public class SettingListAdapter extends RecyclerView.Adapter<SettingListAdapter.
 
     private ArrayList<Setting> populateSetting() {
         ArrayList<Setting> settings = new ArrayList<>();
-        int[] settingImg = {R.drawable.ic_chat, R.drawable.ic_bell
+        int[] settingImg = {R.drawable.ic_chat
                 ,  R.drawable.ic_shopping, R.drawable.ic_settings
                 , R.drawable.ic_help, R.drawable.ic_information};
-        int[] settingName = {R.string.chat, R.string.notification, R.string.transaction
+        int[] settingName = {R.string.chat, R.string.transaction
                 , R.string.account_setting, R.string.help, R.string.information};
 
         for (int i = 0; i < settingName.length; i++){
@@ -73,18 +73,15 @@ public class SettingListAdapter extends RecyclerView.Adapter<SettingListAdapter.
                     context.startActivity(openWA);
                     break;
                 case 1:
-                    context.startActivity(new Intent(context, NotificationActivity.class));
-                    break;
-                case 2:
                     context.startActivity(new Intent(context, TransactionActivity.class));
                     break;
-                case 3:
+                case 2:
                     context.startActivity(new Intent(context, AccountSettingActivity.class));
                     break;
-                case 4:
+                case 3:
                     context.startActivity(new Intent(context, HelpActivity.class));
                     break;
-                case 5:
+                case 4:
                     context.startActivity(new Intent(context, InformationActivity.class));
                     break;
                     default:
