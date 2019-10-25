@@ -2,8 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/white"
-    android:padding="10dp">
+    android:background="@android:color/white">
 
     <TextView
         android:layout_width="match_parent"
@@ -68,21 +67,24 @@
                 android:id="@+id/rb_jne"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="JNE"/>
+                android:text="JNE"
+                android:onClick="onRadioButtonClicked"/>
 
             <RadioButton
                 android:layout_margin="15dp"
                 android:id="@+id/rb_pos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="POS"/>
+                android:text="POS"
+                android:onClick="onRadioButtonClicked"/>
 
             <RadioButton
                 android:layout_margin="15dp"
                 android:id="@+id/rb_tiki"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TIKI"/>
+                android:text="TIKI"
+                android:onClick="onRadioButtonClicked"/>
 
         </RadioGroup>
 
@@ -93,7 +95,7 @@
             android:alpha=".5"/>
 
         <Spinner
-            android:id="@+id/carType"
+            android:id="@+id/sp_tipekurir"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="25dp"/>

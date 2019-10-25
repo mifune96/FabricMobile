@@ -111,6 +111,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onFailure(Call<ResponseLogin> call, Throwable t) {
                 Log.d("TAG", "Failed Connetion To" + t.toString());
+//                Toast.makeText(getActivity(),"Gagal Login Gagal cek koneksi" , Toast.LENGTH_SHORT).show();
             }
         });
 

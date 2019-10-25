@@ -124,15 +124,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
-            android:layout_weight="3"
-            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Pilih Provinsi"/>
         <Spinner
-            android:padding="15dp"
-            android:layout_weight="1"
+            android:padding="20dp"
+            android:layout_weight="3"
             android:id="@+id/sp_input_provinsi"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content" />
     </LinearLayout>
         <View
@@ -145,15 +145,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:layout_weight="3"
-                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Pilih Kota"/>
             <Spinner
-                android:padding="15dp"
-                android:layout_weight="1"
+                android:padding="20dp"
+                android:layout_weight="3"
                 android:id="@+id/sp_input_kota"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content" />
         </LinearLayout>
         <View

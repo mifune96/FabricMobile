@@ -91,25 +91,10 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
         BtnSignup.setOnClickListener(this);
         LoaddataProvinsi();
         LoaddataKota();
-//        Spnprovinsi.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                String SelectProvinsi = parent.getItemAtPosition(position).toString();
-////                idSpinner = parent.getItemAtPosition(position).toString();
-//
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//
-//            }
-//        });
 
         return view;
 
     }
-
-
 
     private void LoaddataProvinsi() {
         ConfigRetrofit.provideApiService().getProvince().enqueue(new Callback<ResponseProvinceModel>() {
@@ -118,7 +103,6 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
                 if (response.isSuccessful()){
                     resultsItems = response.body().getRajaongkir().getResults();
                     initdatakeSpinner();
-//                    Toast.makeText(getActivity(), String.valueOf(resultsItems.size()),Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getActivity(), "Data Provinsi tidak ada", Toast.LENGTH_SHORT).show();
                 }
@@ -139,7 +123,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
                 if (response.isSuccessful()){
                     resultsItemKotaModels = response.body().getRajaongkir().getResults();
                     initdatakotaSpinner();
-//                    Toast.makeText(getActivity(), String.valueOf(resultsItems.size()),Toast.LENGTH_SHORT).show();
+
                 } else {
                     Toast.makeText(getActivity(), "Data Kota tidak ada", Toast.LENGTH_SHORT).show();
                 }
@@ -264,38 +248,6 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
 
              }
          });
-
-
-//
-//        ConfigRetrofit.provideApiService().Signup(nama,username,notlp,pass,pass2)
-//                .enqueue(new Callback<ResponseSignup>() {
-//                    @Override
-//                    public void onResponse(Call<ResponseSignup> call, ResponseKotaModel<ResponseSignup> response) {
-//                        if (response != null && response.isSuccessful()){
-//                            Log.d("TAG", "Sukses Daftar ");
-//                            String token = response.body().getAccessToken();
-//                            int id = response.body().getCustomerSignup().getId();
-//                            sessionSharedPreferences.saveSPString(SessionSharedPreferences.AccessToken, token);
-//                            sessionSharedPreferences.saveSPInt(SessionSharedPreferences.ID, id); //dah jdi string
-//                            sessionSharedPreferences.saveSPBoolean(SessionSharedPreferences.IS_LOGIN,true);
-//
-//                            startActivity(new Intent(getContext(),MainActivity.class)
-//                                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
-//                            getActivity().finish();
-////                            Intent intent = new Intent(getActivity(), MainActivity.class);
-////                            startActivity(intent);
-////                            startActivity(new Intent(getContext(),MainActivity.class));
-//                        } else {
-//                            Toast.makeText(getActivity(),"Gagal MendaftarCek data diri" , Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<ResponseSignup> call, Throwable t) {
-//
-//                    }
-//                });
-
 
     }
 

@@ -34,8 +34,7 @@
             <include
                 layout="@layout/checkout_info_provider"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp" />
+                android:layout_height="wrap_content" />
 
             <include
                 layout="@layout/checkout_shipping_payment"

@@ -1,6 +1,5 @@
 package com.fabric.apps.mobile.activity;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,24 +12,33 @@ import retrofit2.Response;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fabric.apps.mobile.R;
 import com.fabric.apps.mobile.adapter.CartListAdapter;
+import com.fabric.apps.mobile.adapter.KurirListAdapter;
 import com.fabric.apps.mobile.connection.ConfigRetrofit;
 import com.fabric.apps.mobile.contoller.CartController;
 import com.fabric.apps.mobile.model.cartModel.CartItem;
 import com.fabric.apps.mobile.model.cartModel.ResponseCart;
+import com.fabric.apps.mobile.model.cekkurirModel.CostItemKurirModel;
+import com.fabric.apps.mobile.model.cekkurirModel.CostsItemKurirModel;
+import com.fabric.apps.mobile.model.cekkurirModel.ResponseKurirModel;
 import com.fabric.apps.mobile.utils.SessionSharedPreferences;
 import com.github.ybq.android.spinkit.SpinKitView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -105,12 +113,23 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
     @BindView(R.id.progress_bar)
     SpinKitView progressBar;
 
+    @BindView(R.id.sp_tipekurir)
+    Spinner spkurir;
+
+    private List<CostsItemKurirModel> costsItemKurirModels;
+    private List<CostItemKurirModel> kuriritem;
+    private KurirListAdapter kurirListAdapter;
+
+
     private CartController cartController = new CartController();
     private Intent intent;
     private CartListAdapter cartListAdapter;
     SessionSharedPreferences preferences;
     private List<CartItem> cartItems;
     private final int REQUEST_ADDRESS_CODE = 100;
+    public static String kurir;
+    public static int harga;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,33 +151,107 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
         toolbar.setNavigationIcon(R.drawable.ic_back);
         toolbar.setNavigationOnClickListener(v -> finish());
 
-//        cartController.addcart(productList,progressBar,this,i);
+//        servicePrice.setText("Rp. "+harga);
+
+
         productList.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
 
 
         initCheckoutFromProduct();
 
-//        changeAddress.setOnClickListener(this);
-//        if (TAG.equals("Product")){
-//            progressBar.setVisibility(View.VISIBLE);
-//            initCheckoutFromProduct();
-//            progressBar.setVisibility(View.GONE);
-//        } else if (TAG.equals("Cart")){
-//            progressBar.setVisibility(View.VISIBLE);
-//            initCheckoutFromCart();
-//            progressBar.setVisibility(View.GONE);
-//        }
-//
-//        changeAddress.setOnClickListener(this);
-//        serviceWrapper.setOnClickListener(this);
-//        paymentInfo.setOnClickListener(this);
+    }
 
+    public void onRadioButtonClicked(View view){
+        boolean cekradio = ((RadioButton) view).isChecked();
+
+        switch (view.getId()){
+            case R.id.rb_jne:
+                if (cekradio) {
+                   kurir = "jne";
+                   initradio();
+//                   servicePrice.setText("Rp. "+harga);
+                }
+                    break;
+
+            case R.id.rb_pos:
+                if (cekradio)
+                    kurir = "pos";
+                    initradio();
+//                    servicePrice.setText("Rp. "+harga);
+                    break;
+
+            case R.id.rb_tiki:
+                if (cekradio)
+                    kurir = "tiki";
+                    initradio();
+//                    servicePrice.setText("Rp. "+harga);
+                    break;
+        }
     }
 
 
-    private void initCheckoutFromCart() {
 
 
+private void initradio(){
+    int id = preferences.getID();
+//    kurir = "jne";
+    ConfigRetrofit.provideApiService().getKurir(id,kurir).enqueue(new Callback<CostsItemKurirModel>() {
+        @Override
+        public void onResponse(Call<CostsItemKurirModel> call, Response<CostsItemKurirModel> response) {
+            if (response.isSuccessful()){
+                kuriritem = response.body().getCost();
+                initDataSpinner();
+            }
+        }
+
+        @Override
+        public void onFailure(Call<CostsItemKurirModel> call, Throwable t) {
+
+        }
+    });
+}
+
+    private void initDataSpinner() {
+        kurirListAdapter = new KurirListAdapter(this,kuriritem);
+        kurirListAdapter.notifyDataSetChanged();
+        spkurir.setAdapter(kurirListAdapter);
+
+        spkurir.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                CostItemKurirModel cur = (CostItemKurirModel) parent.getItemAtPosition(position);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+//        spkurir.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                try {
+//                    CostsItemKurirModel cost = (CostsItemKurirModel) parent.getItemAtPosition(position);
+//                    //servicePrice.setText("Rp. " + cost.getCost().get(position));
+//                    Toast.makeText(CheckoutActivity.this, "" + cost.getCost().get(position).getValue(), Toast.LENGTH_SHORT).show();
+//                } catch (IndexOutOfBoundsException e) {
+//                    Toast.makeText(CheckoutActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+//                }
+//
+////                String price;
+////                switch (position) {
+////                    case 0:
+////                        price = costsItemKurirModels.get(0).getCost().get(position).getValue().toString();
+////                }
+//
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
     }
 
     private void initCheckoutFromProduct() {
@@ -186,19 +279,7 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
                 Toast.makeText(CheckoutActivity.this, "Gagal bro", Toast.LENGTH_LONG).show();
             }
         });
-//        productName.setText(intent.getStringExtra("product_name"));
-//        productPrice.setText(intent.getStringExtra("product_price"));
-//
-//
-//        if (!intent.getStringExtra("product_image").isEmpty()){
-//            Glide.with(this).load(intent.getStringExtra("product_image")).into(productImage);
-//        } else {
-//            productImage.setImageResource(R.drawable.default_image_placeholder);
-//        }
 
-
-
-//        productDetail.setVisibility(View.VISIBLE);
     }
 
 

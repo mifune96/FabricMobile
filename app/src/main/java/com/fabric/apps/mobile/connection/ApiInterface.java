@@ -1,5 +1,6 @@
 package com.fabric.apps.mobile.connection;
 
+import com.fabric.apps.mobile.model.cekkurirModel.CostsItemKurirModel;
 import com.fabric.apps.mobile.model.cekkurirModel.ResponseKurirModel;
 import com.fabric.apps.mobile.model.daftarModel.ResponseDaftarModel;
 import com.fabric.apps.mobile.model.kotaModel.ResponseKotaModel;
@@ -58,7 +59,7 @@ public interface ApiInterface {
      */
     @FormUrlEncoded
     @POST("cek-ongkir")
-    Call<ResponseKurirModel> getKurir(
+    Call<CostsItemKurirModel> getKurir(
             @Field("CustomerId") int idcustomer,
             @Field("courier") String kurir);
 
