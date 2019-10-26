@@ -13,15 +13,18 @@ import androidx.annotation.Nullable;
 import com.fabric.apps.mobile.R;
 import com.fabric.apps.mobile.model.cekkurirModel.CostItemKurirModel;
 import com.fabric.apps.mobile.model.cekkurirModel.CostsItemKurirModel;
+import com.fabric.apps.mobile.model.cekkurirModel.ResponseKurirModel;
 import com.fabric.apps.mobile.model.kotaModel.ResultsItemKotaModel;
 
+import java.util.Currency;
 import java.util.List;
 
 import static com.fabric.apps.mobile.R.layout.item_kurir;
+import static com.fabric.apps.mobile.R.layout.checkout_detail;
 
-public class KurirListAdapter extends ArrayAdapter<CostItemKurirModel>{
+public class KurirListAdapter extends ArrayAdapter<CostsItemKurirModel>{
 
-  public KurirListAdapter(Context context, List<CostItemKurirModel> itemKurirModels){
+  public KurirListAdapter(Context context, List<CostsItemKurirModel> itemKurirModels){
       super(context,0,itemKurirModels);
   }
 
@@ -29,8 +32,6 @@ public class KurirListAdapter extends ArrayAdapter<CostItemKurirModel>{
     public View getView(int position, View convertView, ViewGroup parent) {
         return initView(position, convertView, parent);
     }
-
-
 
 
     @Override
@@ -41,17 +42,19 @@ public class KurirListAdapter extends ArrayAdapter<CostItemKurirModel>{
     private View initView(int position, View convertView, ViewGroup parent) {
         //todo 21 biarkan merah
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(item_kurir, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(item_kurir, parent,false);
 
         }
         TextView kurir_tipe = convertView.findViewById(R.id.tv_kurir);
+//        TextView bayar = convertView.findViewById(R.id.tv_harga);
 
         //item sama dengan todo20
-        CostItemKurirModel current = getItem(position);
+        CostsItemKurirModel current = getItem(position);
+
 
 
         if (current != null) {
-            kurir_tipe.setText(current.getValue().toString());
+            kurir_tipe.setText(current.getService());
 
         }
 

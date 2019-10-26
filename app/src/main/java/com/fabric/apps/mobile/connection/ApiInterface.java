@@ -1,5 +1,6 @@
 package com.fabric.apps.mobile.connection;
 
+import com.fabric.apps.mobile.model.cekkurirModel.CostItemKurirModel;
 import com.fabric.apps.mobile.model.cekkurirModel.CostsItemKurirModel;
 import com.fabric.apps.mobile.model.cekkurirModel.ResponseKurirModel;
 import com.fabric.apps.mobile.model.daftarModel.ResponseDaftarModel;
@@ -11,6 +12,8 @@ import com.fabric.apps.mobile.model.cartModel.ResponseCart;
 import com.fabric.apps.mobile.model.productModel.ResponseProduc;
 import com.fabric.apps.mobile.model.siginModel.ResponseLogin;
 
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.DELETE;
@@ -57,9 +60,14 @@ public interface ApiInterface {
      *
      * Cek Ongkir dan kurir
      */
+//    @FormUrlEncoded
+//    @POST("cek-ongkir")
+//    Call<ResponseKurirModel> getKurir(
+//            @Field("CustomerId") int idcustomer,
+//            @Field("courier") String kurir);
     @FormUrlEncoded
     @POST("cek-ongkir")
-    Call<CostsItemKurirModel> getKurir(
+    Call<ResponseKurirModel> getKurir(
             @Field("CustomerId") int idcustomer,
             @Field("courier") String kurir);
 

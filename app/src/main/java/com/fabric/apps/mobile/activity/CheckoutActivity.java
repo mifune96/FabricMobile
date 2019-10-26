@@ -117,6 +117,7 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
     Spinner spkurir;
 
     private List<CostsItemKurirModel> costsItemKurirModels;
+    private List<ResponseKurirModel> responkurir;
     private List<CostItemKurirModel> kuriritem;
     private KurirListAdapter kurirListAdapter;
 
@@ -144,6 +145,22 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
         removeButton.setVisibility(View.GONE);
         increaseProduct.setVisibility(View.GONE);
         decreaseProduct.setVisibility(View.GONE);
+
+//        initradio();
+
+//        spkurir.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                String harga = parent.getItemAtPosition(position).toString();
+//                Toast.makeText(CheckoutActivity.this, "" + harga, Toast.LENGTH_SHORT).show();
+//
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
 
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(true);
@@ -191,35 +208,38 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
 
 
 
-
 private void initradio(){
     int id = preferences.getID();
-//    kurir = "jne";
-    ConfigRetrofit.provideApiService().getKurir(id,kurir).enqueue(new Callback<CostsItemKurirModel>() {
+
+    ConfigRetrofit.provideApiService().getKurir(id,kurir).enqueue(new Callback<ResponseKurirModel>() {
         @Override
-        public void onResponse(Call<CostsItemKurirModel> call, Response<CostsItemKurirModel> response) {
-            if (response.isSuccessful()){
-                kuriritem = response.body().getCost();
-                initDataSpinner();
-            }
+        public void onResponse(Call<ResponseKurirModel> call, Response<ResponseKurirModel> response) {
+            costsItemKurirModels = response.body().getCosts();
+
+//            ArrayAdapter<String> apterbgs = new ArrayAdapter<>()
+
+           initDataSpinner();
         }
 
         @Override
-        public void onFailure(Call<CostsItemKurirModel> call, Throwable t) {
+        public void onFailure(Call<ResponseKurirModel> call, Throwable t) {
 
         }
     });
 }
 
     private void initDataSpinner() {
-        kurirListAdapter = new KurirListAdapter(this,kuriritem);
+        kurirListAdapter = new KurirListAdapter(this,costsItemKurirModels);
+
         kurirListAdapter.notifyDataSetChanged();
         spkurir.setAdapter(kurirListAdapter);
 
         spkurir.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                CostItemKurirModel cur = (CostItemKurirModel) parent.getItemAtPosition(position);
+                CostsItemKurirModel cur = (CostsItemKurirModel) parent.getItemAtPosition(position);
+
+                servicePrice.setText(cur.getCost().get(position).getValue());
 
             }
 
