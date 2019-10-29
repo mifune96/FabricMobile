@@ -25,7 +25,7 @@
 
     <include
         android:id="@+id/cart_item"
-        layout="@layout/cart_list_item"
+        layout="@layout/checkout_list_item"
         android:visibility="gone"/>
 
     <View
@@ -54,8 +54,7 @@
         android:id="@+id/service_provider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginBottom="15dp">
+        android:orientation="vertical">
 
         <RadioGroup
             android:gravity="center"
@@ -97,8 +96,7 @@
         <Spinner
             android:id="@+id/sp_tipekurir"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="25dp"/>
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 

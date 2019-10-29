@@ -19,11 +19,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.fabric.apps.mobile.R;
 import com.fabric.apps.mobile.activity.EditProfileActivity;
+import com.fabric.apps.mobile.activity.Login_Signup_Activity;
 import com.fabric.apps.mobile.adapter.SettingListAdapter;
 import com.fabric.apps.mobile.connection.ConfigRetrofit;
 import com.fabric.apps.mobile.model.profileModel.ResponseProfilModel;
@@ -46,6 +48,9 @@ public class ProfileFragment extends Fragment {
     @BindView(R.id.profile_wrapper)
     RelativeLayout wrapper;
 
+    @BindView(R.id.button_logout)
+    Button btnLogout;
+
     SessionSharedPreferences sessionSharedPreferences;
 
 
@@ -61,11 +66,18 @@ public class ProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         ButterKnife.bind(this, view);
         sessionSharedPreferences = new SessionSharedPreferences(this.getActivity());
-        LoadProfil();
 
+        LoadProfil();
         initRecyclerView();
+
         wrapper.setOnClickListener(v -> {
             startActivity(new Intent(getContext(), EditProfileActivity.class));
+        });
+
+        btnLogout.setOnClickListener(v -> {
+            sessionSharedPreferences.logout();
+            startActivity(new Intent(getContext(), Login_Signup_Activity.class));
+            getActivity().finish();
         });
 
         return view;

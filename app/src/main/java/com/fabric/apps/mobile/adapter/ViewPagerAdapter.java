@@ -1,5 +1,4 @@
 package com.fabric.apps.mobile.adapter;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,8 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-public class ViewPagerAdapter extends FragmentPagerAdapter {
-
+public class ViewPagerAdapter  extends FragmentPagerAdapter {
     private final List<Fragment> fragmentList = new ArrayList<>();
     private final List<String> titleList = new ArrayList<>();
 

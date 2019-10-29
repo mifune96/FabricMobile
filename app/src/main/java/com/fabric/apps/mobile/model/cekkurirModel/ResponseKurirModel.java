@@ -1,5 +1,6 @@
 package com.fabric.apps.mobile.model.cekkurirModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.annotations.Expose;
@@ -15,7 +16,7 @@ public class ResponseKurirModel {
 	private String name;
 	@SerializedName("costs")
 	@Expose
-	private List<CostsItemKurirModel> costs = null;
+	private List<CostsItemKurirModel> costs;
 
 	public String getCode() {
 		return code;

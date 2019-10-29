@@ -95,7 +95,7 @@ public class CartFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.proceed_to_checkout:
+            case R.id.checkout:
                 startActivity(new Intent(getContext(), CheckoutActivity.class));
                 break;
             case R.id.reload:

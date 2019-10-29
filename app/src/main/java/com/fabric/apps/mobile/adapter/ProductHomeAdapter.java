@@ -56,6 +56,9 @@ public class ProductHomeAdapter extends RecyclerView.Adapter<ProductHomeAdapter.
             intent.putExtra("product_price", productList.get(position).getHarga());
             intent.putExtra("product_image", productList.get(position).getImage());
             intent.putExtra("product_stok",productList.get(position).getStok());
+            intent.putExtra("product_color",productList.get(position).getWarna());
+            intent.putExtra("product_material",productList.get(position).getMaterial());
+            intent.putExtra("product_code",productList.get(position).getCode());
             intent.putExtra("product_description", productList.get(position).getDeskripsi());
             context.startActivity(intent);
         });

@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -27,14 +28,18 @@ import android.widget.Toast;
 
 import com.fabric.apps.mobile.R;
 import com.fabric.apps.mobile.adapter.CartListAdapter;
+import com.fabric.apps.mobile.adapter.CheckoutListAdapter;
 import com.fabric.apps.mobile.adapter.KurirListAdapter;
 import com.fabric.apps.mobile.connection.ConfigRetrofit;
+import com.fabric.apps.mobile.contoller.AddressController;
 import com.fabric.apps.mobile.contoller.CartController;
 import com.fabric.apps.mobile.model.cartModel.CartItem;
 import com.fabric.apps.mobile.model.cartModel.ResponseCart;
 import com.fabric.apps.mobile.model.cekkurirModel.CostItemKurirModel;
 import com.fabric.apps.mobile.model.cekkurirModel.CostsItemKurirModel;
 import com.fabric.apps.mobile.model.cekkurirModel.ResponseKurirModel;
+import com.fabric.apps.mobile.model.profileModel.CustomerProfilModel;
+import com.fabric.apps.mobile.model.transaksiPostModel.ResponseTransaksiPostModel;
 import com.fabric.apps.mobile.utils.SessionSharedPreferences;
 import com.github.ybq.android.spinkit.SpinKitView;
 
@@ -46,21 +51,6 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-//
-//    @BindView(R.id.user_name)
-//    TextView userName;
-
-//    @BindView(R.id.user_address)
-//    TextView userAddress;
-//
-//    @BindView(R.id.user_phone_number)
-//    TextView userPhoneNumber;
-//
-//    @BindView(R.id.change_shipping_adress)
-//    TextView changeAddress;
-//
-//    @BindView(R.id.payment_method_info)
-//    TextView paymentInfo;
 
     @BindView(R.id.service_provider)
     LinearLayout serviceWrapper;
@@ -89,26 +79,17 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
     @BindView(R.id.place_order)
     Button placeOrder;
 
-    @BindView(R.id.product_image)
+    @BindView(R.id.iv_produk)
     ImageView productImage;
 
-    @BindView(R.id.product_name)
+    @BindView(R.id.tv_namaproduk)
     TextView productName;
 
-    @BindView(R.id.product_price)
+    @BindView(R.id.tv_hargaproduk)
     TextView productPrice;
 
-    @BindView(R.id.product_quantity)
+    @BindView(R.id.tv_qty)
     TextView productQuantity;
-
-    @BindView(R.id.increase_product)
-    ImageButton increaseProduct;
-
-    @BindView(R.id.decrease_product)
-    ImageButton decreaseProduct;
-
-    @BindView(R.id.button_remove)
-    ImageView removeButton;
 
     @BindView(R.id.progress_bar)
     SpinKitView progressBar;
@@ -116,20 +97,20 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
     @BindView(R.id.sp_tipekurir)
     Spinner spkurir;
 
+    @BindView(R.id.et_note)
+    EditText note;
+
     private List<CostsItemKurirModel> costsItemKurirModels;
-    private List<ResponseKurirModel> responkurir;
-    private List<CostItemKurirModel> kuriritem;
     private KurirListAdapter kurirListAdapter;
 
 
-    private CartController cartController = new CartController();
-    private Intent intent;
-    private CartListAdapter cartListAdapter;
+    private CheckoutListAdapter checkoutListAdapter;
     SessionSharedPreferences preferences;
     private List<CartItem> cartItems;
-    private final int REQUEST_ADDRESS_CODE = 100;
     public static String kurir;
-    public static int harga;
+    public static int total_ongkir;
+    public static int totalbelanja;
+    public static int HargaAkhir;
 
 
     @Override
@@ -138,29 +119,7 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_checkout);
         ButterKnife.bind(this);
 
-        intent = getIntent();
-        String TAG = intent.getStringExtra("TAG");
         preferences = new SessionSharedPreferences(this);
-
-        removeButton.setVisibility(View.GONE);
-        increaseProduct.setVisibility(View.GONE);
-        decreaseProduct.setVisibility(View.GONE);
-
-//        initradio();
-
-//        spkurir.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                String harga = parent.getItemAtPosition(position).toString();
-//                Toast.makeText(CheckoutActivity.this, "" + harga, Toast.LENGTH_SHORT).show();
-//
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//
-//            }
-//        });
 
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(true);
@@ -168,13 +127,15 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
         toolbar.setNavigationIcon(R.drawable.ic_back);
         toolbar.setNavigationOnClickListener(v -> finish());
 
-//        servicePrice.setText("Rp. "+harga);
-
-
         productList.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
+
+        placeOrder.setOnClickListener(this);
+
+        initradio();
 
 
         initCheckoutFromProduct();
+        Log.d("TAG", "dari controller "+AddressController.addressid);
 
     }
 
@@ -186,47 +147,45 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
                 if (cekradio) {
                    kurir = "jne";
                    initradio();
-//                   servicePrice.setText("Rp. "+harga);
                 }
                     break;
 
             case R.id.rb_pos:
-                if (cekradio)
+                if (cekradio) {
                     kurir = "pos";
                     initradio();
-//                    servicePrice.setText("Rp. "+harga);
+                }
                     break;
 
             case R.id.rb_tiki:
-                if (cekradio)
+                if (cekradio) {
                     kurir = "tiki";
                     initradio();
-//                    servicePrice.setText("Rp. "+harga);
+                }
                     break;
         }
     }
 
-
-
-private void initradio(){
+    private void initradio(){
     int id = preferences.getID();
-
-    ConfigRetrofit.provideApiService().getKurir(id,kurir).enqueue(new Callback<ResponseKurirModel>() {
+    ConfigRetrofit.provideApiService().getKurir(id, kurir).enqueue(new Callback<ResponseKurirModel>() {
         @Override
         public void onResponse(Call<ResponseKurirModel> call, Response<ResponseKurirModel> response) {
-            costsItemKurirModels = response.body().getCosts();
+            if (response.isSuccessful()) {
+                costsItemKurirModels = response.body().getCosts();
+                initDataSpinner();
 
-//            ArrayAdapter<String> apterbgs = new ArrayAdapter<>()
-
-           initDataSpinner();
-        }
+                } else {
+                Toast.makeText(CheckoutActivity.this, "Gagal Post Kurir", Toast.LENGTH_LONG).show();
+              }
+            }
 
         @Override
         public void onFailure(Call<ResponseKurirModel> call, Throwable t) {
-
+            Log.d("TAG", "onFailure: " +t.toString());
         }
     });
-}
+    }
 
     private void initDataSpinner() {
         kurirListAdapter = new KurirListAdapter(this,costsItemKurirModels);
@@ -238,8 +197,17 @@ private void initradio(){
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 CostsItemKurirModel cur = (CostsItemKurirModel) parent.getItemAtPosition(position);
+                List<CostItemKurirModel> mom = cur.getCost();
+                for (int i = 0; i<mom.size();i++){
+                    total_ongkir = mom.get(i).getValue();
+                   servicePrice.setText("Rp. "+total_ongkir);
 
-                servicePrice.setText(cur.getCost().get(position).getValue());
+                    HargaAkhir = totalbelanja+total_ongkir;
+
+                   totalPayment.setText("Rp. "+ HargaAkhir);
+
+                }
+
 
             }
 
@@ -248,30 +216,6 @@ private void initradio(){
 
             }
         });
-//        spkurir.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                try {
-//                    CostsItemKurirModel cost = (CostsItemKurirModel) parent.getItemAtPosition(position);
-//                    //servicePrice.setText("Rp. " + cost.getCost().get(position));
-//                    Toast.makeText(CheckoutActivity.this, "" + cost.getCost().get(position).getValue(), Toast.LENGTH_SHORT).show();
-//                } catch (IndexOutOfBoundsException e) {
-//                    Toast.makeText(CheckoutActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-//                }
-//
-////                String price;
-////                switch (position) {
-////                    case 0:
-////                        price = costsItemKurirModels.get(0).getCost().get(position).getValue().toString();
-////                }
-//
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//
-//            }
-//        });
     }
 
     private void initCheckoutFromProduct() {
@@ -283,12 +227,15 @@ private void initradio(){
             public void onResponse(Call<ResponseCart> call, Response<ResponseCart> response) {
                 if (response.isSuccessful()) {
                     cartItems = response.body().getCart();
-                    cartListAdapter = new CartListAdapter(CheckoutActivity.this, cartItems, totalPrice);
-                    productList.setAdapter(cartListAdapter);
-                    cartListAdapter.notifyDataSetChanged();
-                    removeButton.setVisibility(View.GONE);
-                    increaseProduct.setVisibility(View.GONE);
-                    decreaseProduct.setVisibility(View.GONE);
+                    checkoutListAdapter = new CheckoutListAdapter(CheckoutActivity.this, cartItems);
+                    totalPrice.setText("Rp."+checkoutListAdapter.setTotalBayar());
+                    totalbelanja = (int) checkoutListAdapter.setTotalBayar();
+                    Log.d("TAG", "totalharganya " +totalbelanja);
+
+                    productList.setAdapter(checkoutListAdapter);
+                    checkoutListAdapter.notifyDataSetChanged();
+
+
                 } else {
                     Toast.makeText(CheckoutActivity.this, "Gak Ada Hasil Bro", Toast.LENGTH_LONG).show();
                 }
@@ -296,7 +243,41 @@ private void initradio(){
 
             @Override
             public void onFailure(Call<ResponseCart> call, Throwable t) {
-                Toast.makeText(CheckoutActivity.this, "Gagal bro", Toast.LENGTH_LONG).show();
+                Log.d("TAG", "onFailure: " +t.toString());
+            }
+        });
+
+    }
+
+    private void initDatatransaksi(){
+        int id = preferences.getID();
+        int idaddress = AddressController.addressid;
+        String token = preferences.getAccessToken();
+        String key = "oa00000000app";
+
+
+        String edNote = note.getText().toString();
+
+        if (edNote.isEmpty()) {
+            note.setError("Catatan Untuk penjual tdk Boleh Kosong");
+            note.requestFocus();
+            return;
+        }
+
+        ConfigRetrofit.provideApiService().postTransaksi(key,token,id,idaddress,HargaAkhir,kurir,edNote,total_ongkir).enqueue(new Callback<ResponseTransaksiPostModel>() {
+            @Override
+            public void onResponse(Call<ResponseTransaksiPostModel> call, Response<ResponseTransaksiPostModel> response) {
+                if (response.isSuccessful()){
+                    Toast.makeText(CheckoutActivity.this, "Transaksi Berhasil", Toast.LENGTH_LONG).show();
+
+                } else {
+                    Toast.makeText(CheckoutActivity.this, "Transaksi Gagal", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseTransaksiPostModel> call, Throwable t) {
+                Log.d("TAG", "onFailureTransaksi: " +t.toString());
             }
         });
 
@@ -306,20 +287,10 @@ private void initradio(){
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.service_provider:
-                break;
-            default:
+            case R.id.place_order:
+                initDatatransaksi();
                 break;
         }
     }
 
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == REQUEST_ADDRESS_CODE || resultCode == RESULT_OK && data != null){
-////            userName.setText(data.getStringExtra("Name"));
-////            userAddress.setText(data.getStringExtra("Description"));
-////            userPhoneNumber.setText(data.getStringExtra("PhoneNumber"));
-//        }
-//    }
 }

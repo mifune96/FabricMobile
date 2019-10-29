@@ -30,63 +30,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="170dp">
 
-                <androidx.viewpager.widget.ViewPager
-                    android:id="@+id/banner_view_pager"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
-
-                <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
-                    android:id="@+id/view_pager_indicator"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="5dp"
-                    app:dotsSize="10dp"
-                    app:selectedDotColor="@color/colorPrimary"
-                    app:dotsColor="@android:color/white"/>
+            <include layout="@layout/content_main"/>
 
             </RelativeLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="10dp"
-                android:layout_marginTop="10dp"
-                android:paddingEnd="0dp"
-                android:background="@android:color/white"
-                android:paddingBottom="10dp">
-
-                <TextView
-                    android:id="@+id/for_you"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:text="@string/just_for_you"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/view_for_you"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="10dp"
-                    android:text="@string/view_all"
-                    android:layout_alignBottom="@id/for_you"
-                    android:textSize="12sp"
-                    tools:ignore="RelativeOverlap" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:padding="3dp"
-                    android:id="@+id/for_you_list"
-                    android:layout_below="@id/for_you"
-                    android:layout_marginTop="5dp"
-                    android:layout_width="match_parent"
-                    android:nestedScrollingEnabled="true"
-                    android:layout_height="wrap_content"/>
-
-            </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"

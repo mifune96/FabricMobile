@@ -1,6 +1,7 @@
 package com.fabric.apps.mobile.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.fabric.apps.mobile.R;
+import com.fabric.apps.mobile.activity.CheckoutActivity;
 import com.fabric.apps.mobile.contoller.CartController;
 import com.fabric.apps.mobile.model.cartModel.CartItem;
 import com.fabric.apps.mobile.utils.SessionSharedPreferences;
@@ -28,8 +30,7 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
     private Context context;
     private List<CartItem> cartItems;
     private TextView total;
-    private Double qty;
-    public static Double totalPayment;
+    public static int totalbayarnya;
     private CartController cartController = new CartController();
     SessionSharedPreferences sessionSharedPreferences;
 
@@ -57,6 +58,7 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
         holder.productPrice.setText("Rp. "+cartItems.get(position).getProductCart().getHarga());
 //        totalPayment = setTotalBayar();
         holder.quantity.setText(Double.toString(cartItems.get(position).getPermeter()));
+        holder.warna.setText(cartItems.get(position).getProductCart().getWarna());
 
 
         Log.d("TAG", "heheheh: " +total);
@@ -73,6 +75,8 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
             cartItems.remove(position);
             notifyDataSetChanged();
         });
+
+
         /*
         menekan button +
          */
@@ -110,10 +114,8 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
         for (CartItem c : cartItems){
                price += (c.getPermeter() * c.getProductCart().getHarga());
         }
-        Log.d("TAG", "setTotalBayar: " +price);
-//        totalPayment = price;
         total.setText("Rp. " +price.intValue());
-
+        totalbayarnya = +price.intValue();
     }
 
     @Override
@@ -126,11 +128,14 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
         @BindView(R.id.product_image)
         ImageView productImage;
 
-        @BindView(R.id.product_name)
+        @BindView(R.id.tv_namaproduk_dialog)
         TextView productName;
 
-        @BindView(R.id.product_price)
+        @BindView(R.id.tv_hargaproduk_dialog)
         TextView productPrice;
+
+        @BindView(R.id.tv_warna_dialog)
+        TextView warna;
 
         @BindView(R.id.button_remove)
         ImageView remove;

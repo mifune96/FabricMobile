@@ -24,17 +24,17 @@ public class AccountSettingActivity extends AppCompatActivity {
 
     @BindView(R.id.account_setting_list)
     RecyclerView settingList;
-
-    @BindView(R.id.button_logout)
-    Button btLogout;
-    SessionSharedPreferences sessionSharedPreferences;
+//
+//    @BindView(R.id.button_logout)
+//    Button btLogout;
+//    SessionSharedPreferences sessionSharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_setting);
         ButterKnife.bind(this);
-        sessionSharedPreferences = new SessionSharedPreferences(this);
+//        sessionSharedPreferences = new SessionSharedPreferences(this);
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setTitle("Pengaturan Akun");
         getSupportActionBar().setDisplayShowTitleEnabled(true);
@@ -44,10 +44,10 @@ public class AccountSettingActivity extends AppCompatActivity {
         settingList.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         settingList.setAdapter(new AccountSettingListAdapter(this));
 
-        btLogout.setOnClickListener(v -> {
-            sessionSharedPreferences.logout();
-            startActivity(new Intent(this, Login_Signup_Activity.class));
-            finish();
-        });
+//        btLogout.setOnClickListener(v -> {
+//            sessionSharedPreferences.logout();
+//            startActivity(new Intent(this, Login_Signup_Activity.class));
+//            finish();
+//        });
     }
 }

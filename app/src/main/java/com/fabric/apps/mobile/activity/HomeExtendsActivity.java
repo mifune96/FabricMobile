@@ -51,37 +51,8 @@ public class HomeExtendsActivity extends AppCompatActivity implements View.OnCli
 
         title.setText(intent.getStringExtra("Title"));
 
-//        LoadJson();
     }
 
-//    private void LoadJson() {
-//        ApiInterface apiInterface = ConfigRetrofit.getClient().create(ApiInterface.class);
-//
-//        Call<Product_catalog_parent> call;
-//        call = apiInterface.getProductparent();
-//        call.enqueue(new Callback<Product_catalog_parent>() {
-//            @Override
-//            public void onResponse(Call<Product_catalog_parent> call, ResponseSignup<Product_catalog_parent> response) {
-//                if (response.isSuccessful() && response.body().getProduct_catalog() != null){
-//                    if (!productList.isEmpty()){
-//                        productList.clear();
-//                    }
-//
-//                    productList = response.body().getProduct_catalog();
-//                    extendListAdapter = new ExtendListAdapter(HomeExtendsActivity.this,productList);
-//                    rvextendList.setAdapter(extendListAdapter);
-//                    extendListAdapter.notifyDataSetChanged();
-//                } else {
-//                    Toast.makeText(HomeExtendsActivity.this, "Gak Ada Hasil Bro", Toast.LENGTH_LONG).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Product_catalog_parent> call, Throwable t) {
-//
-//            }
-//        });
-//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

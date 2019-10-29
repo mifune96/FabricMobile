@@ -29,7 +29,7 @@ public class ProductController {
     private List<ProductsItem> productsItems = new ArrayList<>();
 
     //mengambil data produk di json
-    public void ambilProduk(RecyclerView recyclerView,RecyclerView recyclerView1,RecyclerView recyclerView2, Context context, ViewGroup onNoData, ViewGroup onSuccess, ViewGroup onError, SwipeRefreshLayout refreshLayout){
+    public void ambilProduk(RecyclerView recyclerView1,RecyclerView recyclerView2, Context context, ViewGroup onNoData, ViewGroup onSuccess, ViewGroup onError, SwipeRefreshLayout refreshLayout){
         sessionSharedPreferences = new SessionSharedPreferences(context);
         int id = sessionSharedPreferences.getID();
         Log.d("TAG", "isi idnya bro: " +id);
@@ -45,7 +45,7 @@ public class ProductController {
                     }
                     productsItems = response.body().getProducts();
                     ProductHomeAdapter adapter = new ProductHomeAdapter(context,productsItems);
-                    recyclerView.setAdapter(adapter);
+//                    recyclerView.setAdapter(adapter);
                     recyclerView1.setAdapter(adapter);
                     recyclerView2.setAdapter(adapter);
                     onSuccess.setVisibility(View.VISIBLE);

@@ -17,9 +17,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.fabric.apps.mobile.R;
+import com.fabric.apps.mobile.contoller.AddressController;
 import com.fabric.apps.mobile.fragment.CartFragment;
 import com.fabric.apps.mobile.fragment.CatalogueFragment;
 import com.fabric.apps.mobile.fragment.FavoriteFragment;
@@ -27,12 +29,15 @@ import com.fabric.apps.mobile.fragment.HomeFragment;
 import com.fabric.apps.mobile.fragment.ProfileFragment;
 import com.fabric.apps.mobile.utils.SessionSharedPreferences;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.synnapps.carouselview.CarouselView;
+import com.synnapps.carouselview.ImageListener;
 
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     SessionSharedPreferences sm;
+
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
@@ -48,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Fragment cartFragment = new CartFragment();
     private Fragment profileFragment = new ProfileFragment();
     private Fragment activeFragment = homeFragment;
+    private AddressController addressController = new AddressController();
 
     private FragmentManager fragmentManager = getSupportFragmentManager();
 
@@ -63,7 +69,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ButterKnife.bind(this);
         sm = new SessionSharedPreferences(this);
 
+        addressController.getAddress(this);
+
         TAG = "Home";
+
 
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(true);
@@ -78,6 +87,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBotNavBar.setOnNavigationItemSelectedListener(itemSelectedListener);
         searchButton.setOnClickListener(this);
     }
+
+
 
     private void initFragment(){
         fragmentManager.beginTransaction().add(R.id.main_container, homeFragment, "Home").commit();
@@ -170,6 +181,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
+        //noinspection SimplifiableIfStatement
+
         switch (item.getItemId()){
 //            case R.id.menu_notif:
 //                startActivity(new Intent(this, NotificationActivity.class));

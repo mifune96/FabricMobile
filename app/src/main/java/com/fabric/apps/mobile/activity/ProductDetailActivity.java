@@ -53,17 +53,29 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
-    @BindView(R.id.product_image)
+    @BindView(R.id.iv_produk_gambar)
     ImageView productImage;
 
-    @BindView(R.id.product_name)
+    @BindView(R.id.tv_produk_nama)
     TextView productName;
 
-    @BindView(R.id.product_price)
+    @BindView(R.id.tv_produk_harga)
     TextView productPrice;
 
-    @BindView(R.id.product_description)
+    @BindView(R.id.tv_produk_deskripsi)
     TextView productDescription;
+
+    @BindView(R.id.tv_produk_warna)
+    TextView productColor;
+
+    @BindView(R.id.tv_produk_bahan)
+    TextView productMaterial;
+
+    @BindView(R.id.tv_produk_stok)
+    TextView productStock;
+
+    @BindView(R.id.tv_produk_code)
+    TextView productCode;
 
     @BindView(R.id.product_review)
     RecyclerView reviewList;
@@ -71,16 +83,13 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
     @BindView(R.id.button_chat)
     ImageButton buttonChat;
 
-    @BindView(R.id.button_add_to_cart)
-    ImageButton buttonAddToCart;
-
     @BindView(R.id.button_buy_now)
     Button buttonBuyNow;
 
     @BindView(R.id.progress_bar)
     SpinKitView progressBar;
 
-    private String mImg,mProductname,mDescription;
+    private String mImg,mProductname,mDescription,mProductcode,mProductmaterial,mProductcolor;
     private int mProductprice,mProductstock;
     private int mProductid;
     SessionSharedPreferences preferences;
@@ -110,6 +119,9 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
         mProductid = getIntent().getIntExtra("id",0); // kalo int pake defaultValue
         mProductprice = getIntent().getIntExtra("product_price",0);
         mProductstock = getIntent().getIntExtra("product_stok",0);
+        mProductcode = getIntent().getStringExtra("product_code");
+        mProductmaterial = getIntent().getStringExtra("product_material");
+        mProductcolor = getIntent().getStringExtra("product_color");
         mDescription = getIntent().getStringExtra("product_description");
         mImg = getIntent().getStringExtra("product_image");
         //progressBar.animate();
@@ -124,9 +136,12 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
         productName.setText(mProductname);
         productPrice.setText("Rp. "+mProductprice);
         productDescription.setText(mDescription);
+        productCode.setText(mProductcode);
+        productColor.setText(mProductcolor);
+        productStock.setText(mProductstock+ " Meter");
+        productMaterial.setText(mProductmaterial);
         ID = mProductid;
 
-        buttonAddToCart.setOnClickListener(this);
         buttonBuyNow.setOnClickListener(this);
         buttonChat.setOnClickListener(this);
     }
@@ -174,26 +189,17 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
                 Intent openWA = new Intent(Intent.ACTION_VIEW, Uri.parse("https://api.whatsapp.com/send?phone=6281368009882&text=Hi%20there,%20i%20love%20your%20product.%20Contact%20Me."));
                 startActivity(openWA);
                 break;
-            case R.id.button_add_to_cart:
+            case R.id.button_buy_now:
                 Bundle bundle = new Bundle();
                 bundle.putInt("product_id", mProductid);
                 bundle.putString("product_name", productName.getText().toString());
                 bundle.putInt("product_price", mProductprice);
                 bundle.putString("product_image", mImg);
+                bundle.putString("product_color", mProductcolor);
 
                 DialogFragment dialogFragment = new DialogCartFragment();
                 dialogFragment.setArguments(bundle);// setbundelnya
                 dialogFragment.show(getSupportFragmentManager(),"Cart Dialog");
-//                addCart();
-                break;
-            case R.id.button_buy_now:
-                Intent intent = new Intent(this, CheckoutActivity.class);
-                intent.putExtra("TAG", "Product");
-                intent.putExtra("product_id", mProductid);
-                intent.putExtra("product_name", productName.getText().toString());
-                intent.putExtra("product_price", productPrice.getText());
-                intent.putExtra("product_image", mImg);
-                startActivity(intent);
                 break;
             default:
                 break;

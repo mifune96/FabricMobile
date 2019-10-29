@@ -1,5 +1,6 @@
 package com.fabric.apps.mobile.connection;
 
+import com.fabric.apps.mobile.model.addressModel.ResponseAddressModel;
 import com.fabric.apps.mobile.model.cekkurirModel.CostItemKurirModel;
 import com.fabric.apps.mobile.model.cekkurirModel.CostsItemKurirModel;
 import com.fabric.apps.mobile.model.cekkurirModel.ResponseKurirModel;
@@ -11,6 +12,7 @@ import com.fabric.apps.mobile.model.cartModel.CartItem;
 import com.fabric.apps.mobile.model.cartModel.ResponseCart;
 import com.fabric.apps.mobile.model.productModel.ResponseProduc;
 import com.fabric.apps.mobile.model.siginModel.ResponseLogin;
+import com.fabric.apps.mobile.model.transaksiPostModel.ResponseTransaksiPostModel;
 
 
 import java.util.List;
@@ -43,6 +45,14 @@ public interface ApiInterface {
      * ===========================================================================
      /*
 
+     /*
+     get data adrress
+     */
+    @GET("address/{id}")
+    Call<ResponseAddressModel> getAddress(@Path("id")int id,
+                                          @Query("apiKey") String apiKey,
+                                          @Query("accessToken") String accessToken);
+
     /*
     cek provinsi from raja ongkir
      */
@@ -60,11 +70,6 @@ public interface ApiInterface {
      *
      * Cek Ongkir dan kurir
      */
-//    @FormUrlEncoded
-//    @POST("cek-ongkir")
-//    Call<ResponseKurirModel> getKurir(
-//            @Field("CustomerId") int idcustomer,
-//            @Field("courier") String kurir);
     @FormUrlEncoded
     @POST("cek-ongkir")
     Call<ResponseKurirModel> getKurir(
@@ -152,4 +157,26 @@ public interface ApiInterface {
     Call<ResponseCart> deletCart  (@Path("id") int id,
                                    @Query("apiKey") String apiKey,
                                    @Query("accessToken") String accessToken);
+
+/**
+ *
+ *============================================================================
+ * ============= Fungsi untuk transaksi Get/update/delet===========================
+ * ===========================================================================
+ /*
+
+ /**
+ * Post Transaksi
+ */
+
+@FormUrlEncoded
+@POST("transaction")
+Call<ResponseTransaksiPostModel> postTransaksi(@Query("apiKey") String apiKey,
+                                               @Query("accessToken") String accessToken,
+                                               @Field("CustomerId") int costumerid,
+                                               @Field("AddressId") int addressid,
+                                               @Field("totalHarga") int totalHarga,
+                                               @Field("typeOfOngkir") String kurir,
+                                               @Field("note") String note,
+                                               @Field("shippingCosts") int ongkir);
 }

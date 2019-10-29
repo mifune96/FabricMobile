@@ -67,11 +67,14 @@ public class DialogCartFragment extends DialogFragment implements View.OnClickLi
     @BindView(R.id.product_image)
     ImageView productImage;
 
-    @BindView(R.id.product_name)
+    @BindView(R.id.tv_namaproduk_dialog)
     TextView productName;
 
-    @BindView(R.id.product_price)
+    @BindView(R.id.tv_hargaproduk_dialog)
     TextView productPrice;
+
+    @BindView(R.id.tv_warna_dialog)
+    TextView warna;
 
     @BindView(R.id.button_remove)
     ImageView buttonRemove;
@@ -122,6 +125,7 @@ public class DialogCartFragment extends DialogFragment implements View.OnClickLi
                 productImage.setImageResource(R.drawable.default_image_placeholder);
             }
 
+            warna.setText(bundle.getString("product_color"));
             productName.setText(bundle.getString("product_name"));
             productPrice.setText("Rp" +bundle.getInt("product_price"));
             subTotal.setText("Rp. "+bundle.getInt("product_price"));
@@ -143,20 +147,22 @@ public class DialogCartFragment extends DialogFragment implements View.OnClickLi
         int idcostumer = sessionSharedPreferences.getID();
         String token = sessionSharedPreferences.getAccessToken();
         String key = "oa00000000app";
-        Log.d("TAG", "qtynya : " +permeter);
+        Log.d("TAG", "qtynya : " +token +id);
 
         ConfigRetrofit.provideApiService().postCart(key,token,idcostumer,id,permeter).enqueue(new Callback<CartItem>() {
             @Override
             public void onResponse(Call<CartItem> call, Response<CartItem> response) {
                 if (response.isSuccessful()){
+                    Toast.makeText(getActivity(), "Berhasil Menambahkan Barang", Toast.LENGTH_SHORT).show();
                     Log.d("TAG", "Berhasil memasukkan cardialog");
                 } else {
+                    Toast.makeText(getActivity(), "Gagal Menambahkan Barang", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<CartItem> call, Throwable t) {
-//                Toast.makeText(getActivity(), "Oops, something went wrong.", Toast.LENGTH_SHORT).show();
+                Log.d("TAG", "errormemasukkan barang : " +t.toString());
             }
         });
     }
@@ -168,13 +174,16 @@ public class DialogCartFragment extends DialogFragment implements View.OnClickLi
             case R.id.button_close:
                 refresh();
                 break;
+
             case R.id.add_more:
                 Adddialogcart();
                 refresh();
                 break;
+
             case R.id.proceed_to_checkout:
                 startActivity(new Intent(getContext(), CheckoutActivity.class));
                 break;
+
             case R.id.increase_product:
                 Bundle bundle = this.getArguments();
                 int harga = 0;

@@ -27,7 +27,7 @@
     <string name="total">Total</string>
     <string name="total_payment">Total Payment</string>
     <string name="checkout">Bayar</string>
-    <string name="_1">1</string>
+    <string name="_1">1.0</string>
     <string name="user_name">Nama Pengguna</string>
     <string name="nama">Nama Lengkap</string>
     <string name="edit_profile">Ubah profile</string>
@@ -158,4 +158,16 @@
     <string name="note">Catatan</string>
     <string name="note_for_seller">Catatan untuk penjual</string>
     <string name="price_format">Rp.%1$d</string>
+    <string name="rincian_produk">Rincian Produk</string>
+    <string name="putih">Putih</string>
+    <string name="keteranga_warna">Keteranga Warna</string>
+    <string name="brukat">Brukat</string>
+    <string name="stok_kain">Stok Kain</string>
+    <string name="_20_meter">20 Meter</string>
+    <string name="deskripsi_produk">Deskripsi Produk</string>
+    <string name="deskripi_detail_produk">Motif mewah dan elegan .\n
+        Bahan halus, ringan dan berkualitas.\n
+        *1 kg = 5 meter kain.</string>
+    <string name="code">C-002</string>
+    <string name="kurang">-</string>
 </resources>

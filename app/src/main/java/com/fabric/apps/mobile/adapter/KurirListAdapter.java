@@ -46,7 +46,7 @@ public class KurirListAdapter extends ArrayAdapter<CostsItemKurirModel>{
 
         }
         TextView kurir_tipe = convertView.findViewById(R.id.tv_kurir);
-//        TextView bayar = convertView.findViewById(R.id.tv_harga);
+        TextView estimasi = convertView.findViewById(R.id.tv_estimasis);
 
         //item sama dengan todo20
         CostsItemKurirModel current = getItem(position);
@@ -55,6 +55,13 @@ public class KurirListAdapter extends ArrayAdapter<CostsItemKurirModel>{
 
         if (current != null) {
             kurir_tipe.setText(current.getService());
+//            bayar.setText("Rp."+ current.getCost().get(position).getValue());
+//
+            List<CostItemKurirModel> mom = current.getCost();
+            for (int i = 0; i<mom.size();i++){
+                estimasi.setText(current.getCost().get(i).getEtd()+" Hari");
+            }
+
 
         }
 
