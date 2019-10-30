@@ -18,7 +18,9 @@ import com.fabric.apps.mobile.contoller.CartController;
 import com.fabric.apps.mobile.model.cartModel.CartItem;
 import com.fabric.apps.mobile.utils.SessionSharedPreferences;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -49,10 +51,14 @@ public class CheckoutListAdapter extends RecyclerView.Adapter<CheckoutListAdapte
     @Override
     public void onBindViewHolder(@NonNull CheckoutListAdapter.ViewHolder holder, int position) {
 
+        Locale locale = new Locale("in", "ID");
+
+        NumberFormat format = NumberFormat.getCurrencyInstance(locale);
+
         setTotalBayar();
         holder.productName.setText(cartItems.get(position).getProductCart().getName());
         holder.color.setText(cartItems.get(position).getProductCart().getWarna());
-        holder.productPrice.setText("Rp. "+cartItems.get(position).getProductCart().getHarga());
+        holder.productPrice.setText(format.format(cartItems.get(position).getProductCart().getHarga()));
         holder.quantity.setText(Double.toString(cartItems.get(position).getPermeter()));
 
         if (!cartItems.get(position).getProductCart().getImage().isEmpty()){

@@ -12,6 +12,7 @@ import com.fabric.apps.mobile.model.cartModel.CartItem;
 import com.fabric.apps.mobile.model.cartModel.ResponseCart;
 import com.fabric.apps.mobile.model.productModel.ResponseProduc;
 import com.fabric.apps.mobile.model.siginModel.ResponseLogin;
+import com.fabric.apps.mobile.model.transaksiGetModel.ResponseGetModel;
 import com.fabric.apps.mobile.model.transaksiPostModel.ResponseTransaksiPostModel;
 
 
@@ -179,4 +180,13 @@ Call<ResponseTransaksiPostModel> postTransaksi(@Query("apiKey") String apiKey,
                                                @Field("typeOfOngkir") String kurir,
                                                @Field("note") String note,
                                                @Field("shippingCosts") int ongkir);
+
+/**
+ * Get Transaksi
+ */
+
+@GET("transaction/{id}")
+Call<ResponseGetModel> getTransaksi(@Path("id")int id,
+                                 @Query("apiKey") String apiKey,
+                                 @Query("accessToken") String accessToken);
 }

@@ -11,32 +11,32 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.fabric.apps.mobile.activity.ChangeAddressActivity"></activity>
-        <activity android:name="com.fabric.apps.mobile.activity.ShippingAddressDetailActivity" />
-        <activity android:name="com.fabric.apps.mobile.activity.Login_Signup_Activity">
-
+        <activity android:name=".activity.ActivityPembayaran">
         </activity>
-        <activity android:name="com.fabric.apps.mobile.activity.ProfileSettingDetailActivity" />
-        <activity android:name="com.fabric.apps.mobile.activity.EditProfileActivity" />
-        <activity android:name="com.fabric.apps.mobile.activity.TransactionActivity" />
-        <activity android:name="com.fabric.apps.mobile.activity.NotificationActivity" />
-        <activity android:name="com.fabric.apps.mobile.activity.SearchActivity" />
-        <activity android:name="com.fabric.apps.mobile.activity.AccountSettingActivity" />
-        <activity android:name="com.fabric.apps.mobile.activity.HelpActivity" />
-        <activity android:name="com.fabric.apps.mobile.activity.InformationActivity" />
-        <activity android:name="com.fabric.apps.mobile.activity.FavoritedActivity" />
-        <activity android:name="com.fabric.apps.mobile.activity.CheckoutActivity" />
-        <activity android:name="com.fabric.apps.mobile.activity.CartActivity" />
-        <activity android:name="com.fabric.apps.mobile.activity.ProductDetailActivity" />
-        <activity android:name="com.fabric.apps.mobile.activity.HomeExtendsActivity" />
-        <activity android:name="com.fabric.apps.mobile.SplashScreenActivity">
+        <activity android:name=".activity.ChangeAddressActivity" />
+        <activity android:name=".activity.ShippingAddressDetailActivity" />
+        <activity android:name=".activity.Login_Signup_Activity"></activity>
+        <activity android:name=".activity.ProfileSettingDetailActivity" />
+        <activity android:name=".activity.EditProfileActivity" />
+        <activity android:name=".activity.TransactionActivity" />
+        <activity android:name=".activity.NotificationActivity" />
+        <activity android:name=".activity.SearchActivity" />
+        <activity android:name=".activity.AccountSettingActivity" />
+        <activity android:name=".activity.HelpActivity" />
+        <activity android:name=".activity.InformationActivity" />
+        <activity android:name=".activity.FavoritedActivity" />
+        <activity android:name=".activity.CheckoutActivity" />
+        <activity android:name=".activity.CartActivity" />
+        <activity android:name=".activity.ProductDetailActivity" />
+        <activity android:name=".activity.HomeExtendsActivity" />
+        <activity android:name=".SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.fabric.apps.mobile.activity.MainActivity" />
+        <activity android:name=".activity.MainActivity" />
     </application>
 
 </manifest>

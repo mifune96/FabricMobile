@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.fabric.apps.mobile.R;
 import com.fabric.apps.mobile.contoller.AddressController;
+import com.fabric.apps.mobile.contoller.TransaksiController;
 import com.fabric.apps.mobile.fragment.CartFragment;
 import com.fabric.apps.mobile.fragment.CatalogueFragment;
 import com.fabric.apps.mobile.fragment.FavoriteFragment;
@@ -53,7 +54,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Fragment cartFragment = new CartFragment();
     private Fragment profileFragment = new ProfileFragment();
     private Fragment activeFragment = homeFragment;
+
     private AddressController addressController = new AddressController();
+    private TransaksiController transaksiController = new TransaksiController();
 
     private FragmentManager fragmentManager = getSupportFragmentManager();
 
@@ -70,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         sm = new SessionSharedPreferences(this);
 
         addressController.getAddress(this);
+
 
         TAG = "Home";
 

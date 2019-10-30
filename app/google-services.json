@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "822961557303",
+    "firebase_url": "https://fabricmobile-2fae7.firebaseio.com",
+    "project_id": "fabricmobile-2fae7",
+    "storage_bucket": "fabricmobile-2fae7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:822961557303:android:04a8086283e2fcd68614b2",
+        "android_client_info": {
+          "package_name": "com.fabric.apps"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "822961557303-52vhj7d652treivsj5s4gum5p1vkij31.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fabric.apps",
+            "certificate_hash": "e8d77e5859db0b0789251d3da15e5b3bf97e1729"
+          }
+        },
+        {
+          "client_id": "822961557303-03be4o2u5dkd5agreta436b2nmhafnj4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDs5Js92yOhGquiYmdAkgigCyMaiJLaS-0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "822961557303-03be4o2u5dkd5agreta436b2nmhafnj4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

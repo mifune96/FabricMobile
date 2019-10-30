@@ -43,8 +43,10 @@ import com.fabric.apps.mobile.utils.SessionSharedPreferences;
 import com.github.ybq.android.spinkit.SpinKitView;
 import com.wajahatkarim3.easymoneywidgets.EasyMoneyTextView;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 /**
@@ -118,6 +120,11 @@ public class DialogCartFragment extends DialogFragment implements View.OnClickLi
         sessionSharedPreferences = new SessionSharedPreferences(this.getActivity());
         buttonRemove.setVisibility(View.GONE);
         Bundle bundle = this.getArguments();
+
+        Locale locale = new Locale("in", "ID");
+
+        NumberFormat format = NumberFormat.getCurrencyInstance(locale);
+
         if (bundle != null){
             if (!Objects.requireNonNull(bundle.getString("product_image")).isEmpty()){
                 Glide.with(this).load(bundle.getString("product_image")).into(productImage);
@@ -127,8 +134,8 @@ public class DialogCartFragment extends DialogFragment implements View.OnClickLi
 
             warna.setText(bundle.getString("product_color"));
             productName.setText(bundle.getString("product_name"));
-            productPrice.setText("Rp" +bundle.getInt("product_price"));
-            subTotal.setText("Rp. "+bundle.getInt("product_price"));
+            productPrice.setText(format.format(bundle.getInt("product_price")));
+            subTotal.setText(format.format(bundle.getInt("product_price")));
 
             id = bundle.getInt("product_id");
 
@@ -153,10 +160,10 @@ public class DialogCartFragment extends DialogFragment implements View.OnClickLi
             @Override
             public void onResponse(Call<CartItem> call, Response<CartItem> response) {
                 if (response.isSuccessful()){
-                    Toast.makeText(getActivity(), "Berhasil Menambahkan Barang", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), "Berhasil Menambahkan Barang", Toast.LENGTH_SHORT).show();
                     Log.d("TAG", "Berhasil memasukkan cardialog");
                 } else {
-                    Toast.makeText(getActivity(), "Gagal Menambahkan Barang", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), "Gagal Menambahkan Barang", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -181,10 +188,15 @@ public class DialogCartFragment extends DialogFragment implements View.OnClickLi
                 break;
 
             case R.id.proceed_to_checkout:
+                Adddialogcart();
+                refresh();
                 startActivity(new Intent(getContext(), CheckoutActivity.class));
                 break;
 
             case R.id.increase_product:
+                Locale locale = new Locale("in", "ID");
+                NumberFormat format = NumberFormat.getCurrencyInstance(locale);
+
                 Bundle bundle = this.getArguments();
                 int harga = 0;
                 harga = bundle.getInt("product_price");
@@ -193,11 +205,13 @@ public class DialogCartFragment extends DialogFragment implements View.OnClickLi
                 productQuantity.setText(Double.toString(permeter));
                 harga *= permeter;
                 Log.d("TAG", "isi permeter dalam onklik" +permeter);
-                subTotal.setText("Rp." +harga);
+                subTotal.setText(format.format(harga));
 
                 break;
 
             case R.id.decrease_product:
+                Locale locale2 = new Locale("in", "ID");
+                NumberFormat format2 = NumberFormat.getCurrencyInstance(locale2);
                 Bundle bundle2 = this.getArguments();
                 permeter = Double.parseDouble(productQuantity.getText().toString());
                 if (permeter > 1) {
@@ -206,7 +220,7 @@ public class DialogCartFragment extends DialogFragment implements View.OnClickLi
                     permeter -= 0.5;
                     productQuantity.setText(Double.toString(permeter));
                     harga2 *= permeter;
-                    subTotal.setText("Rp." + harga2);
+                    subTotal.setText(format2.format(harga2));
                 }else {
                     permeter = 1.0;
                     productQuantity.setText(Double.toString(permeter));

@@ -18,7 +18,9 @@ import com.fabric.apps.mobile.model.cartModel.CartItem;
 import com.fabric.apps.mobile.utils.SessionSharedPreferences;
 import com.wajahatkarim3.easymoneywidgets.EasyMoneyTextView;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -53,9 +55,13 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
+        Locale locale = new Locale("in", "ID");
+
+        NumberFormat format = NumberFormat.getCurrencyInstance(locale);
+
         setTotalBayar();
         holder.productName.setText(cartItems.get(position).getProductCart().getName());
-        holder.productPrice.setText("Rp. "+cartItems.get(position).getProductCart().getHarga());
+        holder.productPrice.setText(format.format(cartItems.get(position).getProductCart().getHarga()));
 //        totalPayment = setTotalBayar();
         holder.quantity.setText(Double.toString(cartItems.get(position).getPermeter()));
         holder.warna.setText(cartItems.get(position).getProductCart().getWarna());
@@ -110,11 +116,14 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
 
 
     public void setTotalBayar(){
+        Locale locale = new Locale("in", "ID");
+        NumberFormat format = NumberFormat.getCurrencyInstance(locale);
+
         Double price = 0.0;
         for (CartItem c : cartItems){
                price += (c.getPermeter() * c.getProductCart().getHarga());
         }
-        total.setText("Rp. " +price.intValue());
+        total.setText(format.format(price.intValue()));
         totalbayarnya = +price.intValue();
     }
 

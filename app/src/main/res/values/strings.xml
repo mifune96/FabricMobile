@@ -170,4 +170,5 @@
         *1 kg = 5 meter kain.</string>
     <string name="code">C-002</string>
     <string name="kurang">-</string>
+    <string name="pembayaran_conten">Pembayaran akan doverifikasi maksimal 1 jam\nsetelah konfirmasi pembayaran dikirim</string>
 </resources>

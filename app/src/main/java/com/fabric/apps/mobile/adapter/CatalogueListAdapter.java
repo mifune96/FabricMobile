@@ -18,7 +18,9 @@ import com.fabric.apps.mobile.model.productModel.ResponseProduc;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.wajahatkarim3.easymoneywidgets.EasyMoneyTextView;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -47,9 +49,12 @@ public class CatalogueListAdapter extends RecyclerView.Adapter<CatalogueListAdap
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        //bisa diginiin
+        Locale locale = new Locale("in", "ID");
+
+        NumberFormat format = NumberFormat.getCurrencyInstance(locale);
+
         holder.productName.setText(productList.get(position).getName());
-        holder.productPrice.setText("Rp. "+productList.get(position).getHarga());
+        holder.productPrice.setText(format.format(productList.get(position).getHarga()));
 
         int id = productList.get(position).getId();
         IDcart = id;

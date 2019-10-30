@@ -41,11 +41,13 @@ import com.fabric.apps.mobile.utils.SessionSharedPreferences;
 import com.github.ybq.android.spinkit.SpinKitView;
 import com.wajahatkarim3.easymoneywidgets.EasyMoneyTextView;
 
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 public class ProductDetailActivity extends AppCompatActivity implements View.OnClickListener {
@@ -109,6 +111,10 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
     private void initView(){
         Intent intent = getIntent();
 
+        Locale locale = new Locale("in", "ID");
+
+        NumberFormat format = NumberFormat.getCurrencyInstance(locale);
+
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(true);
         getSupportActionBar().setTitle(intent.getStringExtra("product_name"));
@@ -134,7 +140,7 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
         }
 
         productName.setText(mProductname);
-        productPrice.setText("Rp. "+mProductprice);
+        productPrice.setText(format.format(mProductprice));
         productDescription.setText(mDescription);
         productCode.setText(mProductcode);
         productColor.setText(mProductcolor);
@@ -186,7 +192,7 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.button_chat:
-                Intent openWA = new Intent(Intent.ACTION_VIEW, Uri.parse("https://api.whatsapp.com/send?phone=6281368009882&text=Hi%20there,%20i%20love%20your%20product.%20Contact%20Me."));
+                Intent openWA = new Intent(Intent.ACTION_VIEW, Uri.parse("https://api.whatsapp.com/send?phone=6285299503504&text=Hi%20there,%20i%20love%20your%20product.%20Contact%20Me."));
                 startActivity(openWA);
                 break;
             case R.id.button_buy_now:

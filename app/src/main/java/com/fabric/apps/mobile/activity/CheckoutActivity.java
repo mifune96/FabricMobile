@@ -43,8 +43,10 @@ import com.fabric.apps.mobile.model.transaksiPostModel.ResponseTransaksiPostMode
 import com.fabric.apps.mobile.utils.SessionSharedPreferences;
 import com.github.ybq.android.spinkit.SpinKitView;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 public class CheckoutActivity extends AppCompatActivity implements View.OnClickListener{
@@ -118,6 +120,8 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
         ButterKnife.bind(this);
+
+
 
         preferences = new SessionSharedPreferences(this);
 
@@ -196,15 +200,19 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
         spkurir.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Locale locale = new Locale("in", "ID");
+
+                NumberFormat format = NumberFormat.getCurrencyInstance(locale);
+
                 CostsItemKurirModel cur = (CostsItemKurirModel) parent.getItemAtPosition(position);
                 List<CostItemKurirModel> mom = cur.getCost();
                 for (int i = 0; i<mom.size();i++){
                     total_ongkir = mom.get(i).getValue();
-                   servicePrice.setText("Rp. "+total_ongkir);
+                   servicePrice.setText(format.format(total_ongkir));
 
                     HargaAkhir = totalbelanja+total_ongkir;
 
-                   totalPayment.setText("Rp. "+ HargaAkhir);
+                   totalPayment.setText(format.format(HargaAkhir));
 
                 }
 
@@ -226,11 +234,13 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onResponse(Call<ResponseCart> call, Response<ResponseCart> response) {
                 if (response.isSuccessful()) {
+                    Locale locale = new Locale("in", "ID");
+
+                    NumberFormat format = NumberFormat.getCurrencyInstance(locale);
                     cartItems = response.body().getCart();
                     checkoutListAdapter = new CheckoutListAdapter(CheckoutActivity.this, cartItems);
-                    totalPrice.setText("Rp."+checkoutListAdapter.setTotalBayar());
+                    totalPrice.setText(format.format(checkoutListAdapter.setTotalBayar()));
                     totalbelanja = (int) checkoutListAdapter.setTotalBayar();
-                    Log.d("TAG", "totalharganya " +totalbelanja);
 
                     productList.setAdapter(checkoutListAdapter);
                     checkoutListAdapter.notifyDataSetChanged();
@@ -289,6 +299,7 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
         switch (v.getId()){
             case R.id.place_order:
                 initDatatransaksi();
+                startActivity(new Intent(this,ActivityPembayaran.class));
                 break;
         }
     }
