@@ -22,9 +22,11 @@
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/transaction_tab"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:tabMode="scrollable"
+            app:tabGravity="center"
+            android:layout_gravity="center"
             app:tabTextAppearance="@style/TabLayoutAppearance"/>
 
     </com.google.android.material.appbar.AppBarLayout>

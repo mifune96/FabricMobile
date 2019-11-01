@@ -1,205 +1,184 @@
 package com.fabric.apps.mobile.model.transaksiGetModel;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class TransactionItemGetModel {
 
-	@SerializedName("note")
-	private String note;
-
-	@SerializedName("typeOfOngkir")
-	private String typeOfOngkir;
-
-	@SerializedName("totalHarga")
-	private int totalHarga;
-
-	@SerializedName("CustomerId")
-	private int customerId;
-
-	@SerializedName("shippingCosts")
-	private int shippingCosts;
-
-	@SerializedName("noPesanan")
-	private String noPesanan;
-
-	@SerializedName("createdAt")
-	private String createdAt;
-
-	@SerializedName("noResi")
-	private String noResi;
-
-	@SerializedName("buktiPembayaran")
-	private String buktiPembayaran;
-
-	@SerializedName("dateOfTransaction")
-	private String dateOfTransaction;
-
-	@SerializedName("statusBuktiPembayaran")
-	private String statusBuktiPembayaran;
-
-	@SerializedName("waktu")
-	private String waktu;
-
 	@SerializedName("id")
-	private int id;
-
+	@Expose
+	private Integer id;
+	@SerializedName("noPesanan")
+	@Expose
+	private String noPesanan;
+	@SerializedName("totalHarga")
+	@Expose
+	private Integer totalHarga;
+	@SerializedName("CustomerId")
+	@Expose
+	private Integer customerId;
 	@SerializedName("AddressId")
-	private int addressId;
-
+	@Expose
+	private Integer addressId;
 	@SerializedName("status")
+	@Expose
 	private String status;
-
+	@SerializedName("dateOfTransaction")
+	@Expose
+	private String dateOfTransaction;
+	@SerializedName("waktu")
+	@Expose
+	private Object waktu;
+	@SerializedName("typeOfOngkir")
+	@Expose
+	private String typeOfOngkir;
+	@SerializedName("note")
+	@Expose
+	private String note;
+	@SerializedName("buktiPembayaran")
+	@Expose
+	private Object buktiPembayaran;
+	@SerializedName("statusBuktiPembayaran")
+	@Expose
+	private Object statusBuktiPembayaran;
+	@SerializedName("shippingCosts")
+	@Expose
+	private Integer shippingCosts;
+	@SerializedName("noResi")
+	@Expose
+	private Object noResi;
+	@SerializedName("createdAt")
+	@Expose
+	private String createdAt;
 	@SerializedName("updatedAt")
+	@Expose
 	private String updatedAt;
 
-	public void setNote(String note){
-		this.note = note;
-	}
-
-	public String getNote(){
-		return note;
-	}
-
-	public void setTypeOfOngkir(String typeOfOngkir){
-		this.typeOfOngkir = typeOfOngkir;
-	}
-
-	public String getTypeOfOngkir(){
-		return typeOfOngkir;
-	}
-
-	public void setTotalHarga(int totalHarga){
-		this.totalHarga = totalHarga;
-	}
-
-	public int getTotalHarga(){
-		return totalHarga;
-	}
-
-	public void setCustomerId(int customerId){
-		this.customerId = customerId;
-	}
-
-	public int getCustomerId(){
-		return customerId;
-	}
-
-	public void setShippingCosts(int shippingCosts){
-		this.shippingCosts = shippingCosts;
-	}
-
-	public int getShippingCosts(){
-		return shippingCosts;
-	}
-
-	public void setNoPesanan(String noPesanan){
-		this.noPesanan = noPesanan;
-	}
-
-	public String getNoPesanan(){
-		return noPesanan;
-	}
-
-	public void setCreatedAt(String createdAt){
-		this.createdAt = createdAt;
-	}
-
-	public String getCreatedAt(){
-		return createdAt;
-	}
-
-	public void setNoResi(String noResi){
-		this.noResi = noResi;
-	}
-
-	public String getNoResi(){
-		return noResi;
-	}
-
-	public void setBuktiPembayaran(String buktiPembayaran){
-		this.buktiPembayaran = buktiPembayaran;
-	}
-
-	public String getBuktiPembayaran(){
-		return buktiPembayaran;
-	}
-
-	public void setDateOfTransaction(String dateOfTransaction){
-		this.dateOfTransaction = dateOfTransaction;
-	}
-
-	public String getDateOfTransaction(){
-		return dateOfTransaction;
-	}
-
-	public void setStatusBuktiPembayaran(String statusBuktiPembayaran){
-		this.statusBuktiPembayaran = statusBuktiPembayaran;
-	}
-
-	public String getStatusBuktiPembayaran(){
-		return statusBuktiPembayaran;
-	}
-
-	public void setWaktu(String waktu){
-		this.waktu = waktu;
-	}
-
-	public String getWaktu(){
-		return waktu;
-	}
-
-	public void setId(int id){
-		this.id = id;
-	}
-
-	public int getId(){
+	public Integer getId() {
 		return id;
 	}
 
-	public void setAddressId(int addressId){
-		this.addressId = addressId;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
-	public int getAddressId(){
+	public String getNoPesanan() {
+		return noPesanan;
+	}
+
+	public void setNoPesanan(String noPesanan) {
+		this.noPesanan = noPesanan;
+	}
+
+	public Integer getTotalHarga() {
+		return totalHarga;
+	}
+
+	public void setTotalHarga(Integer totalHarga) {
+		this.totalHarga = totalHarga;
+	}
+
+	public Integer getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(Integer customerId) {
+		this.customerId = customerId;
+	}
+
+	public Integer getAddressId() {
 		return addressId;
 	}
 
-	public void setStatus(String status){
-		this.status = status;
+	public void setAddressId(Integer addressId) {
+		this.addressId = addressId;
 	}
 
-	public String getStatus(){
+	public String getStatus() {
 		return status;
 	}
 
-	public void setUpdatedAt(String updatedAt){
-		this.updatedAt = updatedAt;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
-	public String getUpdatedAt(){
+	public String getDateOfTransaction() {
+		return dateOfTransaction;
+	}
+
+	public void setDateOfTransaction(String dateOfTransaction) {
+		this.dateOfTransaction = dateOfTransaction;
+	}
+
+	public Object getWaktu() {
+		return waktu;
+	}
+
+	public void setWaktu(Object waktu) {
+		this.waktu = waktu;
+	}
+
+	public String getTypeOfOngkir() {
+		return typeOfOngkir;
+	}
+
+	public void setTypeOfOngkir(String typeOfOngkir) {
+		this.typeOfOngkir = typeOfOngkir;
+	}
+
+	public String getNote() {
+		return note;
+	}
+
+	public void setNote(String note) {
+		this.note = note;
+	}
+
+	public Object getBuktiPembayaran() {
+		return buktiPembayaran;
+	}
+
+	public void setBuktiPembayaran(Object buktiPembayaran) {
+		this.buktiPembayaran = buktiPembayaran;
+	}
+
+	public Object getStatusBuktiPembayaran() {
+		return statusBuktiPembayaran;
+	}
+
+	public void setStatusBuktiPembayaran(Object statusBuktiPembayaran) {
+		this.statusBuktiPembayaran = statusBuktiPembayaran;
+	}
+
+	public Integer getShippingCosts() {
+		return shippingCosts;
+	}
+
+	public void setShippingCosts(Integer shippingCosts) {
+		this.shippingCosts = shippingCosts;
+	}
+
+	public Object getNoResi() {
+		return noResi;
+	}
+
+	public void setNoResi(Object noResi) {
+		this.noResi = noResi;
+	}
+
+	public String getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(String createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public String getUpdatedAt() {
 		return updatedAt;
 	}
 
-	@Override
- 	public String toString(){
-		return 
-			"TransactionItemGetModel{" +
-			"note = '" + note + '\'' + 
-			",typeOfOngkir = '" + typeOfOngkir + '\'' + 
-			",totalHarga = '" + totalHarga + '\'' + 
-			",customerId = '" + customerId + '\'' + 
-			",shippingCosts = '" + shippingCosts + '\'' + 
-			",noPesanan = '" + noPesanan + '\'' + 
-			",createdAt = '" + createdAt + '\'' + 
-			",noResi = '" + noResi + '\'' + 
-			",buktiPembayaran = '" + buktiPembayaran + '\'' + 
-			",dateOfTransaction = '" + dateOfTransaction + '\'' + 
-			",statusBuktiPembayaran = '" + statusBuktiPembayaran + '\'' + 
-			",waktu = '" + waktu + '\'' + 
-			",id = '" + id + '\'' + 
-			",addressId = '" + addressId + '\'' + 
-			",status = '" + status + '\'' + 
-			",updatedAt = '" + updatedAt + '\'' + 
-			"}";
-		}
+	public void setUpdatedAt(String updatedAt) {
+		this.updatedAt = updatedAt;
+	}
 }

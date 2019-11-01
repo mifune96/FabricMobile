@@ -1,7 +1,6 @@
 package com.fabric.apps.mobile.activity;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -19,7 +18,7 @@ import android.view.MenuItem;
 
 import com.fabric.apps.mobile.R;
 import com.fabric.apps.mobile.adapter.ViewPagerAdapter;
-import com.fabric.apps.mobile.fragment.TransactionFragment;
+import com.fabric.apps.mobile.fragment.BaseTransactionFragment;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -50,28 +49,59 @@ public class TransactionActivity extends AppCompatActivity {
         toolbar.setNavigationIcon(R.drawable.ic_back);
         toolbar.setNavigationOnClickListener(v -> finish());
 
-//        Fragment transaksiFragment = new TransactionFragment();
+        if (transactionPager != null) {
+            setupPager2(transactionPager);
+        }
+
+        transactionTab.setupWithViewPager(transactionPager);
+
+//        Fragment transaksiFragment = new BaseTransactionFragment();
 //        FragmentManager fragmentManager = getSupportFragmentManager();
 //        fragmentManager.beginTransaction().add(R.id.transaction_pager, transaksiFragment).commit();
 
-        setupViewPager();
+//        setupViewPager();
 
-        transactionTab.setupWithViewPager(transactionPager);
+//        transactionTab.setupWithViewPager(transactionPager);
     }
 
-    private void setupViewPager() {
-
-        TransactionFragment tFrag = TransactionFragment.newInstance();
-        Bundle bundle = new Bundle();
-
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new TransactionFragment(), "Tertunda");
-        adapter.addFragment(new TransactionFragment(), "Membayar");
-
-
+    private void setupPager2(ViewPager transactionPager) {
+        Adapter adapter = new Adapter(getSupportFragmentManager());
+        adapter.addFragment(new BaseTransactionFragment(), "Pendding");
+        adapter.addFragment(new BaseTransactionFragment(), "Dikirim");
+        adapter.addFragment(new BaseTransactionFragment(), "Seleseai");
         transactionPager.setAdapter(adapter);
-
     }
+
+    static class Adapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragments = new ArrayList<>();
+        private final List<String> mFragmentTitles = new ArrayList<>();
+
+        public Adapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        public void addFragment(Fragment fragment, String title) {
+            mFragments.add(fragment);
+            mFragmentTitles.add(title);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragments.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragments.size();
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitles.get(position);
+        }
+    }
+
+
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {

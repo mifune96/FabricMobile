@@ -53,6 +53,11 @@ public class ProductController {
                     onError.setVisibility(View.GONE);
                     refreshLayout.setRefreshing(false);
                     adapter.notifyDataSetChanged();
+                    for (int i = 0; i < productsItems.size(); i++) {
+                        Log.d(TAG, "isi produk "+productsItems.get(i).getCode());
+                    }
+
+
                 }else {
                     onSuccess.setVisibility(View.GONE);
                     onNoData.setVisibility(View.VISIBLE);

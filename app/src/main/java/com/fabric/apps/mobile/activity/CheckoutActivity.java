@@ -279,6 +279,8 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
             public void onResponse(Call<ResponseTransaksiPostModel> call, Response<ResponseTransaksiPostModel> response) {
                 if (response.isSuccessful()){
                     Toast.makeText(CheckoutActivity.this, "Transaksi Berhasil", Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(getApplicationContext(), ActivityPembayaran.class));
+
 
                 } else {
                     Toast.makeText(CheckoutActivity.this, "Transaksi Gagal", Toast.LENGTH_LONG).show();
@@ -299,7 +301,6 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
         switch (v.getId()){
             case R.id.place_order:
                 initDatatransaksi();
-                startActivity(new Intent(this,ActivityPembayaran.class));
                 break;
         }
     }

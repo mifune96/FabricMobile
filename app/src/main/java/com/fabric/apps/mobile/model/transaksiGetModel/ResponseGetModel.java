@@ -1,39 +1,32 @@
 package com.fabric.apps.mobile.model.transaksiGetModel;
 
-import java.util.List;
-
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ResponseGetModel {
-
 	@SerializedName("message")
+	@Expose
 	private String message;
-
 	@SerializedName("transaction")
-	private List<TransactionItemGetModel> transaction;
+	@Expose
+	private List<TransactionItemGetModel> transaction = null;
 
-	public void setMessage(String message){
-		this.message = message;
-	}
-
-	public String getMessage(){
+	public String getMessage() {
 		return message;
 	}
 
-	public void setTransaction(List<TransactionItemGetModel> transaction){
-		this.transaction = transaction;
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
-	public List<TransactionItemGetModel> getTransaction(){
+	public List<TransactionItemGetModel> getTransaction() {
 		return transaction;
 	}
 
-	@Override
- 	public String toString(){
-		return 
-			"ResponseGetModel{" +
-			"message = '" + message + '\'' + 
-			",transaction = '" + transaction + '\'' + 
-			"}";
-		}
+	public void setTransaction(List<TransactionItemGetModel> transaction) {
+		this.transaction = transaction;
+	}
 }

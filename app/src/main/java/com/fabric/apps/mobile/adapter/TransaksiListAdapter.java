@@ -1,6 +1,7 @@
 package com.fabric.apps.mobile.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +12,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fabric.apps.mobile.R;
-import com.fabric.apps.mobile.contoller.TransaksiController;
 import com.fabric.apps.mobile.model.transaksiGetModel.TransactionItemGetModel;
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -25,7 +26,7 @@ public class TransaksiListAdapter extends RecyclerView.Adapter<TransaksiListAdap
 
     private Context context;
     private List<TransactionItemGetModel> transactionItemGetModels;
-    private TransaksiController transaksiController = new TransaksiController();
+
 
     public TransaksiListAdapter(Context context, List<TransactionItemGetModel> transaksi_data){
         this.context = context;
@@ -51,6 +52,7 @@ public class TransaksiListAdapter extends RecyclerView.Adapter<TransaksiListAdap
         holder.status.setText(transactionItemGetModels.get(position).getStatus());
         holder.hargaProduk.setText(format.format(transactionItemGetModels.get(position).getTotalHarga()));
         holder.tglPesanan.setText(transactionItemGetModels.get(position).getDateOfTransaction());
+
 
 
     }
