@@ -15,10 +15,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -279,8 +277,12 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
             public void onResponse(Call<ResponseTransaksiPostModel> call, Response<ResponseTransaksiPostModel> response) {
                 if (response.isSuccessful()){
                     Toast.makeText(CheckoutActivity.this, "Transaksi Berhasil", Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(getApplicationContext(), ActivityPembayaran.class));
-
+//                    startActivity(new Intent(getApplicationContext(), ActivityPembayaran.class));
+                    Intent intent = new Intent(getApplicationContext(), ActivityPembayaran.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.putExtra("total_bayar", HargaAkhir);
+                    getApplicationContext().startActivity(intent);
+                    finish();
 
                 } else {
                     Toast.makeText(CheckoutActivity.this, "Transaksi Gagal", Toast.LENGTH_LONG).show();

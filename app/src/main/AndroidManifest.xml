@@ -10,6 +10,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:hardwareAccelerated="false"
+        android:largeHeap="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activity.ActivityPembayaran">
         </activity>
@@ -28,6 +30,7 @@
         <activity android:name=".activity.CheckoutActivity" />
         <activity android:name=".activity.CartActivity" />
         <activity android:name=".activity.ProductDetailActivity" />
+        <activity android:name=".activity.DetailTransaksi" />
         <activity android:name=".activity.HomeExtendsActivity" />
         <activity android:name=".SplashScreenActivity">
             <intent-filter>

@@ -1,6 +1,5 @@
 package com.fabric.apps.mobile.activity;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -17,8 +16,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.fabric.apps.mobile.R;
-import com.fabric.apps.mobile.adapter.ViewPagerAdapter;
-import com.fabric.apps.mobile.fragment.BaseTransactionFragment;
+import com.fabric.apps.mobile.fragment.BaseTransactionDikirimFragment;
+import com.fabric.apps.mobile.fragment.BaseTransactionPendingFragment;
+import com.fabric.apps.mobile.fragment.BaseTransactionSelesaiFragment;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -43,7 +43,7 @@ public class TransactionActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
 
-        setSupportActionBar(toolbar);
+             setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(true);
         getSupportActionBar().setTitle("Transaksi");
         toolbar.setNavigationIcon(R.drawable.ic_back);
@@ -55,20 +55,13 @@ public class TransactionActivity extends AppCompatActivity {
 
         transactionTab.setupWithViewPager(transactionPager);
 
-//        Fragment transaksiFragment = new BaseTransactionFragment();
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//        fragmentManager.beginTransaction().add(R.id.transaction_pager, transaksiFragment).commit();
-
-//        setupViewPager();
-
-//        transactionTab.setupWithViewPager(transactionPager);
     }
 
     private void setupPager2(ViewPager transactionPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(new BaseTransactionFragment(), "Pendding");
-        adapter.addFragment(new BaseTransactionFragment(), "Dikirim");
-        adapter.addFragment(new BaseTransactionFragment(), "Seleseai");
+        adapter.addFragment(new BaseTransactionPendingFragment(), "Tertunda");
+        adapter.addFragment(new BaseTransactionDikirimFragment(), "Dikirim");
+        adapter.addFragment(new BaseTransactionSelesaiFragment(), "Selesai");
         transactionPager.setAdapter(adapter);
     }
 
@@ -100,8 +93,6 @@ public class TransactionActivity extends AppCompatActivity {
             return mFragmentTitles.get(position);
         }
     }
-
-
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {

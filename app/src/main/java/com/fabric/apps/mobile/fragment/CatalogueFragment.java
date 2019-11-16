@@ -6,6 +6,8 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
@@ -36,6 +38,9 @@ public class CatalogueFragment extends Fragment {
     @BindView(R.id.catalogue_list)
     RecyclerView rvcatalogueList;
 
+    @BindView(R.id.swipeContainer)
+    SwipeRefreshLayout refreshLayout;
+
     SessionSharedPreferences sessionSharedPreferences;
 
     private CatalogueListAdapter catalogueListAdapter;
@@ -55,7 +60,14 @@ public class CatalogueFragment extends Fragment {
 
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2, RecyclerView.VERTICAL, false);
         rvcatalogueList.setLayoutManager(layoutManager);
-        LoadJson();
+//        LoadJson();
+
+        refreshLayout.setOnRefreshListener(onRefreshListener);
+        refreshLayout.post(() -> {
+            refreshLayout.setRefreshing(true);
+            onRefreshListener.onRefresh();
+        });
+
         return view;
     }
 
@@ -75,6 +87,7 @@ public class CatalogueFragment extends Fragment {
                     productList = response.body().getProducts();
                     catalogueListAdapter = new CatalogueListAdapter(getContext(), productList);
                     rvcatalogueList.setAdapter(catalogueListAdapter);
+                    refreshLayout.setRefreshing(false);
                 }
 
                 Log.d("TAG", "Isi Body Cuy"+ response.body());
@@ -87,6 +100,15 @@ public class CatalogueFragment extends Fragment {
         });
 
     }
+
+
+
+    private SwipeRefreshLayout.OnRefreshListener onRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
+        @Override
+        public void onRefresh() {
+            LoadJson();
+        }
+    };
 
 
 }

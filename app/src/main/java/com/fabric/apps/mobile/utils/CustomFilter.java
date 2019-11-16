@@ -2,17 +2,17 @@ package com.fabric.apps.mobile.utils;
 
 import android.widget.Filter;
 
-import com.fabric.apps.mobile.adapter.TransaksiListAdapter;
+import com.fabric.apps.mobile.adapter.TransaksiListPendingAdapter;
 import com.fabric.apps.mobile.model.transaksiGetModel.TransactionItemGetModel;
 
 import java.util.ArrayList;
 
 public class CustomFilter extends Filter {
 
-    TransaksiListAdapter adapter;
+    TransaksiListPendingAdapter adapter;
     ArrayList<TransactionItemGetModel> filterlist;
 
-    public CustomFilter(ArrayList<TransactionItemGetModel> filterlist, TransaksiListAdapter adapter) {
+    public CustomFilter(ArrayList<TransactionItemGetModel> filterlist, TransaksiListPendingAdapter adapter) {
         this.adapter=adapter;
         this.filterlist=filterlist;
     }

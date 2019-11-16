@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 public class ProductCart {
 
 	@SerializedName("ukuran")
-	private int ukuran;
+	private float ukuran;
 
 	@SerializedName("warna")
 	private String warna;
@@ -44,11 +44,11 @@ public class ProductCart {
 	@SerializedName("updatedAt")
 	private String updatedAt;
 
-	public void setUkuran(int ukuran){
+	public void setUkuran(float ukuran){
 		this.ukuran = ukuran;
 	}
 
-	public int getUkuran(){
+	public float getUkuran(){
 		return ukuran;
 	}
 

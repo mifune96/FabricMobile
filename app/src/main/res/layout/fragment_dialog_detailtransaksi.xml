@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    tools:context=".fragment.DialogCartFragment"
+    android:paddingTop="10dp">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:elevation="0dp" />
+
+    <View
+        android:id="@+id/separator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorGray"
+        android:alpha=".5"
+        android:layout_below="@id/toolbar"
+        android:layout_marginTop="10dp"/>
+
+   <RelativeLayout
+       android:layout_below="@id/separator"
+       android:id="@+id/midcontent"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+
+       <TableLayout
+           android:id="@+id/tbl1"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+           <TableRow
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:padding="10dp">
+
+               <TextView
+                   android:textSize="14dp"
+                   android:textColor="@color/vpi__background_holo_dark"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="Status Pesanan"/>
+           </TableRow>
+
+           <TableRow
+               android:layout_gravity="center"
+               android:gravity="center"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:padding="10dp">
+
+               <TextView
+                   android:id="@+id/tv_status_detail"
+                   android:background="@drawable/statustransaksi_bg"
+                   android:padding="20dp"
+                   android:textStyle="bold"
+                   android:textSize="20dp"
+                   android:layout_weight="1"
+                   android:textColor="@color/colorPrimary"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_gravity="center"
+                   android:gravity="center"
+                   android:text="Status"/>
+        </TableRow>
+       </TableLayout>
+       <LinearLayout
+           android:padding="10dp"
+           android:background="@drawable/transaksi_bg"
+           android:layout_margin="10dp"
+           android:orientation="vertical"
+           android:layout_below="@+id/tbl1"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+           <TableRow
+               android:id="@+id/nopes"
+               android:layout_below="@id/tbl1"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:padding="10dp">
+               <TextView
+                   android:textSize="14dp"
+                   android:textColor="@color/vpi__background_holo_dark"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="Nomor Pesanan :"/>
+
+               <TextView
+                   android:id="@+id/pager"
+                   android:textSize="14dp"
+                   android:textColor="@color/vpi__background_holo_dark"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="#"/>
+
+               <TextView
+                   android:id="@+id/tv_nopesanan_detail"
+                   android:textSize="14dp"
+                   android:textColor="@color/vpi__background_holo_dark"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="289000"/>
+           </TableRow>
+
+       <View
+           android:id="@+id/v1"
+           android:layout_width="match_parent"
+           android:layout_height="1dp"
+           android:background="@color/colorGray"
+           android:alpha=".5"
+           android:layout_marginTop="10dp"
+           android:layout_marginBottom="10dp"/>
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+           <TableRow
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:padding="5dp">
+
+               <TextView
+                   android:textSize="14sp"
+                   android:layout_marginEnd="10dp"
+                   android:textColor="@color/vpi__background_holo_dark"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="1.5"
+                   android:text="Kurir yang dipilih"/>
+
+               <TextView
+                   android:textSize="14sp"
+                   android:textColor="@color/vpi__background_holo_dark"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="1"
+                   android:text=":"/>
+
+               <TextView
+                   android:id="@+id/tv_kurir_detail"
+                   android:textSize="14dp"
+                   android:textColor="@color/vpi__background_holo_dark"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="2"
+                   android:text="JNE"/>
+
+           </TableRow>
+           <TableRow
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:padding="5dp">
+
+               <TextView
+                   android:textSize="14sp"
+                   android:layout_marginEnd="10dp"
+                   android:textColor="@color/vpi__background_holo_dark"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="1.5"
+                   android:text="Ongkos Kirim"/>
+
+               <TextView
+                   android:textSize="14sp"
+                   android:textColor="@color/vpi__background_holo_dark"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="1"
+                   android:text=":"/>
+
+               <TextView
+                   android:id="@+id/tv_ongkir_detail"
+                   android:textSize="14sp"
+                   android:textColor="@color/vpi__background_holo_dark"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="2"
+                   android:text="Rp. 200.000"/>
+
+           </TableRow>
+
+        </TableLayout>
+           <TableLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content">
+               <TableRow
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:padding="5dp">
+
+                   <TextView
+                       android:textSize="14sp"
+                       android:layout_marginEnd="10dp"
+                       android:textColor="@color/vpi__background_holo_dark"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_weight="1.5"
+                       android:text="TotalPembayaran"/>
+
+                   <TextView
+                       android:textSize="14sp"
+                       android:textColor="@color/vpi__background_holo_dark"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_weight="1"
+                       android:text=":"/>
+
+                   <TextView
+                       android:id="@+id/tv_bayar_total"
+                       android:textSize="14sp"
+                       android:textColor="@color/vpi__background_holo_dark"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_weight="2"
+                       android:text="Rp.200.00000"/>
+
+               </TableRow>
+
+           </TableLayout>
+
+           <TableRow
+               android:layout_gravity="end"
+               android:gravity="end"
+               android:layout_marginTop="10dp"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content">
+
+               <TextView
+                   android:textSize="14sp"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="Tanggal Transaksi "
+                   />
+
+               <TextView
+                   android:textSize="14sp"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text=" : "
+                   />
+
+               <TextView
+                   android:id="@+id/tgl_transaksi_detail"
+                   android:textSize="14sp"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="2019-11-05"
+                   />
+
+           </TableRow>
+
+       </LinearLayout>
+
+   </RelativeLayout>
+
+
+</RelativeLayout>

@@ -7,12 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ResponseGetModel {
+
 	@SerializedName("message")
 	@Expose
 	private String message;
-	@SerializedName("transaction")
-	@Expose
-	private List<TransactionItemGetModel> transaction = null;
+    @SerializedName("transaction")
+    @Expose
+    private List<TransactionItemGetModel> transaction = null;
 
 	public String getMessage() {
 		return message;

@@ -111,7 +111,7 @@ public class CartController {
                     progressBar.setVisibility(View.GONE);
                     activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
 
-                    Log.i(TAG, "Bgst: " + response.body());
+                    Log.i(TAG, "mantap: " + response.body());
 
                     Log.i(TAG, response.body().toString());
                 } else {
@@ -191,7 +191,6 @@ public class CartController {
                     String cartCount = String.valueOf(Math.min(size, 99));
                     cardBadge.setText(cartCount);
 
-                    Log.d(TAG, "ngentod" + response.body().getCart().size());
                     if (cardBadge.getVisibility() != View.VISIBLE){
                         cardBadge.setVisibility(View.VISIBLE);
                     }

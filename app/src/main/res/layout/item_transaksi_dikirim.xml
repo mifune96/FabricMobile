@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -25,16 +23,15 @@
             android:layout_marginEnd="10dp"/>
 
         <TextView
-            android:id="@+id/tv_nopesanan"
+            android:id="@+id/tv_nopesanan_dikirim"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textAlignment="textStart"
             android:text="796012"
             android:textSize="16sp" />
-
         <TextView
-            android:id="@+id/tv_lihatdetail"
+            android:id="@+id/tv_lihatdetail_dikirim"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -57,7 +54,7 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/tv_status"
+            android:id="@+id/tv_status_dikirim"
             android:layout_width="wrap_content"
             android:layout_weight="1"
             android:layout_height="wrap_content"
@@ -65,7 +62,7 @@
             android:textSize="16sp"/>
 
         <TextView
-            android:id="@+id/tv_tanggal"
+            android:id="@+id/tv_tanggal_dikirim"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -91,7 +88,7 @@
             android:textSize="16dp"/>
 
         <TextView
-            android:id="@+id/tv_hargaproduk"
+            android:id="@+id/tv_hargaproduk_dikirim"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -107,18 +104,5 @@
         android:layout_height="1dp"
         android:alpha=".2"
         android:background="@android:color/black" />
-
-    <Button
-        android:id="@+id/btn_bayar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAllCaps="false"
-        android:layout_marginTop="20dp"
-        android:padding="5dp"
-        android:layout_margin="10dp"
-        android:layout_gravity="end"
-        android:text="Bayar Sekarang"
-        android:textColor="@color/colorWhite"
-        android:background="@drawable/button_gradient_bg"/>
 
 </LinearLayout>

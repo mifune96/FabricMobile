@@ -27,15 +27,6 @@ import com.synnapps.carouselview.ImageListener;
  */
 public class HomeFragment extends Fragment implements View.OnClickListener {
 
-//    @BindView(R.id.banner_view_pager)
-//    ViewPager bannerViewPager;
-//
-//    @BindView(R.id.view_pager_indicator)
-//    DotsIndicator viewPagerIndicator;
-
-//    @BindView(R.id.for_you_list)
-//    RecyclerView forYouList;
-
     CarouselView carouselView;
     int [] sampleimage = {R.drawable.banner, R.drawable.banner, R.drawable.banner};
 

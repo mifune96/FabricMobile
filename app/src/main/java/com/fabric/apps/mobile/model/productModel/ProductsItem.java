@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
 public class ProductsItem{
 
 	@SerializedName("ukuran")
-	private int ukuran;
+	private float ukuran;
 
 	@SerializedName("warna")
 	private String warna;
@@ -45,11 +45,11 @@ public class ProductsItem{
 	@SerializedName("updatedAt")
 	private Object updatedAt;
 
-	public void setUkuran(int ukuran){
+	public void setUkuran(float ukuran){
 		this.ukuran = ukuran;
 	}
 
-	public int getUkuran(){
+	public float getUkuran(){
 		return ukuran;
 	}
 

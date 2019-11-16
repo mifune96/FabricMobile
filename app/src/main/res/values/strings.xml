@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Fabric Mobile</string>
-    <string name="gama_textile">Fabric Store</string>
+    <string name="gama_textile">Fabrik Store</string>
 
     <string name="nav_home">Beranda</string>
     <string name="nav_catalogue">Katalog</string>
@@ -20,7 +20,7 @@
     <string name="view_all">Lihat Semua</string>
     <string name="best_seller">Produk Terlaris</string>
     <string name="just_for_you">Rekomendasi</string>
-    <string name="product_name">Product Name</string>
+    <string name="product_name">Product Name brokat termahal dunia</string>
     <string name="extend_activity">Extend Activity</string>
     <string name="product_price">Product Price</string>
     <string name="buy_now">Beli Sekarang</string>
@@ -61,7 +61,7 @@
         \n\nHarap chat sebelum chekout!!!
 
         \n\nHati2 kehabisan brokat cantiiik ini yah kak</string>
-    <string name="success_add_to_cart">Berhasil Masuk Keranjang</string>
+    <string name="success_add_to_cart">Beli Sekarang</string>
     <string name="sub_total">Sub Total</string>
     <string name="belum_termasuk_biaya_kirim">Belum termasuk biaya kirim</string>
     <string name="proced_to_checkout">Lanjut ke Pembayaran</string>
@@ -171,4 +171,5 @@
     <string name="code">C-002</string>
     <string name="kurang">-</string>
     <string name="pembayaran_conten">Pembayaran akan doverifikasi maksimal 1 jam\nsetelah konfirmasi pembayaran dikirim</string>
+    <string name="detail_transaksi">Detail transaksi</string>
 </resources>

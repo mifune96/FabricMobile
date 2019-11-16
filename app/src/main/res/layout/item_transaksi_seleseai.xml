@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginTop="5dp"
+    android:background="@drawable/transaksi_bg"
+    android:layout_marginBottom="5dp"
+    android:elevation="5dp">
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="#"
+            android:gravity="center"
+            android:layout_marginEnd="10dp"/>
+
+        <TextView
+            android:id="@+id/tv_nopesanan_selesai"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="textStart"
+            android:text="796012"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_lihatdetail_selesai"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Lihat Detail"
+            android:textSize="14sp"
+            android:textColor="@color/colorPrimary"
+            android:textAlignment="textEnd"/>
+
+
+
+    </TableRow>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:alpha=".2"
+        android:background="@android:color/black" />
+
+    <TableRow
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_status_selesai"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Tertunda"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/tv_tanggal_selesai"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:text="2019-10-30"
+            android:textSize="15sp" />
+
+
+    </TableRow>
+
+    <TableRow
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/totalahrga"
+            android:text="Total Bayar Keseluruhan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="textStart"
+            android:textSize="16dp"/>
+
+        <TextView
+            android:id="@+id/tv_hargaproduk_selesai"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:text="Rp.200000"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </TableRow>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:alpha=".2"
+        android:background="@android:color/black" />
+
+</LinearLayout>

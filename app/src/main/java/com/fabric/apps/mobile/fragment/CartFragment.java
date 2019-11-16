@@ -80,7 +80,6 @@ public class CartFragment extends Fragment implements View.OnClickListener {
         checkoutButton.setOnClickListener(this);
         reload.setOnClickListener(this);
 
-
         refreshLayout.setOnRefreshListener(onRefreshListener);
         refreshLayout.post(() -> {
             refreshLayout.setRefreshing(true);

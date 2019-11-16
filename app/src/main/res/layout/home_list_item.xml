@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@android:color/white"
     android:elevation="1dp"
-    android:layout_marginEnd="3dp"
+    android:layout_marginEnd="4dp"
     android:layout_marginTop="6dp"
     android:layout_marginBottom="6dp"
     android:layout_marginStart="3dp"
@@ -13,8 +13,8 @@
 
     <RelativeLayout
         android:id="@+id/product_wrapper"
-        android:layout_width="130dp"
-        android:layout_height="wrap_content">
+        android:layout_width="140dp"
+        android:layout_height="195dp">
 
         <ImageView
             android:id="@+id/product_image"
@@ -28,10 +28,14 @@
             android:layout_below="@id/product_image"
             android:text="@string/product_name"
             android:textAlignment="center"
-            android:textStyle="normal"
+            android:textStyle="bold"
             android:textSize="12sp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

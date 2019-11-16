@@ -12,11 +12,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.fabric.apps.mobile.R;
-import com.fabric.apps.mobile.activity.CheckoutActivity;
 import com.fabric.apps.mobile.contoller.CartController;
 import com.fabric.apps.mobile.model.cartModel.CartItem;
 import com.fabric.apps.mobile.utils.SessionSharedPreferences;
-import com.wajahatkarim3.easymoneywidgets.EasyMoneyTextView;
 
 import java.text.NumberFormat;
 import java.util.List;
@@ -43,7 +41,6 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
     }
 
 
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -62,7 +59,6 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.ViewHo
         setTotalBayar();
         holder.productName.setText(cartItems.get(position).getProductCart().getName());
         holder.productPrice.setText(format.format(cartItems.get(position).getProductCart().getHarga()));
-//        totalPayment = setTotalBayar();
         holder.quantity.setText(Double.toString(cartItems.get(position).getPermeter()));
         holder.warna.setText(cartItems.get(position).getProductCart().getWarna());
 
