@@ -20,8 +20,7 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@android:color/white">
+            android:orientation="vertical">
 
             <RelativeLayout
                 android:id="@+id/banner_wrapper"
@@ -41,7 +40,6 @@
                 android:paddingStart="10dp"
                 android:paddingEnd="0dp"
                 android:layout_marginTop="10dp"
-                android:background="@android:color/white"
                 android:paddingBottom="10dp">
 
                 <TextView
@@ -81,7 +79,6 @@
                 android:paddingStart="10dp"
                 android:paddingEnd="0dp"
                 android:layout_marginTop="10dp"
-                android:background="@android:color/white"
                 android:paddingBottom="10dp">
 
                 <TextView
@@ -111,7 +108,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_width="match_parent"
                     android:nestedScrollingEnabled="true"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
 
             </RelativeLayout>
 
@@ -132,6 +129,5 @@
             android:layout_width="match_parent"
             android:visibility="gone" />
     </RelativeLayout>
-
 
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
